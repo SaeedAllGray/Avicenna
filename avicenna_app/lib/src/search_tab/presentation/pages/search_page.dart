@@ -1,3 +1,4 @@
+import 'package:avicenna_app/src/doctor_detail/presentation/pages/doctor_detail_page.dart';
 import 'package:avicenna_app/src/search_tab/bloc/search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +22,16 @@ class SearchPage extends StatelessWidget {
               return ListView.builder(
                   itemCount: state.doctors.length,
                   itemBuilder: (context, index) => ListTile(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => DoctorDetailsPage(
+                                doctor: state.doctors[index],
+                              ),
+                            ),
+                          );
+                        },
+                        trailing: const Icon(Icons.chevron_right),
                         title: Text(state.doctors[index].name),
                         subtitle: Text(state.doctors[index].profession),
                       ));

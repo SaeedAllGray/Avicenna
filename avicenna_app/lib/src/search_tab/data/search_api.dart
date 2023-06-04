@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:avicenna_app/src/models/doctor.dart';
 import 'package:faker/faker.dart';
 
@@ -24,11 +26,13 @@ class SearchApi {
         name: 'Dr. ${faker.person.firstName()} ${faker.person.lastName()}',
         email: faker.internet.email(),
         profession: realProfessions[i % realProfessions.length],
+        phoneNumber: faker.phoneNumber.de(),
       );
 
       // Generate 4 schedules for each doctor
-      for (int j = 0; j < 4; j++) {
-        DateTime schedule = DateTime.now().add(Duration(days: j + 1));
+      for (int j = 0; j < 10; j++) {
+        DateTime schedule =
+            DateTime.now().add(Duration(days: j + Random().nextInt(50)));
         doctor.schedules.add(schedule);
       }
 
