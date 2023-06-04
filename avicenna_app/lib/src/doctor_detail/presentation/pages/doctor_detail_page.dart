@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 class DoctorDetailsPage extends StatelessWidget {
   final Doctor doctor;
 
-  DoctorDetailsPage({required this.doctor});
+  const DoctorDetailsPage({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +34,13 @@ class DoctorDetailsPage extends StatelessWidget {
             Text(
               doctor.profession,
               style: FontStyles.BLACK_REGULAR_18,
+            ),
+            ListTile(
+              leading: const Icon(Icons.work),
+              title: Text(
+                doctor.address,
+                style: FontStyles.BLACK_REGULAR_18,
+              ),
             ),
             ListTile(
               leading: const Icon(Icons.email),
@@ -67,7 +74,7 @@ class DoctorDetailsPage extends StatelessWidget {
                   DateTime schedule = doctor.schedules[index];
                   return ListTile(
                     title: Text(
-                      DateFormat.MMMMEEEEd().format(schedule),
+                      DateFormat('EEEE, MMMM d, HH:mm').format(schedule),
                       style: const TextStyle(fontSize: 16.0),
                     ),
                     trailing: ElevatedButton(

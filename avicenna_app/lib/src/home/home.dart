@@ -1,3 +1,4 @@
+import 'package:avicenna_app/src/schedule_tab/presentation/pages/schedule_page.dart';
 import 'package:avicenna_app/src/search_tab/presentation/pages/search_page.dart';
 import 'package:flutter/material.dart';
 
@@ -14,10 +15,7 @@ class _HomePageState extends State<HomePage> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     SearchPage(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
+    SchedulePage(),
     Text(
       'Index 2: School',
       style: optionStyle,
@@ -43,12 +41,12 @@ class _HomePageState extends State<HomePage> {
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.schedule),
+            label: 'Schedules',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.person),
+            label: 'My Account',
           ),
         ],
         currentIndex: _selectedIndex,

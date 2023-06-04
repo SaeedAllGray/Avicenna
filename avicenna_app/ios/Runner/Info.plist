@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This app requires access to your calendar to schedule and manage events efficiently.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app requires access to your contacts to provide a seamless sharing experience and allow you to easily connect with your friends and family.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
