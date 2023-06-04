@@ -15,13 +15,13 @@ class SchedulePage extends StatelessWidget {
               location: 'Event location',
               startDate: DateTime.now().add(const Duration(days: 1)),
               endDate: DateTime.now().add(const Duration(days: 1, hours: 2)),
-              iosParams: IOSParams(
+              iosParams: const IOSParams(
                 reminder: Duration(
                     /* Ex. hours:1 */), // on iOS, you can set alarm notification after your event.
                 url:
                     'https://www.example.com', // on iOS, you can set url to your event.
               ),
-              androidParams: AndroidParams(
+              androidParams: const AndroidParams(
                 emailInvites: [], // on Android, you can add invite emails to your event.
               ),
             );
