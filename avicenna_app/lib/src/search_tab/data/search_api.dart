@@ -27,6 +27,7 @@ class SearchApi {
         email: faker.internet.email(),
         profession: realProfessions[i % realProfessions.length],
         phoneNumber: faker.phoneNumber.de(),
+        address: faker.address.streetAddress(),
       );
 
       // Generate 4 schedules for each doctor

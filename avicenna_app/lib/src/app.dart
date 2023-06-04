@@ -1,4 +1,4 @@
-import 'package:avicenna_app/src/home/home.dart';
+import 'package:avicenna_app/src/splash/presentation/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
 
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
-          home: const HomePage(),
+          home: const SplashPage(),
         );
       },
     );
