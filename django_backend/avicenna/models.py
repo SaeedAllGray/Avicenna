@@ -8,10 +8,16 @@ class Doctor(models.Model):
     specialization = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 
 class Patient(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
+
+    def __str__(self):
+        return self.name
 
 
 class Appointment(models.Model):
