@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Doctor(models.Model):
@@ -25,3 +26,7 @@ class Appointment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     created_timestamp = models.DateTimeField(auto_now_add=True)
     appointment_timestamp = models.DateTimeField('appointemnt\'s date')
+
+    def days_remaining_from_now(self):
+        self.remaining_time = timezone.now() - self.appointment_timestamp
+        return self.remaining_time.days
