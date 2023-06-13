@@ -30,3 +30,7 @@ class Appointment(models.Model):
     def days_remaining_from_now(self):
         self.remaining_time = timezone.now() - self.appointment_timestamp
         return self.remaining_time.days
+
+    def __str__(self):
+        return 'Appointment on {:%B %d, %Y} for Dr. {} and patient {}'.format(
+            self.appointment_timestamp, self.doctor.name, self.patient.name)
