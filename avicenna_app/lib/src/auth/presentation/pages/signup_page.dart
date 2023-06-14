@@ -1,5 +1,6 @@
 import 'package:avicenna_app/src/auth/presentation/bloc/auth_bloc.dart';
 import 'package:avicenna_app/src/auth/presentation/pages/login_page.dart';
+import 'package:avicenna_app/src/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -106,7 +107,14 @@ class _SignupPageState extends State<SignupPage> {
                                   builder: (context) => const LoginPage())),
                           child: const Text("I ALREADY HAVE AN ACCOUNT")),
                       ElevatedButton(
-                          onPressed: () => _bloc.add(SignupEvent()),
+                          onPressed: () {
+                            _bloc.add(SignupEvent());
+                            // TODO: remove this
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomePage()));
+                          },
                           child: const Text("Signup")),
                     ],
                   )
