@@ -13,3 +13,5 @@ python manage.py migrate
 python manage.py runserver
 ```
 3. Go to http://127.0.0.1:8000/
+
+Note: make sure that you have Django installed. You may activate a venv using the requirements.txt
