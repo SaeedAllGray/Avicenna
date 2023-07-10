@@ -33,6 +33,9 @@ class Doctor(models.Model):
     specialization = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
 
+    def __str__(self):
+        return str(self.user)
+
 # django.contrib.auth.get_user_model()
 
 
@@ -44,6 +47,9 @@ class Patient(models.Model):
     ssn = models.CharField(
         'Social Security number',
         max_length=9)  # example: 790714615
+    
+    def __str__(self):
+        return str(self.user)
 
 
 class Appointment(models.Model):
