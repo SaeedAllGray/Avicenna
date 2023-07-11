@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import Appointment, CustomUser
+from .serializers import AppointmentSerializer
 
 
 def index(request):
@@ -47,3 +48,15 @@ def delete_appointment(request, appointment_id):
     appointment = get_object_or_404(Appointment, id=appointment_id)
     appointment.delete()
     return Response(status=204)
+
+@api_view(['POST'])
+def create_appointment(request, doctor_id, patient_id, appointment_timestamp):
+    serializer = AppointmentSerializer(data={
+        'doctor': doctor_id,
+        'patient': patient_id,
+        'appointment_timestamp': appointment_timestamp
+    })
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
