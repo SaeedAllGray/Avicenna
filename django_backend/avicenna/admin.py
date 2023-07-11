@@ -17,6 +17,15 @@ class PatientInline(admin.StackedInline):
 class UserAdmin(BaseUserAdmin):
     inlines = [DoctorInline, PatientInline]
 
+    list_display = (
+        "username",
+        "email",
+        "first_name",
+        "last_name",
+        "is_doctor",
+        "is_patient",
+        "is_active")
+
     fieldsets = (
         *BaseUserAdmin.fieldsets,  # original form fieldsets, expanded
         (                      # new fieldset added on to the bottom
@@ -32,9 +41,5 @@ class UserAdmin(BaseUserAdmin):
         ),
     )
 
-
-# admin.site.register((CustomUser, Appointment, UserAdmin))
 admin.site.register(CustomUser, UserAdmin)
-# admin.site.register(Doctor, DoctorInline)
-# admin.site.register(Patient, PatientInline)
 admin.site.register(Appointment)
