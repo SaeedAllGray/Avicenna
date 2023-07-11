@@ -7,7 +7,14 @@ abstract class AuthState extends Equatable {
   List<Object> get props => [];
 }
 
-class AuthInitialState extends AuthState {}
+class AuthInitialState extends AuthState {
+  final String uuid = const Uuid().v4();
+
+  @override
+  List<Object> get props => [uuid];
+}
+
+class AuthInProgress extends AuthState {}
 
 class AuthSucceedState extends AuthState {}
 

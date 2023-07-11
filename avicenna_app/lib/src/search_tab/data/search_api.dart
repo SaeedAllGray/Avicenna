@@ -22,6 +22,7 @@ class SearchApi {
 
     for (int i = 1; i <= 100; i++) {
       Doctor doctor = Doctor(
+        username: faker.person.firstName(),
         id: i.toString(),
         name: 'Dr. ${faker.person.firstName()} ${faker.person.lastName()}',
         email: faker.internet.email(),

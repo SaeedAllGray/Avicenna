@@ -19,6 +19,7 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
   final TextEditingController professionController = TextEditingController();
 
   @override
@@ -77,6 +78,13 @@ class _SignupPageState extends State<SignupPage> {
                         decoration:
                             const InputDecoration(label: Text('Address')),
                       ),
+                    ),
+                  ),
+                  ListTile(
+                    title: TextField(
+                      controller: usernameController,
+                      decoration:
+                          const InputDecoration(label: Text('username')),
                     ),
                   ),
                   ListTile(
