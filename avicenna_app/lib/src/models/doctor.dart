@@ -5,6 +5,7 @@ class Doctor {
   final String phoneNumber;
   final String profession;
   final String address;
+  final String username;
   // TODO: Field for location
   List<DateTime> schedules = [];
 
@@ -15,5 +16,6 @@ class Doctor {
     required this.profession,
     required this.phoneNumber,
     required this.address,
+    required this.username,
   });
 }
