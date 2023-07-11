@@ -1,12 +1,12 @@
+from django.contrib.auth.hashers import check_password, make_password
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_list_or_404, get_object_or_404, render
+from django.shortcuts import get_list_or_404, get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import Appointment, CustomUser
 from .serializers import AppointmentSerializer
-from django.contrib.auth.hashers import check_password
 
 
 def index(request):
@@ -19,7 +19,7 @@ def delete_user(request, user_id):
     user.delete()
     return Response(status=204)
 
-def create_user(request, user_id):
+def create_user(request, username, user_password, email, first_name, last_name, is_doctor, is_patient):
     response = "You've created user #%s."
     return HttpResponse(response % user_id)
 
@@ -41,7 +41,7 @@ def log_in_user(request, username, user_password):
     if not check_password(user_password, user.password):
         return Response(status=400)
     user_data = serializers.serialize('json', [user])
-    return JsonResponse(user_data, safe=False)
+    return HttpResponse(user_data)
 
 
 @api_view(['GET'])
@@ -50,7 +50,7 @@ def get_appointments_by_user_id(request, user_id):
         Appointment.objects.order_by('appointment_timestamp'),
         doctor__user__id__exact=user_id)  # TODO: make it support both patients and doctors
     appointment_data = serializers.serialize('json', appointments)
-    return JsonResponse(appointment_data, safe=False)
+    return HttpResponse(appointment_data)
 
 @api_view(['DELETE'])
 def delete_appointment(request, appointment_id):
