@@ -14,7 +14,7 @@ class CustomUser(AbstractUser):
         unique=True,
         max_length=100,
         default=str(
-            uuid.uuid4()))
+            uuid.uuid4())[:8])
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     is_doctor = models.BooleanField(default=False)

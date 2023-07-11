@@ -6,6 +6,7 @@ from rest_framework.response import Response
 
 from .models import Appointment, CustomUser
 from .serializers import AppointmentSerializer
+from django.contrib.auth.hashers import check_password
 
 
 def index(request):
@@ -31,8 +32,16 @@ def register_user(request, user_id):
     return HttpResponse("You've registered user #%s." % user_id)
 
 
-def log_in_user(request, user_id):
-    return HttpResponse("You've logged in as user #%s." % user_id)
+@api_view(['GET'])
+def log_in_user(request, username, user_password):
+    try:
+        user = CustomUser.objects.get(username=username)
+    except CustomUser.DoesNotExist:
+        return Response(status=400)
+    if not check_password(user_password, user.password):
+        return Response(status=400)
+    user_data = serializers.serialize('json', [user])
+    return JsonResponse(user_data, safe=False)
 
 
 @api_view(['GET'])
