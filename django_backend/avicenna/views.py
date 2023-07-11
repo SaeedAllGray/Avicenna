@@ -39,3 +39,9 @@ def get_appointments_by_user_id(request, user_id):
         doctor__user__id__exact=user_id)  # TODO: make it support both patients and doctors
     appointment_data = serializers.serialize('json', appointments)
     return JsonResponse(appointment_data, safe=False)
+
+@api_view(['DELETE'])
+def delete_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+    appointment.delete()
+    return Response(status=204)
