@@ -1,5 +1,8 @@
-from django.http import HttpResponse
+from django.core import serializers
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_list_or_404, get_object_or_404, render
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from .models import Appointment
 
@@ -29,8 +32,10 @@ def log_in_user(request, user_id):
     return HttpResponse("You've logged in as user #%s." % user_id)
 
 
+@api_view(['GET'])
 def get_appointments_by_user_id(request, user_id):
-    appointment = get_list_or_404(
+    appointments = get_list_or_404(
         Appointment.objects.order_by('appointment_timestamp'),
         doctor__user__id__exact=user_id)  # TODO: make it support both patients and doctors
-    return HttpResponse(appointment)
+    appointment_data = serializers.serialize('json', appointments)
+    return JsonResponse(appointment_data, safe=False)
