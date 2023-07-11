@@ -19,6 +19,7 @@ def delete_user(request, user_id):
     user.delete()
     return Response(status=204)
 
+@api_view(['POST'])
 def create_user(request, username, user_password, email, first_name, last_name, is_doctor, is_patient):
     response = "You've created user #%s."
     return HttpResponse(response % user_id)
@@ -26,10 +27,6 @@ def create_user(request, username, user_password, email, first_name, last_name, 
 
 def update_user(request, user_id):
     return HttpResponse("You've updated user #%s." % user_id)
-
-
-def register_user(request, user_id):
-    return HttpResponse("You've registered user #%s." % user_id)
 
 
 @api_view(['GET'])
@@ -45,10 +42,17 @@ def log_in_user(request, username, user_password):
 
 
 @api_view(['GET'])
-def get_appointments_by_user_id(request, user_id):
-    appointments = get_list_or_404(
-        Appointment.objects.order_by('appointment_timestamp'),
-        doctor__user__id__exact=user_id)  # TODO: make it support both patients and doctors
+def get_appointments_by_user_id(request, user_id, user_type):
+    if user_type == 'doctor':
+        appointments = get_list_or_404(
+            Appointment.objects.order_by('appointment_timestamp'),
+            doctor__user__id__exact=user_id)
+    elif user_type == 'patient':
+        appointments = get_list_or_404(
+            Appointment.objects.order_by('appointment_timestamp'),
+            patient__user__id__exact=user_id)
+    else:
+        return Response(status=400)
     appointment_data = serializers.serialize('json', appointments)
     return HttpResponse(appointment_data)
 
