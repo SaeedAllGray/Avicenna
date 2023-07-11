@@ -4,16 +4,18 @@ from django.shortcuts import get_list_or_404, get_object_or_404, render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Appointment
+from .models import Appointment, CustomUser
 
 
 def index(request):
     return HttpResponse("Hello, world. You're at the avicenna index.")
 
 
+@api_view(['DELETE'])
 def delete_user(request, user_id):
-    return HttpResponse("You've deleted user #%s." % user_id)
-
+    user = get_object_or_404(CustomUser, id=user_id)
+    user.delete()
+    return Response(status=204)
 
 def create_user(request, user_id):
     response = "You've created user #%s."
