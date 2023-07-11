@@ -1,3 +1,4 @@
+import 'package:avicenna_app/src/profile/presentation/profile_page.dart';
 import 'package:avicenna_app/src/schedule_tab/presentation/pages/schedule_page.dart';
 import 'package:avicenna_app/src/search_tab/presentation/pages/search_page.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +17,7 @@ class _HomePageState extends State<HomePage> {
   static const List<Widget> _widgetOptions = <Widget>[
     SearchPage(),
     SchedulePage(),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
