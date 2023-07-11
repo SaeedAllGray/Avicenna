@@ -41,5 +41,6 @@ class UserAdmin(BaseUserAdmin):
         ),
     )
 
+
 admin.site.register(CustomUser, UserAdmin)
 admin.site.register(Appointment)

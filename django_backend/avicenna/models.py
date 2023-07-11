@@ -47,7 +47,7 @@ class Patient(models.Model):
     ssn = models.CharField(
         'Social Security number',
         max_length=9)  # example: 790714615
-    
+
     def __str__(self):
         return str(self.user)
 
@@ -61,7 +61,7 @@ class Appointment(models.Model):
     def days_remaining_from_now(self):
         self.remaining_time = timezone.now() - self.appointment_timestamp
         return self.remaining_time.days
-    
+
 #    def get_all_appointments_by_user_id(self, user_id):
 #        pass
 
