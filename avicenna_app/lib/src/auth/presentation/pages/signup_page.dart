@@ -18,7 +18,9 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController ssnController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController professionController = TextEditingController();
 
@@ -29,7 +31,7 @@ class _SignupPageState extends State<SignupPage> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('SIGNUP'),
+            title: const Text('SIGN UP'),
           ),
           body: SafeArea(
             child: SingleChildScrollView(
@@ -46,8 +48,27 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   ListTile(
                     title: TextField(
-                      controller: nameController,
-                      decoration: const InputDecoration(label: Text('Name')),
+                      controller: firstNameController,
+                      decoration:
+                          const InputDecoration(label: Text('First Name')),
+                    ),
+                  ),
+                  ListTile(
+                    title: TextField(
+                      controller: lastNameController,
+                      decoration:
+                          const InputDecoration(label: Text('Last Name')),
+                    ),
+                  ),
+                  Visibility(
+                    visible: !isChecked!,
+                    child: ListTile(
+                      title: TextField(
+                        keyboardType: TextInputType.number,
+                        controller: ssnController,
+                        decoration: const InputDecoration(
+                            label: Text('Social Security Number')),
+                      ),
                     ),
                   ),
                   Visibility(
@@ -84,7 +105,7 @@ class _SignupPageState extends State<SignupPage> {
                     title: TextField(
                       controller: usernameController,
                       decoration:
-                          const InputDecoration(label: Text('username')),
+                          const InputDecoration(label: Text('Username')),
                     ),
                   ),
                   ListTile(
@@ -97,6 +118,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   ListTile(
                     title: TextField(
+                      obscureText: true,
                       controller: passwordController,
                       decoration:
                           const InputDecoration(label: Text('Password')),
