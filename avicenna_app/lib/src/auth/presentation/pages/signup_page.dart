@@ -1,5 +1,6 @@
 import 'package:avicenna_app/src/auth/presentation/bloc/auth_bloc.dart';
 import 'package:avicenna_app/src/auth/presentation/pages/login_page.dart';
+import 'package:avicenna_app/src/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,6 +19,7 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
   final TextEditingController professionController = TextEditingController();
 
   @override
@@ -80,6 +82,13 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   ListTile(
                     title: TextField(
+                      controller: usernameController,
+                      decoration:
+                          const InputDecoration(label: Text('username')),
+                    ),
+                  ),
+                  ListTile(
+                    title: TextField(
                       controller: emailController,
                       decoration: const InputDecoration(
                         label: Text('Email'),
@@ -106,7 +115,14 @@ class _SignupPageState extends State<SignupPage> {
                                   builder: (context) => const LoginPage())),
                           child: const Text("I ALREADY HAVE AN ACCOUNT")),
                       ElevatedButton(
-                          onPressed: () => _bloc.add(SignupEvent()),
+                          onPressed: () {
+                            _bloc.add(SignupEvent());
+                            // TODO: remove this
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomePage()));
+                          },
                           child: const Text("Signup")),
                     ],
                   )

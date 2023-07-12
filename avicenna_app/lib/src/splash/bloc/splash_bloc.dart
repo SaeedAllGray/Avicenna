@@ -10,7 +10,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc() : super(InitialState()) {
     on<SplashEvent>((event, emit) async {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      if (prefs.getString('email') == null) {
+      if (prefs.getBool('is_signed_in') == null) {
         emit(UserDoesNotExistState());
       } else {
         emit(UserExistsState());

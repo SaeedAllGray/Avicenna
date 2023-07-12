@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:add_2_calendar/add_2_calendar.dart';
 
@@ -33,6 +34,18 @@ class SchedulePage extends StatelessWidget {
           icon: const Icon(Icons.event_note)),
       appBar: AppBar(
         title: const Text("My Schedules"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return BottomSheetModal();
+                  },
+                );
+              },
+              icon: const Icon(Icons.add))
+        ],
       ),
       body: ListView.builder(
         itemCount: 1,
@@ -41,6 +54,36 @@ class SchedulePage extends StatelessWidget {
           title: Text("Thursday, July 6"),
           subtitle: Text("Dr. Arthur Mohseni"),
         ),
+      ),
+    );
+  }
+}
+
+class BottomSheetModal extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 370,
+      child: Column(
+        children: [
+          CupertinoButton(
+            child: Text('Done'),
+            onPressed: () {
+              // Handle the done button press
+              Navigator.pop(context);
+            },
+          ),
+          Container(
+            height: 300,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.dateAndTime,
+              initialDateTime: DateTime.now(),
+              onDateTimeChanged: (DateTime newDateTime) {
+                // Handle the selected date and time
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
