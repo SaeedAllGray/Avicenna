@@ -14,7 +14,7 @@ class ProfilePage extends StatelessWidget {
       create: (context) => ProfileBloc()..add(GetUserInfoEvent()),
       child: BlocConsumer<ProfileBloc, ProfileState>(
         listener: (context, state) {
-          if (state is DeletionSucceed) {
+          if (state is DeletionOrLogoutSucceed) {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => const LoginPage()));
           }
@@ -26,6 +26,7 @@ class ProfilePage extends StatelessWidget {
                 title: const Text("Profile"),
               ),
               body: ListView(
+                padding: const EdgeInsets.all(8),
                 children: [
                   if (state.user is Doctor)
                     Visibility(
@@ -75,9 +76,49 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                   OutlinedButton(
-                      onPressed: () => BlocProvider.of<ProfileBloc>(context)
-                          .add(DeleteUser()),
-                      child: const Text('Delete Account')),
+                    style: ButtonStyle(
+                      // Customize the outline color
+                      side: MaterialStateProperty.all<BorderSide>(
+                        const BorderSide(
+                          color: Colors.teal, // Set your desired outline color
+                          width: 2.0, // Set the outline thickness
+                        ),
+                      ),
+                    ),
+                    child: const Text(
+                      'Logout',
+                    ),
+                    onPressed: () =>
+                        BlocProvider.of<ProfileBloc>(context).add(Logout()),
+                  ),
+                  OutlinedButton(
+                    style: ButtonStyle(
+                      // Customize the outline color
+                      side: MaterialStateProperty.all<BorderSide>(
+                        const BorderSide(
+                          color: Colors.red, // Set your desired outline color
+                          width: 2.0, // Set the outline thickness
+                        ),
+                      ),
+                      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                        const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 8.0),
+                      ),
+                      textStyle: MaterialStateProperty.all<TextStyle>(
+                        const TextStyle(
+                          fontSize: 16.0, // Set the font size
+                          fontWeight: FontWeight.bold, // Set the font weight
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                    onPressed: () =>
+                        BlocProvider.of<ProfileBloc>(context).add(DeleteUser()),
+                    child: const Text(
+                      'Delete Account',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
                 ],
               ),
             );

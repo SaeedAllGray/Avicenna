@@ -17,4 +17,4 @@ class ProfileFetched extends ProfileState {
 
 class ProfileFailed extends ProfileState {}
 
-class DeletionSucceed extends ProfileState {}
+class DeletionOrLogoutSucceed extends ProfileState {}
