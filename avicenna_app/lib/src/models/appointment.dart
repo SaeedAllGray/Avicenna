@@ -1,7 +1,11 @@
-import 'package:avicenna_app/src/models/doctor.dart';
-
 class Appointment {
-  Doctor doctor;
+  String? doctorId;
+  String? patientId;
   DateTime datetime;
-  Appointment(this.doctor, this.datetime);
+  Appointment({
+    required this.datetime,
+    this.doctorId,
+    this.patientId,
+  });
+  // factory Appointment.fromJson(List<dynamic> json) =>Appointment(json, doctorId, patientId);
 }
