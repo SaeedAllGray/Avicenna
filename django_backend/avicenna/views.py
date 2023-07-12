@@ -146,4 +146,5 @@ def get_all_doctors(request):
         serialized_data.append(serializers.serialize('json', [user, doctor], fields=(
             'pk', 'email', 'first_name', 'last_name', 'phone_number', 'specialization', 'address')))
 
-    return HttpResponse(serialized_data)
+    result = ','.join(serialized_data)
+    return HttpResponse(f'[{result}]')
