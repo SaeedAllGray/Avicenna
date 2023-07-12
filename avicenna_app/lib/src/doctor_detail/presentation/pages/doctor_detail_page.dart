@@ -28,7 +28,7 @@ class DoctorDetailsPage extends StatelessWidget {
               height: 16,
             ),
             Text(
-              doctor.name,
+              '${doctor.firstname} ${doctor.lastname}',
               style: FontStyles.BLACK_MEDIUM_24,
             ),
             Text(
