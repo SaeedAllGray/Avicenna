@@ -46,4 +46,8 @@ urlpatterns = [
     path(
         'api/create-appointment/<int:doctor_id>/<int:patient_id>/<str:appointment_timestamp>/',
         views.create_appointment,
-        name='create_appointment')]
+        name='create_appointment'),
+    path(
+        'api/get-all-doctors/',
+        views.get_all_doctors,
+        name='get_all_doctors')]
