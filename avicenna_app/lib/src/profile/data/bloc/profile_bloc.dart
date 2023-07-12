@@ -56,7 +56,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           Uri.parse(
             '${ApiConstants.baseUrl}delete-user/6',
           ),
-          followRedirects: true,
         );
         await prefs.clear();
       }
