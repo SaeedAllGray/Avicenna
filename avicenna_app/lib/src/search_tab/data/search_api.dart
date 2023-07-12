@@ -1,48 +1,23 @@
-import 'dart:math';
+import 'dart:convert';
+import 'dart:developer';
 
+import 'package:avicenna_app/src/constants/api_constant.dart';
 import 'package:avicenna_app/src/models/doctor.dart';
-import 'package:faker/faker.dart';
+import 'package:dio/dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class SearchApi {
-  Future<List<Doctor>> fetchSearchResult(String searchTerm) async {
-    await Future.delayed(const Duration(seconds: 2));
-    List<String> realProfessions = [
-      'Cardiologist',
-      'Pediatrician',
-      'Dermatologist',
-      'Orthopedic Surgeon',
-      'Neurologist',
-      'Gynecologist',
-      'Ophthalmologist',
-      'Psychiatrist',
-      // Add more real professions here...
-    ];
+  Future<List<Doctor>> getAllDoctors() async {
+    Dio dio = Dio();
+    dio.interceptors.add(PrettyDioLogger());
 
-    List<Doctor> doctors = [];
-
-    for (int i = 1; i <= 100; i++) {
-      Doctor doctor = Doctor(
-        username: faker.person.firstName(),
-        id: i,
-        firstname: faker.person.firstName(),
-        lastname: faker.person.lastName(),
-        email: faker.internet.email(),
-        profession: realProfessions[i % realProfessions.length],
-        phoneNumber: faker.phoneNumber.de(),
-        address: faker.address.streetAddress(),
-        isDoctor: true,
-      );
-
-      // Generate 4 schedules for each doctor
-      for (int j = 0; j < 10; j++) {
-        DateTime schedule =
-            DateTime.now().add(Duration(days: j + Random().nextInt(50)));
-        doctor.schedules.add(schedule);
-      }
-
-      doctors.add(doctor);
-    }
-
+    Response response = await dio.get(
+      '${ApiConstants.baseUrl}get-all-doctors/',
+    );
+    log(response.data);
+    List<Doctor> doctors = (jsonDecode(response.data) as List)
+        .map((e) => Doctor.fromJson(e))
+        .toList();
     return doctors;
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:avicenna_app/src/auth/data/providers/signup_api.dart';
+import 'package:avicenna_app/src/auth/data/repo/auth_repository.dart';
 import 'package:avicenna_app/src/models/doctor.dart';
 import 'package:avicenna_app/src/models/patient.dart';
 import 'package:bloc/bloc.dart';
@@ -19,6 +20,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     emit(SignupInProgress());
 
     if (await SignupApi().signUpPatient(event.patient, event.password)) {
+      await AuthRepository().login(event.patient.username, event.password);
       emit(SignupSucceed());
     } else {
       emit(SignupFailed());
@@ -27,12 +29,13 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
 
   FutureOr<void> _onSignUpDoctorEvent(
       SignUpDoctorEvent event, Emitter<SignupState> emit) async {
-    // emit(SignupInProgress());
+    emit(SignupInProgress());
 
-    // if (await SignupApi().signUpDoctor(event.doctor, event.password)) {
-    //   emit(SignupSucceed());
-    // } else {
-    //   emit(SignupFailed());
-    // }
+    if (await SignupApi().signUpDoctor(event.doctor, event.password)) {
+      await AuthRepository().login(event.doctor.username, event.password);
+      emit(SignupSucceed());
+    } else {
+      emit(SignupFailed());
+    }
   }
 }
