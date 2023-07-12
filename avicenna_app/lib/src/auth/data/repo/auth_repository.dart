@@ -16,7 +16,7 @@ class AuthRepository {
     } catch (e) {
       return false;
     }
-    sharedPreferences.setBool('is_signed_in', true);
+    await sharedPreferences.setBool('is_signed_in', true);
     return true;
   }
 }

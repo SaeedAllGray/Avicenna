@@ -32,7 +32,8 @@ class SearchPage extends StatelessWidget {
                           );
                         },
                         trailing: const Icon(Icons.chevron_right),
-                        title: Text(state.doctors[index].name),
+                        title: Text(
+                            "${state.doctors[index].firstname} ${state.doctors[index].lastname}"),
                         subtitle: Text(state.doctors[index].profession),
                       ));
             }
