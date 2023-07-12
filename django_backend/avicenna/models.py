@@ -36,8 +36,6 @@ class Doctor(models.Model):
     def __str__(self):
         return str(self.user)
 
-# django.contrib.auth.get_user_model()
-
 
 class Patient(models.Model):
     user = models.OneToOneField(
@@ -59,8 +57,8 @@ class Appointment(models.Model):
     appointment_timestamp = models.DateTimeField('appointemnt\'s date')
 
     def days_remaining_from_now(self):
-        self.remaining_time = timezone.now() - self.appointment_timestamp
-        return self.remaining_time.days
+        self.remaining_time = self.appointment_timestamp - timezone.now()
+        return self.remaining_time.days if self.remaining_time.days > 0 else 0
 
 #    def get_all_appointments_by_user_id(self, user_id):
 #        pass
