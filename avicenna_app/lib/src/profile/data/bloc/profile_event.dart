@@ -1,6 +1,5 @@
 part of 'profile_bloc.dart';
 
-@immutable
 abstract class ProfileEvent extends Equatable {
   @override
   List<Object> get props => [];
@@ -8,4 +7,4 @@ abstract class ProfileEvent extends Equatable {
 
 class GetUserInfoEvent extends ProfileEvent {}
 
-class DeleteGetUser extends ProfileEvent {}
+class DeleteUser extends ProfileEvent {}

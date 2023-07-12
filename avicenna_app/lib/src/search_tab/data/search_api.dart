@@ -23,12 +23,14 @@ class SearchApi {
     for (int i = 1; i <= 100; i++) {
       Doctor doctor = Doctor(
         username: faker.person.firstName(),
-        id: i.toString(),
-        name: 'Dr. ${faker.person.firstName()} ${faker.person.lastName()}',
+        id: i,
+        firstname: faker.person.firstName(),
+        lastname: faker.person.lastName(),
         email: faker.internet.email(),
         profession: realProfessions[i % realProfessions.length],
         phoneNumber: faker.phoneNumber.de(),
         address: faker.address.streetAddress(),
+        isDoctor: true,
       );
 
       // Generate 4 schedules for each doctor
