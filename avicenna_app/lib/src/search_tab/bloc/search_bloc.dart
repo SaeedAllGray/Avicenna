@@ -19,8 +19,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     Emitter<SearchState> emit,
   ) async {
     emit(SearchInProgress());
-    List<Doctor> doctors =
-        await SearchApi().fetchSearchResult(event.searchTerm);
+    List<Doctor> doctors = await SearchApi().getAllDoctors();
     emit(SearchSucceed(doctors));
   }
 }
