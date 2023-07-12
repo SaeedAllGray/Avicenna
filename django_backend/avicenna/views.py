@@ -135,13 +135,15 @@ def create_appointment(request, doctor_id, patient_id, appointment_timestamp):
         return Response(serializer.data, status=201)
     return Response(serializer.errors, status=400)
 
+
 @api_view(['GET'])
 def get_all_doctors(request):
     users = CustomUser.objects.filter(is_doctor=True)
     serialized_data = []
-    
+
     for user in users:
         doctor = Doctor.objects.get(user=user)
-        serialized_data.append(serializers.serialize('json', [user, doctor]))
-    
+        serialized_data.append(serializers.serialize('json', [user, doctor], fields=(
+            'pk', 'email', 'first_name', 'last_name', 'phone_number', 'specialization', 'address')))
+
     return HttpResponse(serialized_data)
