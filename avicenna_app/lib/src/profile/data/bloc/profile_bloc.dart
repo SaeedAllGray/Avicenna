@@ -6,7 +6,7 @@ import 'package:avicenna_app/src/models/doctor.dart';
 import 'package:avicenna_app/src/models/patient.dart';
 import 'package:avicenna_app/src/models/user.dart';
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:equatable/equatable.dart';
 
