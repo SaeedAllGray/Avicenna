@@ -148,3 +148,12 @@ def get_all_doctors(request):
 
     result = ','.join(serialized_data)
     return HttpResponse(f'[{result}]')
+
+
+@api_view(['GET'])
+def get_doctor_by_id(request, doctor_id):
+    user = get_object_or_404(CustomUser, pk=doctor_id)
+    doctor = get_object_or_404(Doctor, pk=doctor_id)
+    serialized_data = serializers.serialize('json', [user, doctor], fields=('pk', 'email', 'first_name', 'last_name', 'phone_number', 'specialization', 'address'))
+
+    return HttpResponse(serialized_data)
