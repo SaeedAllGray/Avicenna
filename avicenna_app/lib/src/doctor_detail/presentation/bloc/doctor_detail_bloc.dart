@@ -19,7 +19,6 @@ class DoctorDetailBloc extends Bloc<DoctorDetailEvent, DoctorDetailState> {
     emit(DoctorDetailInProgress());
     List<Appointment> appointments =
         await AppointmentRepository().getAllFreeAppointments();
-    print(appointments);
     emit(DoctorDetailInFetched(appointments));
   }
 

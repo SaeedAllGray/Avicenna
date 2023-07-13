@@ -20,4 +20,18 @@ abstract class User {
     Doctor doctor = Doctor.fromJson(json);
     return doctor;
   }
+
+  static Future<User> getUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    User? user;
+    String? jsonstr = prefs.getString("userinfo");
+    List<dynamic> json = jsonDecode(jsonstr!);
+    try {
+      user = Doctor.fromJson(json);
+      return user;
+    } catch (e) {
+      user = Patient.fromJson(json);
+      return user;
+    }
+  }
 }

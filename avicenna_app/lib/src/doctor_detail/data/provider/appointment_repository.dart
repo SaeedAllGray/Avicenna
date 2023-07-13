@@ -1,9 +1,7 @@
-import 'dart:developer';
 import 'dart:math';
 
 import 'package:avicenna_app/src/constants/api_constant.dart';
 import 'package:avicenna_app/src/models/appointment.dart';
-import 'package:avicenna_app/src/models/doctor.dart';
 import 'package:avicenna_app/src/models/patient.dart';
 import 'package:avicenna_app/src/models/user.dart';
 import 'package:dio/dio.dart';
