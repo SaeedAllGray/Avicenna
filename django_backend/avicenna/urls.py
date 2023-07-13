@@ -52,6 +52,6 @@ urlpatterns = [
         views.get_all_doctors,
         name='get_all_doctors'),
     path(
-        'api/get_doctor_by_id/<int:doctor_id>',
+        'api/get-doctor-by-id/<int:doctor_id>',
         views.get_doctor_by_id,
         name='get_doctor_by_id')]
