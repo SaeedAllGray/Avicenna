@@ -47,7 +47,7 @@ class ProfilePage extends StatelessWidget {
                             trailing: Text((state.user as Doctor).email),
                           ),
                           ListTile(
-                            title: const Text('profession'),
+                            title: const Text('Profession'),
                             trailing: Text((state.user as Doctor).profession),
                           ),
                         ],
