@@ -17,18 +17,6 @@ class SchedulePage extends StatelessWidget {
             return Scaffold(
               appBar: AppBar(
                 title: const Text("My Schedules"),
-                actions: [
-                  IconButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return BottomSheetModal();
-                          },
-                        );
-                      },
-                      icon: const Icon(Icons.add))
-                ],
               ),
               body: ListView.builder(
                 itemCount: state.appointmentList.length,
