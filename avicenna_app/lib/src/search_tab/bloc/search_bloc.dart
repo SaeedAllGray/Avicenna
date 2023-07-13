@@ -11,15 +11,34 @@ part 'search_event.dart';
 part 'search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
+  List<Doctor> doctors = [];
   SearchBloc() : super(SearchInitial()) {
-    on<SearchRequestedEvent>(_onSearchRequestedEvent);
+    on<GetDoctors>(_onGettingDoctors);
   }
-  FutureOr<void> _onSearchRequestedEvent(
-    SearchRequestedEvent event,
+  FutureOr<void> _onGettingDoctors(
+    GetDoctors event,
     Emitter<SearchState> emit,
   ) async {
     emit(SearchInProgress());
-    List<Doctor> doctors = await SearchApi().getAllDoctors();
+    if (doctors.isEmpty) {
+      doctors = await SearchApi().getAllDoctors();
+    }
+    if (event.searchTerm.isEmpty) {
+      emit(SearchSucceed(doctors));
+    } else {
+      emit(SearchSucceed(doctors
+          .where((doc) =>
+              doc.profession
+                  .toLowerCase()
+                  .startsWith(event.searchTerm.toLowerCase()) ||
+              doc.firstname
+                  .toLowerCase()
+                  .startsWith(event.searchTerm.toLowerCase()) ||
+              doc.lastname
+                  .toLowerCase()
+                  .startsWith(event.searchTerm.toLowerCase()))
+          .toList()));
+    }
     emit(SearchSucceed(doctors));
   }
 }

@@ -10,22 +10,22 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProfileBloc()..add(GetUserInfoEvent()),
-      child: BlocConsumer<ProfileBloc, ProfileState>(
-        listener: (context, state) {
-          if (state is DeletionOrLogoutSucceed) {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const LoginPage()));
-          }
-        },
-        builder: (context, state) {
-          if (state is ProfileFetched) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text("Profile"),
-              ),
-              body: ListView(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Profile"),
+      ),
+      body: BlocProvider(
+        create: (context) => ProfileBloc()..add(GetUserInfoEvent()),
+        child: BlocConsumer<ProfileBloc, ProfileState>(
+          listener: (context, state) {
+            if (state is DeletionOrLogoutSucceed) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()));
+            }
+          },
+          builder: (context, state) {
+            if (state is ProfileFetched) {
+              return ListView(
                 padding: const EdgeInsets.all(8),
                 children: [
                   if (state.user is Doctor)
@@ -120,13 +120,13 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
             );
-          }
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        },
+          },
+        ),
       ),
     );
   }
