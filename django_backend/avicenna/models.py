@@ -44,7 +44,7 @@ class Patient(models.Model):
         on_delete=models.CASCADE)
     ssn = models.CharField(
         'Social Security number',
-        max_length=9)  # example: 790714615
+        max_length=11)  # example: 790-71-4615
 
     def __str__(self):
         return str(self.user)
