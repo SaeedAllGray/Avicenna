@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:avicenna_app/src/constants/api_constant.dart';
 import 'package:avicenna_app/src/models/doctor.dart';
 import 'package:avicenna_app/src/models/patient.dart';
@@ -31,5 +33,14 @@ class ScheduleApi {
       '${ApiConstants.baseUrl}delete-appointment/$id/',
     );
     return response;
+  }
+
+  Future<Doctor> getDoctorById(int id) async {
+    dio.interceptors.add(PrettyDioLogger());
+
+    Response response = await dio.get(
+      '${ApiConstants.baseUrl}get-doctor-by-id/$id',
+    );
+    return Doctor.fromJson(jsonDecode(response.data));
   }
 }

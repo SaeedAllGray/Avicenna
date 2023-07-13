@@ -15,31 +15,6 @@ class SchedulePage extends StatelessWidget {
         builder: (context, state) {
           if (state is ScheduleFetched) {
             return Scaffold(
-              floatingActionButton: FloatingActionButton.extended(
-                  onPressed: () {
-                    final Event event = Event(
-                      title: 'Event title',
-                      description: 'Event description',
-                      location: 'Event location',
-                      startDate: DateTime.now().add(const Duration(days: 1)),
-                      endDate:
-                          DateTime.now().add(const Duration(days: 1, hours: 2)),
-                      iosParams: const IOSParams(
-                        reminder: Duration(
-                            /* Ex. hours:1 */), // on iOS, you can set alarm notification after your event.
-                        url:
-                            'https://www.example.com', // on iOS, you can set url to your event.
-                      ),
-                      androidParams: const AndroidParams(
-                        emailInvites: [], // on Android, you can add invite emails to your event.
-                      ),
-                    );
-                    Add2Calendar.addEvent2Cal(event);
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  label: const Text("Export to my calendar"),
-                  icon: const Icon(Icons.event_note)),
               appBar: AppBar(
                 title: const Text("My Schedules"),
                 actions: [
@@ -58,6 +33,24 @@ class SchedulePage extends StatelessWidget {
               body: ListView.builder(
                 itemCount: state.appointmentList.length,
                 itemBuilder: (context, index) => ListTile(
+                  onTap: () {
+                    final Event event = Event(
+                      location: state.appointmentList[index].doctor!.address,
+                      startDate: state.appointmentList[index].datetime,
+                      endDate: state.appointmentList[index].datetime
+                          .add(const Duration(hours: 2)),
+                      iosParams: const IOSParams(
+                        reminder: Duration(
+                            /* Ex. hours:1 */), // on iOS, you can set alarm notification after your event.
+                      ),
+                      androidParams: const AndroidParams(
+                        emailInvites: [], // on Android, you can add invite emails to your event.
+                      ),
+                      title:
+                          'Meeting with Dr. ${state.appointmentList[index].doctor!.lastname}',
+                    );
+                    Add2Calendar.addEvent2Cal(event);
+                  },
                   leading: const Icon(Icons.event_available),
                   title: Text(state.appointmentList[index].datetime.toString()),
                   subtitle: Text("Dr. Arthur Mohseni"),
