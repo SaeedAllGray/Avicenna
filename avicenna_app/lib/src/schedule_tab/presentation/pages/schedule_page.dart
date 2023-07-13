@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class SchedulePage extends StatelessWidget {
   const SchedulePage({super.key});
@@ -40,8 +41,12 @@ class SchedulePage extends StatelessWidget {
                     Add2Calendar.addEvent2Cal(event);
                   },
                   leading: const Icon(Icons.event_available),
-                  title: Text(state.appointmentList[index].datetime.toString()),
-                  subtitle: Text("Dr. Arthur Mohseni"),
+                  title: Text(DateFormat('EEEE, MMMM d, HH:mm')
+                      .format(state.appointmentList[index].datetime)),
+                  subtitle: Text(
+                      state.appointmentList[index].doctor!.firstname +
+                          " " +
+                          state.appointmentList[index].doctor!.lastname),
                   trailing: IconButton(
                       onPressed: () => BlocProvider.of<ScheduleBloc>(context)
                           .add(DeleteSchedule(state.appointmentList[index])),

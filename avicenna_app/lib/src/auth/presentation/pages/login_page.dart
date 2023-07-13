@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                         TextFormField(
                           controller: usernameController,
                           decoration: const InputDecoration(
-                            label: Text('username'),
+                            label: Text('Username'),
                           ),
                           onChanged: (v) => _bloc.add(InputEvent()),
                         ),
