@@ -9,16 +9,16 @@ class SchedulePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ScheduleBloc()..add(GetScheduleEvent()),
-      child: BlocBuilder<ScheduleBloc, ScheduleState>(
-        builder: (context, state) {
-          if (state is ScheduleFetched) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text("My Schedules"),
-              ),
-              body: ListView.builder(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("My Schedules"),
+      ),
+      body: BlocProvider(
+        create: (context) => ScheduleBloc()..add(GetScheduleEvent()),
+        child: BlocBuilder<ScheduleBloc, ScheduleState>(
+          builder: (context, state) {
+            if (state is ScheduleFetched) {
+              return ListView.builder(
                 itemCount: state.appointmentList.length,
                 itemBuilder: (context, index) => ListTile(
                   onTap: () {
@@ -47,13 +47,13 @@ class SchedulePage extends StatelessWidget {
                           .add(DeleteSchedule(state.appointmentList[index])),
                       icon: const Icon(Icons.delete_forever)),
                 ),
-              ),
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
             );
-          }
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        },
+          },
+        ),
       ),
     );
   }
