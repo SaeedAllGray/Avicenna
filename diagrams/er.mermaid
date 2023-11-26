@@ -1,0 +1,44 @@
+erDiagram
+    PATIENT ||--o{ RATING : leaves
+    PATIENT ||..o{ TIME_SLOT : selects
+    DOCTOR ||--o{ RATING : receives
+    DOCTOR ||--o{ TIME_SLOT : creates
+    DOCTOR{
+        int id PK
+        string first_name
+        string last_name
+        string specialization
+        string username UK
+        string email UK "optional"
+        string phone_number UK
+        string password
+        string address
+    }
+    PATIENT{
+        int id PK
+        string ssn UK
+        string first_name
+        string last_name
+        date date_born
+        string username UK
+        string email UK "optional"
+        string password
+    }
+    RATING{
+        int id PK
+        int rating "from 0 to 5"
+        string comment "optional"
+        int patient FK
+        int doctor FK
+    }
+    TIME_SLOT{
+        int id PK
+        date day
+        time beginning
+        time end
+        int doctor FK
+        int patient FK "optional"
+        bool booked "not stored in the DB"
+        bool confirmed
+    }
+
