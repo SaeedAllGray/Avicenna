@@ -1,9 +1,13 @@
 {
-  "appTitle": "Avicenna App",
+  "appTitle": "Avicenna",
   "@appTitle": {
     "description": "The title of the application"
   },
   "doctors": "Doctors",
   "search": "Search",
-  "pateint": "Pateint"
+  "pateint": "Pateint",
+  "username": "Username",
+  "password": "Password",
+  "register": "Register",
+  "login": "Login"
 }
