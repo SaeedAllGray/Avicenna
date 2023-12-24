@@ -1,5 +1,6 @@
 import 'package:avicenna_app/presentation/constants/colors.dart';
 import 'package:avicenna_app/presentation/constants/fonts.dart';
+import 'package:avicenna_app/presentation/features/auth/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -69,10 +70,10 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(AppLocalizations.of(context)!.login)),
               TextButton(
                   onPressed: () {
-                    // Navigator.pushReplacement(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => const SignupPage()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignupPage()));
                   },
                   child: Text(AppLocalizations.of(context)!.register)),
             ],
