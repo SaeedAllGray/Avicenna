@@ -9,5 +9,7 @@
   "username": "Username",
   "password": "Password",
   "register": "Register",
-  "login": "Login"
+  "login": "Login",
+  "iHaveAnAccount": "I have an account.",
+  "iAmADoctor": "I am a doctor."
 }
