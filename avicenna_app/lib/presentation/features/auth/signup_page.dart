@@ -26,8 +26,11 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.register),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100.0), // here the desired height
+        child: AppBar(
+          leading: Text(AppLocalizations.of(context)!.register),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

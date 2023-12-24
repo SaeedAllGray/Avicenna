@@ -40,23 +40,23 @@ class _LoginPageState extends State<LoginPage> {
           bloc: _bloc,
           builder: (context, state) {
             return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.teal,
+                leadingWidth: 100,
+                leading: Image.asset(
+                  'assets/images/avicenna.png',
+                  color: Colors.white,
+                ),
+                title: Text(
+                  AppLocalizations.of(context)!.appTitle,
+                  style: FontStyles.WHITE_MEDIUM_24,
+                ),
+              ),
               body: SafeArea(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.all(10),
                   child: Column(
                     children: [
-                      Image.asset(
-                        'assets/images/avicenna.png',
-                        height: 100,
-                        color: Colors.teal,
-                      ),
-                      Text(
-                        AppLocalizations.of(context)!.appTitle,
-                        style: FontStyles.BLACK_MEDIUM_24,
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
                       Visibility(
                         visible: _bloc.signupActive,
                         child: Column(
@@ -73,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                             ListTile(
                               title: TextField(
                                 controller: firstNameController,
+                                onChanged: (v) => _bloc.add(InputEvent()),
                                 decoration: InputDecoration(
                                     label: Text(AppLocalizations.of(context)!
                                         .firstName)),
@@ -81,6 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                             ListTile(
                               title: TextField(
                                 controller: lastNameController,
+                                onChanged: (v) => _bloc.add(InputEvent()),
                                 decoration: InputDecoration(
                                     label: Text(AppLocalizations.of(context)!
                                         .lastName)),
@@ -91,6 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: ListTile(
                                 title: TextField(
                                   keyboardType: TextInputType.number,
+                                  onChanged: (v) => _bloc.add(InputEvent()),
                                   controller: ssnController,
                                   decoration: InputDecoration(
                                     label: Text(AppLocalizations.of(context)!
@@ -104,6 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: ListTile(
                                 title: TextField(
                                   controller: professionController,
+                                  onChanged: (v) => _bloc.add(InputEvent()),
                                   decoration: const InputDecoration(
                                       label: Text('Profession')),
                                 ),
@@ -114,6 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: ListTile(
                                 title: TextField(
                                   controller: phoneController,
+                                  onChanged: (v) => _bloc.add(InputEvent()),
                                   decoration: InputDecoration(
                                       label: Text(
                                           AppLocalizations.of(context)!.phone)),
@@ -125,6 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: ListTile(
                                 title: TextField(
                                   controller: addressController,
+                                  onChanged: (v) => _bloc.add(InputEvent()),
                                   decoration: InputDecoration(
                                     label: Text(
                                         AppLocalizations.of(context)!.address),
@@ -140,30 +146,19 @@ class _LoginPageState extends State<LoginPage> {
                                   label:
                                       Text(AppLocalizations.of(context)!.email),
                                 ),
-                                // onChanged: (v) => _bloc.add(InputEvent()),
+                                onChanged: (v) => _bloc.add(InputEvent()),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      Visibility(
-                        visible: !_bloc.signupActive,
-                        child: Column(
-                          children: [
-                            ListTile(
-                              title: TextFormField(
-                                controller: usernameController,
-                                decoration: InputDecoration(
-                                  label: Text(
-                                      AppLocalizations.of(context)!.username),
-                                ),
-                                // onChanged: (v) => _bloc.add(InputEvent()),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                          ],
+                      ListTile(
+                        title: TextFormField(
+                          controller: usernameController,
+                          decoration: InputDecoration(
+                            label: Text(AppLocalizations.of(context)!.username),
+                          ),
+                          onChanged: (v) => _bloc.add(InputEvent()),
                         ),
                       ),
                       ListTile(
@@ -173,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: InputDecoration(
                             label: Text(AppLocalizations.of(context)!.password),
                           ),
-                          // onChanged: (v) => _bloc.add(InputEvent()),
+                          onChanged: (v) => _bloc.add(InputEvent()),
                         ),
                       ),
                       state is AuthInProgress

@@ -64,6 +64,12 @@ class MyApp extends StatelessWidget {
               seedColor: Colors.teal,
               // ···
             ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                foregroundColor:
+                    MaterialStateProperty.all<Color>(AppColors.white),
+              ),
+            ),
           ),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
