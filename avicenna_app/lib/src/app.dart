@@ -86,7 +86,7 @@ class MyApp extends StatelessWidget {
           //     },
           // );
           // },
-          home: LoginPage(),
+          home: const LoginPage(),
         );
       },
     );

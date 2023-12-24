@@ -24,4 +24,22 @@ class LoginEvent extends AuthEvent {
   List<Object> get props => [username, password];
 }
 
-class SignupEvent extends AuthEvent {}
+class SignUpDoctorEvent extends AuthEvent {
+  final Doctor doctor;
+  final String password;
+  const SignUpDoctorEvent(this.doctor, this.password);
+}
+
+class SignUpPatientEvent extends AuthEvent {
+  final Patient patient;
+  final String password;
+
+  const SignUpPatientEvent(this.patient, this.password);
+}
+
+class ToggleAuthEvent extends AuthEvent {
+  final String uuid = const Uuid().v4();
+
+  @override
+  List<Object> get props => [uuid];
+}
