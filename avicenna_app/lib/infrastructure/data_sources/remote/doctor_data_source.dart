@@ -1,6 +1,6 @@
 import 'package:avicenna_app/domain/entries/doctor.dart';
 import 'package:avicenna_app/domain/value_objects/user_info.dart';
-import 'package:avicenna_app/infrastructure/data_sources/entity_data_source.dart';
+import 'package:avicenna_app/infrastructure/data_sources/remote/entity_data_source.dart';
 
 class DoctorDataSource implements EntityDataSource<Doctor> {
   // Implementation might involve interaction with an API, database, etc.
