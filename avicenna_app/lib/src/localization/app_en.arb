@@ -8,8 +8,14 @@
   "pateint": "Pateint",
   "username": "Username",
   "password": "Password",
+  "email": "email",
   "register": "Register",
+  "phone": "Phone Number",
+  "address":"Address",
   "login": "Login",
   "iHaveAnAccount": "I have an account.",
-  "iAmADoctor": "I am a doctor."
+  "iAmADoctor": "I am a doctor.",
+  "firstName":"First Name",
+  "lastName":"Last Name",
+  "socialNumber":"Social Security Number"
 }

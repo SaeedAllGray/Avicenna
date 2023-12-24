@@ -1,6 +1,6 @@
 import 'package:avicenna_app/domain/entries/doctor.dart';
 import 'package:avicenna_app/domain/repositories/entity_repository.dart';
-import 'package:avicenna_app/infrastructure/data_sources/doctor_data_source.dart';
+import 'package:avicenna_app/infrastructure/data_sources/remote/doctor_data_source.dart';
 
 class DoctorRepository extends EntityRepository<Doctor> {
   DoctorRepository(DoctorDataSource dataSource) : super(dataSource);

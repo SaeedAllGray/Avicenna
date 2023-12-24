@@ -1,4 +1,4 @@
-import 'package:avicenna_app/infrastructure/data_sources/entity_data_source.dart';
+import 'package:avicenna_app/infrastructure/data_sources/remote/entity_data_source.dart';
 
 abstract class EntityRepository<T> {
   EntityDataSource<T> dataSource;
