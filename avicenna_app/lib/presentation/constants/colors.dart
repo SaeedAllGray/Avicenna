@@ -6,4 +6,5 @@ class AppColors {
   static const Color BLACK = Colors.black;
   static const Color primary = Colors.teal;
   static const Color white = Colors.white;
+  static const Color scaffoldBackgroundColor = Color.fromRGBO(240, 240, 240, 1);
 }

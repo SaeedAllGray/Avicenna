@@ -1,5 +1,5 @@
 import 'package:avicenna_app/presentation/constants/colors.dart';
-import 'package:avicenna_app/presentation/features/auth/login_page.dart';
+import 'package:avicenna_app/presentation/features/auth/auth_page.dart';
 import 'package:avicenna_app/presentation/features/doctor/pages/doctors_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -60,6 +60,7 @@ class MyApp extends StatelessWidget {
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
           theme: ThemeData(
+            scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
             colorScheme: ColorScheme.fromSeed(
               seedColor: Colors.teal,
               // ···
@@ -92,7 +93,7 @@ class MyApp extends StatelessWidget {
           //     },
           // );
           // },
-          home: const LoginPage(),
+          home: const AuthPage(),
         );
       },
     );

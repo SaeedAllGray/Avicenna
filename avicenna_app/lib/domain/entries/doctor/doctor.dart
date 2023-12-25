@@ -7,8 +7,7 @@ class Doctor {
   final int id;
   final String firstName;
   final String lastName;
-  final String userName;
-  final String ssn;
+  final String username;
   final String email;
   final String specialization;
   final String phoneNumber;
@@ -20,8 +19,7 @@ class Doctor {
     required this.id,
     required this.firstName,
     required this.lastName,
-    required this.userName,
-    required this.ssn,
+    required this.username,
     required this.email,
     required this.specialization,
   });
