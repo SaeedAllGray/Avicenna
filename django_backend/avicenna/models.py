@@ -1,68 +1,173 @@
-import uuid
+"""Main models."""
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MaxValueValidator, RegexValidator
 from django.db import models
-from django.utils import timezone
 
 
-# refer to https://docs.djangoproject.com/en/4.2/ref/contrib/auth/#fields
-# to see the default fields
 class CustomUser(AbstractUser):
-    email = models.CharField(max_length=50)
-    username = models.CharField(
-        unique=True,
-        max_length=100,
-        default=str(
-            uuid.uuid4())[:8])
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    is_doctor = models.BooleanField(default=False)
-    is_patient = models.BooleanField(default=False)
+    """Common user fields.
 
-    def __str__(self):
+    Subclasses AbstractUser.
+    """
+
+    first_name = models.CharField("first name", max_length=150)
+    last_name = models.CharField("last name", max_length=150)
+    email = models.EmailField("email address", blank=True, null=True, unique=True)
+
+    def __str__(self) -> str:
         return self.get_full_name()
 
 
 class Doctor(models.Model):
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
-        primary_key=True,
-        on_delete=models.CASCADE)
-    phone_number = models.CharField(max_length=30)
-    specialization = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
+    """Fields pertaining to the doctor.
 
-    def __str__(self):
-        return str(self.user)
+    Extends CustomUser by means of OneToOne.
+    """
+
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.CASCADE
+    )
+    phone_number = models.CharField(
+        max_length=15,
+        unique=True,
+        help_text="Kindly use only numeric characters.",
+        validators=[
+            RegexValidator(
+                regex=r"^\d+$",
+                message="Enter a numeric only number",
+                code="invalid_phone_number",
+            ),
+        ],
+    )
+    address = models.CharField(max_length=150)
+
+    SPECIALIZATION_CHOICES = [
+        ("cardiology", "Cardiology"),
+        ("dermatology", "Dermatology"),
+        ("endocrinology", "Endocrinology"),
+        ("gastroenterology", "Gastroenterology"),
+        ("neurology", "Neurology"),
+        ("oncology", "Oncology"),
+        ("orthopedics", "Orthopedics"),
+        ("pediatrics", "Pediatrics"),
+        ("psychiatry", "Psychiatry"),
+        ("urology", "Urology"),
+        (
+            "Internal Medicine",
+            [
+                ("nephrology", "Nephrology"),
+                ("pulmonology", "Pulmonology"),
+                ("rheumatology", "Rheumatology"),
+            ],
+        ),
+        (
+            "Surgery",
+            [
+                ("general surgery", "General Surgery"),
+                ("orthopedic surgery", "Orthopedic Surgery"),
+                ("neurosurgery", "Neurosurgery"),
+            ],
+        ),
+        (
+            "Obstetrics and Gynecology",
+            [
+                ("obstetrics", "Obstetrics"),
+                ("gynecology", "Gynecology"),
+            ],
+        ),
+        ("ophthalmology", "Ophthalmology"),
+        ("otolaryngology", "Otolaryngology"),
+    ]
+    specialization = models.CharField(max_length=50, choices=SPECIALIZATION_CHOICES)
+
+    def get_average_rating(self) -> float:
+        """Retrieves the average rating received by the doctor.
+
+        Returns:
+            float: The average rating limited to floats from 0 to 5.
+        """
+        return (
+            Review.objects.filter(doctor=self).aggregate(models.Avg("rating"))[
+                "rating__avg"
+            ]
+            or 0.0
+        )
+
+    def __str__(self) -> str:
+        return f"DR. {str(self.user)}"
 
 
 class Patient(models.Model):
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
-        primary_key=True,
-        on_delete=models.CASCADE)
-    ssn = models.CharField(
-        'Social Security number',
-        max_length=11)  # example: 790-71-4615
+    """Fields pertaining to the patient.
 
-    def __str__(self):
+    Extends CustomUser by means of OneToOne.
+    """
+
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.CASCADE
+    )
+    ssn = models.CharField(
+        "Social Security number",
+        max_length=11,
+        unique=True,
+        help_text="Kindly use the following format: <em>NNN-NN-NNNN</em>.",
+    )
+    date_born = models.DateField("date of birth")
+
+    def __str__(self) -> str:
         return str(self.user)
 
 
-class Appointment(models.Model):
+class Review(models.Model):
+    """A review consisting of a rating and an optional comment.
+
+    The rating is limited to numbers from 0 to 5.
+    """
+
+    comment = models.TextField(max_length=500, blank=True)
+    rating = models.PositiveSmallIntegerField(
+        validators=[MaxValueValidator(limit_value=5)]
+    )
+    patient = models.ForeignKey(
+        Patient, on_delete=models.CASCADE, help_text="Provider of the review."
+    )
+    doctor = models.ForeignKey(
+        Doctor, on_delete=models.CASCADE, help_text="Receiver of the review."
+    )
+
+    def __str__(self) -> str:
+        return f"Rating of {self.rating} stars from {self.patient} to {self.doctor}."
+
+
+class TimeSlot(models.Model):
+    """A time slot created by a doctor.
+
+    Is considered open when the patient field is None, otherwise
+    considered taken if is_confirmed is set to True.
+    """
+
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    created_timestamp = models.DateTimeField(auto_now_add=True)
-    appointment_timestamp = models.DateTimeField('appointemnt\'s date')
+    patient = models.ForeignKey(
+        Patient, on_delete=models.CASCADE, blank=True, null=True
+    )
+    day = models.DateField("day of the appointment")
+    beginning = models.TimeField("appointment begins at")
+    end = models.TimeField("appointment ends at")
+    is_confirmed = models.BooleanField("confirmed by the doctor", default=False)
 
-    def days_remaining_from_now(self):
-        self.remaining_time = self.appointment_timestamp - timezone.now()
-        return self.remaining_time.days if self.remaining_time.days > 0 else 0
+    @property
+    def is_booked(self) -> bool:
+        """Return True if the time slot is booked, False otherwise.
 
-#    def get_all_appointments_by_user_id(self, user_id):
-#        pass
+        Returns:
+            bool: True if patient is set, False if None.
+        """
+        return bool(self.patient)
 
     def __str__(self):
-        return 'Appointment on {:%B %d, %Y} for Dr. {} and patient {}'.format(
-            self.appointment_timestamp, str(self.doctor), str(self.patient))
+        return (
+            f"Appointment on {self.day:%B %d, %Y} "
+            f"between {self.doctor} and patient {self.patient}."
+        )
