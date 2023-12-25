@@ -42,14 +42,23 @@ class _LoginPageState extends State<LoginPage> {
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.teal,
-                leadingWidth: 100,
-                leading: Image.asset(
-                  'assets/images/avicenna.png',
-                  color: Colors.white,
-                ),
-                title: Text(
-                  AppLocalizations.of(context)!.appTitle,
-                  style: FontStyles.WHITE_MEDIUM_24,
+                centerTitle: true,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/avicenna.png',
+                      color: Colors.white,
+                      height: 20,
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.appTitle,
+                      style: FontStyles.WHITE_MEDIUM_24,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                  ],
                 ),
               ),
               body: SafeArea(
