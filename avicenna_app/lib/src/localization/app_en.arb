@@ -20,5 +20,6 @@
   "socialNumber":"Social Security Number",
   "search": "Search",
   "profession": "Profession",
-  "address": "Address"
+  "address": "Address",
+  "available_time_slots": "Available Time Slots"
 }
