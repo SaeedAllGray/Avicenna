@@ -9,7 +9,11 @@ class FontStyles {
     fontSize: 24.0,
     fontWeight: FontWeight.bold,
   );
-  static const BLACK_REGULAR_18 = TextStyle(fontSize: 18.0);
+  static const BLACK_REGULAR_18 = TextStyle(
+    color: AppColors.BLACK,
+    fontSize: 18.0,
+    fontWeight: FontWeight.bold,
+  );
   static const WHITE_MEDIUM_24 = TextStyle(
     color: AppColors.white,
     fontSize: 24.0,
