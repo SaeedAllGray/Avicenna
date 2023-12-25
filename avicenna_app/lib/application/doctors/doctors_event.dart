@@ -8,7 +8,11 @@ sealed class DoctorsEvent extends Equatable {
 }
 
 class GetDoctors extends DoctorsEvent {
+  const GetDoctors();
+}
+
+class SearchDoctors extends DoctorsEvent {
   final String searchTerm;
 
-  const GetDoctors(this.searchTerm);
+  const SearchDoctors({required this.searchTerm});
 }

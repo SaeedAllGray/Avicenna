@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class AuthPage extends StatefulWidget {
+  const AuthPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<AuthPage> createState() => _AuthPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _AuthPageState extends State<AuthPage> {
   final AuthBloc _bloc = AuthBloc();
   bool isChecked = false;
   final TextEditingController usernameController = TextEditingController();
@@ -138,8 +138,10 @@ class _LoginPageState extends State<LoginPage> {
                                   title: TextField(
                                     controller: professionController,
                                     onChanged: (v) => _bloc.add(InputEvent()),
-                                    decoration: const InputDecoration(
-                                        label: Text('Profession')),
+                                    decoration: InputDecoration(
+                                        label: Text(
+                                            AppLocalizations.of(context)!
+                                                .profession)),
                                   ),
                                 ),
                               ),

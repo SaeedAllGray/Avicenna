@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:avicenna_app/domain/entries/doctor.dart';
-import 'package:avicenna_app/domain/entries/patient.dart';
+import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
+import 'package:avicenna_app/domain/entries/patient/patient.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';

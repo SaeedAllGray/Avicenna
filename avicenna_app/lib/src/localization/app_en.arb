@@ -17,5 +17,8 @@
   "iAmADoctor": "I am a doctor.",
   "firstName":"First Name",
   "lastName":"Last Name",
-  "socialNumber":"Social Security Number"
+  "socialNumber":"Social Security Number",
+  "search": "Search",
+  "profession": "Profession",
+  "address": "Address"
 }

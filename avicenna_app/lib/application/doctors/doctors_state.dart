@@ -9,10 +9,12 @@ sealed class DoctorsState extends Equatable {
 
 final class DoctorsInitial extends DoctorsState {}
 
-class SearchInProgress extends DoctorsState {}
+class DoctorsInProgress extends DoctorsState {}
 
-class SearchSucceed extends DoctorsState {
+class DoctorsSucceed extends DoctorsState {
   final List<Doctor> doctors;
 
-  const SearchSucceed(this.doctors);
+  const DoctorsSucceed(this.doctors);
+  @override
+  List<Object> get props => [doctors];
 }
