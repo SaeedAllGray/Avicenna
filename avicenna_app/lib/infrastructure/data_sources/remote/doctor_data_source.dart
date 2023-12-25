@@ -13,8 +13,7 @@ class DoctorDataSource implements EntityDataSource<Doctor> {
     // or return await databaseHelper.getAllDoctors();
     return [
       Doctor(
-          userInfo:
-              UserInfo(id: ',', firstName: '', lastName: '', userName: ''),
+          userInfo: UserInfo(id: 8, firstName: '', lastName: '', userName: ''),
           specialization: 'specialization')
     ];
   }
@@ -25,7 +24,13 @@ class DoctorDataSource implements EntityDataSource<Doctor> {
     // return await someApiService.getDoctorById(id);
     // or return await databaseHelper.getDoctorById(id);
     return Doctor(
-        userInfo: UserInfo(id: ',', firstName: '', lastName: '', userName: ''),
+        userInfo: UserInfo(
+            id: 8,
+            firstName: '',
+            lastName: '',
+            userName: '',
+            ssn: '',
+            birthdate: DateTime.now()),
         specialization: 'specialization');
   }
 
