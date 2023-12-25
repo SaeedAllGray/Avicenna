@@ -7,7 +7,7 @@ class Patient {
   final int id;
   final String firstName;
   final String lastName;
-  final String userName;
+  final String username;
   final String ssn;
   final String email;
 
@@ -18,7 +18,7 @@ class Patient {
     required this.id,
     required this.firstName,
     required this.lastName,
-    required this.userName,
+    required this.username,
     required this.ssn,
     required this.email,
   });
