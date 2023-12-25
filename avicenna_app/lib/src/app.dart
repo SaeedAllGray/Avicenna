@@ -1,6 +1,5 @@
 import 'package:avicenna_app/presentation/constants/colors.dart';
 import 'package:avicenna_app/presentation/features/auth/auth_page.dart';
-import 'package:avicenna_app/presentation/features/doctor/pages/doctors_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

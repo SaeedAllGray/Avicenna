@@ -1,4 +1,4 @@
-import 'package:avicenna_app/presentation/features/doctor/pages/doctors_page.dart';
+import 'package:avicenna_app/presentation/features/doctor/doctors_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,7 +12,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   // static const TextStyle optionStyle =
   //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     DoctorsPage(),
     Container(),
     Container(),
