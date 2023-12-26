@@ -1,0 +1,102 @@
+[
+    {
+        "model": "avicenna.review",
+        "pk": 1,
+        "fields": {
+            "comment": "So good, I've beaten my friend so that he'd use your services too!",
+            "rating": 5,
+            "patient": 13,
+            "doctor": 2
+        }
+    },
+    {
+        "model": "avicenna.review",
+        "pk": 2,
+        "fields": {
+            "comment": "Exceptional service! I recommend this doctor to everyone.",
+            "rating": 4,
+            "patient": 14,
+            "doctor": 3
+        }
+    },
+    {
+        "model": "avicenna.review",
+        "pk": 3,
+        "fields": {
+            "comment": "Caring and knowledgeable doctor. Helped me through a tough time.",
+            "rating": 5,
+            "patient": 15,
+            "doctor": 4
+        }
+    },
+    {
+        "model": "avicenna.review",
+        "pk": 4,
+        "fields": {
+            "comment": "Great bedside manner and excellent communication. Highly recommended.",
+            "rating": 4,
+            "patient": 16,
+            "doctor": 5
+        }
+    },
+    {
+        "model": "avicenna.review",
+        "pk": 5,
+        "fields": {
+            "comment": "Very professional. Explained everything clearly. I felt at ease.",
+            "rating": 5,
+            "patient": 17,
+            "doctor": 6
+        }
+    },
+    {
+        "model": "avicenna.review",
+        "pk": 6,
+        "fields": {
+            "comment": "Helpful and friendly staff. The doctor was thorough in examination.",
+            "rating": 4,
+            "patient": 18,
+            "doctor": 7
+        }
+    },
+    {
+        "model": "avicenna.review",
+        "pk": 7,
+        "fields": {
+            "comment": "Quick and efficient service. Solved my health concern effectively.",
+            "rating": 5,
+            "patient": 19,
+            "doctor": 8
+        }
+    },
+    {
+        "model": "avicenna.review",
+        "pk": 8,
+        "fields": {
+            "comment": "Courteous and professional. The doctor went above and beyond.",
+            "rating": 4,
+            "patient": 20,
+            "doctor": 9
+        }
+    },
+    {
+        "model": "avicenna.review",
+        "pk": 9,
+        "fields": {
+            "comment": "Excellent experience. I appreciate the doctor's expertise.",
+            "rating": 5,
+            "patient": 11,
+            "doctor": 10
+        }
+    },
+    {
+        "model": "avicenna.review",
+        "pk": 10,
+        "fields": {
+            "comment": "Couldn't have asked for better care. Top-notch service.",
+            "rating": 5,
+            "patient": 12,
+            "doctor": 10
+        }
+    }
+]

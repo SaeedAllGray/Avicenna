@@ -1,0 +1,134 @@
+[
+    {
+        "model": "avicenna.timeslot",
+        "pk": 1,
+        "fields": {
+            "doctor": 1,
+            "patient": 11,
+            "day": "2023-12-25",
+            "beginning": "12:00:00",
+            "end": "13:00:00",
+            "is_confirmed": true
+        }
+    },
+    {
+        "model": "avicenna.timeslot",
+        "pk": 2,
+        "fields": {
+            "doctor": 2,
+            "patient": 12,
+            "day": "2023-12-26",
+            "beginning": "20:42:58",
+            "end": "00:00:00",
+            "is_confirmed": false
+        }
+    },
+    {
+        "model": "avicenna.timeslot",
+        "pk": 3,
+        "fields": {
+            "doctor": 3,
+            "patient": 13,
+            "day": "2023-12-27",
+            "beginning": "14:30:00",
+            "end": "15:30:00",
+            "is_confirmed": true
+        }
+    },
+    {
+        "model": "avicenna.timeslot",
+        "pk": 4,
+        "fields": {
+            "doctor": 4,
+            "patient": 14,
+            "day": "2023-12-28",
+            "beginning": "10:00:00",
+            "end": "11:30:00",
+            "is_confirmed": true
+        }
+    },
+    {
+        "model": "avicenna.timeslot",
+        "pk": 5,
+        "fields": {
+            "doctor": 5,
+            "patient": 15,
+            "day": "2023-12-29",
+            "beginning": "16:00:00",
+            "end": "17:00:00",
+            "is_confirmed": false
+        }
+    },
+    {
+        "model": "avicenna.timeslot",
+        "pk": 6,
+        "fields": {
+            "doctor": 6,
+            "patient": 16,
+            "day": "2023-12-30",
+            "beginning": "08:45:00",
+            "end": "09:45:00",
+            "is_confirmed": true
+        }
+    },
+    {
+        "model": "avicenna.timeslot",
+        "pk": 7,
+        "fields": {
+            "doctor": 7,
+            "patient": 17,
+            "day": "2023-12-31",
+            "beginning": "12:30:00",
+            "end": "13:30:00",
+            "is_confirmed": false
+        }
+    },
+    {
+        "model": "avicenna.timeslot",
+        "pk": 8,
+        "fields": {
+            "doctor": 8,
+            "patient": 18,
+            "day": "2024-01-01",
+            "beginning": "18:15:00",
+            "end": "19:15:00",
+            "is_confirmed": true
+        }
+    },
+    {
+        "model": "avicenna.timeslot",
+        "pk": 9,
+        "fields": {
+            "doctor": 9,
+            "patient": 19,
+            "day": "2024-01-02",
+            "beginning": "10:30:00",
+            "end": "11:30:00",
+            "is_confirmed": true
+        }
+    },
+    {
+        "model": "avicenna.timeslot",
+        "pk": 10,
+        "fields": {
+            "doctor": 10,
+            "patient": 20,
+            "day": "2024-01-03",
+            "beginning": "14:00:00",
+            "end": "15:00:00",
+            "is_confirmed": false
+        }
+    },
+    {
+        "model": "avicenna.timeslot",
+        "pk": 11,
+        "fields": {
+            "doctor": 10,
+            "patient": null,
+            "day": "2024-01-04",
+            "beginning": "14:00:00",
+            "end": "15:00:00",
+            "is_confirmed": false
+        }
+    }
+]

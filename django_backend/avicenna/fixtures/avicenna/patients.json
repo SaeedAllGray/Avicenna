@@ -1,0 +1,82 @@
+[
+    {
+        "model": "avicenna.patient",
+        "pk": 11,
+        "fields": {
+            "ssn": "261-89-2939",
+            "date_born": "1999-11-06"
+        }
+    },
+    {
+        "model": "avicenna.patient",
+        "pk": 12,
+        "fields": {
+            "ssn": "175-34-6789",
+            "date_born": "1985-05-20"
+        }
+    },
+    {
+        "model": "avicenna.patient",
+        "pk": 13,
+        "fields": {
+            "ssn": "390-56-7812",
+            "date_born": "1990-03-15"
+        }
+    },
+    {
+        "model": "avicenna.patient",
+        "pk": 14,
+        "fields": {
+            "ssn": "467-23-9012",
+            "date_born": "1976-08-12"
+        }
+    },
+    {
+        "model": "avicenna.patient",
+        "pk": 15,
+        "fields": {
+            "ssn": "589-12-3456",
+            "date_born": "2000-12-01"
+        }
+    },
+    {
+        "model": "avicenna.patient",
+        "pk": 16,
+        "fields": {
+            "ssn": "654-78-9012",
+            "date_born": "1988-06-30"
+        }
+    },
+    {
+        "model": "avicenna.patient",
+        "pk": 17,
+        "fields": {
+            "ssn": "789-45-1234",
+            "date_born": "1995-04-18"
+        }
+    },
+    {
+        "model": "avicenna.patient",
+        "pk": 18,
+        "fields": {
+            "ssn": "823-56-3498",
+            "date_born": "1972-09-25"
+        }
+    },
+    {
+        "model": "avicenna.patient",
+        "pk": 19,
+        "fields": {
+            "ssn": "936-67-8923",
+            "date_born": "1982-11-08"
+        }
+    },
+    {
+        "model": "avicenna.patient",
+        "pk": 20,
+        "fields": {
+            "ssn": "109-45-6789",
+            "date_born": "1993-07-04"
+        }
+    }
+]
