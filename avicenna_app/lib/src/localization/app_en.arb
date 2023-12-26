@@ -21,5 +21,13 @@
   "search": "Search",
   "profession": "Profession",
   "address": "Address",
-  "available_time_slots": "Available Time Slots"
+  "available_time_slots": "Available Time Slots",
+  "choose_another_time": "Choose another time",
+  "make_appointment": "Make appointment",
+  "appointment_confirmation_message": "You have successfully made an appointment.",
+  "feedbacks": "Feedbacks",
+  "browse": "Browse",
+  "schedules": "Schedules",
+  "account": "Account",
+  "patients": "Patients"
 }

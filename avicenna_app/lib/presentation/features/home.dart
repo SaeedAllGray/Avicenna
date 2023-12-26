@@ -1,4 +1,7 @@
 import 'package:avicenna_app/presentation/features/doctor/doctors_page.dart';
+
+import 'package:avicenna_app/presentation/features/time_stamp/pages/schedules_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
     DoctorsPage(),
+    const SchedulesPage(),
     Container(),
     Container(),
   ];
@@ -32,18 +36,23 @@ class _HomePageState extends State<HomePage> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        type: BottomNavigationBarType.fixed,
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Browse',
+            icon: const Icon(Icons.search),
+            label: AppLocalizations.of(context)!.browse,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.schedule),
-            label: 'Schedules',
+            icon: const Icon(Icons.schedule),
+            label: AppLocalizations.of(context)!.schedules,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'My Account',
+            icon: const Icon(Icons.medical_services),
+            label: AppLocalizations.of(context)!.patients,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.person),
+            label: AppLocalizations.of(context)!.account,
           ),
         ],
         currentIndex: _selectedIndex,
