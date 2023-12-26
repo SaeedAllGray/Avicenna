@@ -19,7 +19,7 @@ class DoctorsBloc extends Bloc<DoctorsEvent, DoctorsState> {
       GetDoctors event, Emitter<DoctorsState> emit) async {
     emit(DoctorsInProgress());
     DoctorRepository repository = DoctorRepository();
-    doctors = await repository.fetchDoctors();
+    doctors = await repository.fetchEntities();
     emit(DoctorsSucceed(doctors));
   }
 

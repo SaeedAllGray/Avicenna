@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:avicenna_app/infrastructure/data_sources/remote/remote_data_source.dart';
 import 'package:avicenna_app/presentation/constants/api_constant.dart';
@@ -7,6 +6,7 @@ import 'package:dio/dio.dart';
 // import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DoctorRemoteDataSource implements RemoteDataSource {
+  @override
   String url = "doctors";
   Dio dio = Dio();
 

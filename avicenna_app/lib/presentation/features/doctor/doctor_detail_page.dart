@@ -1,17 +1,16 @@
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/presentation/constants/colors.dart';
 import 'package:avicenna_app/presentation/constants/fonts.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:avicenna_app/presentation/features/doctor/doctor_schedule_page.dart';
 
-import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DoctorDetailsPage extends StatelessWidget {
   final Doctor doctor;
   // final DoctorDetailBloc _bloc = DoctorDetailBloc();
 
-  DoctorDetailsPage({super.key, required this.doctor});
+  const DoctorDetailsPage({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -84,13 +83,22 @@ class DoctorDetailsPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16.0),
-            const SizedBox(
+            SizedBox(
               width: double.infinity,
-              child: Text(
-                'Schedules:',
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.start,
-              ),
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => DoctorSchedulePage(),
+                      ),
+                    );
+                  },
+                  child:
+                      Text(AppLocalizations.of(context)!.available_time_slots)),
             ),
             const SizedBox(height: 8.0),
           ],

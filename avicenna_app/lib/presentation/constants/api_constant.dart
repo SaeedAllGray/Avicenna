@@ -3,4 +3,6 @@ class ApiConstants {
   static const String TOKEN = 'token';
   static const String USER = 'user';
   static const String TYPE = 'type';
+  static const String DOCTOR = 'doctor';
+  static const String PATIENT = 'patient';
 }
