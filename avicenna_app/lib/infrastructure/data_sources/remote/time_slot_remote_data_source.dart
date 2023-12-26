@@ -30,9 +30,9 @@ class TimeSlotRemoteDataSource implements RemoteDataSource {
   },
   {
     "id": 2,
-    "date": "2023-12-25",
-    "start": "2023-12-25T10:30:00",
-    "end": "2023-12-25T11:30:00",
+    "date": "2023-12-24",
+    "start": "2023-12-24T11:00:00",
+    "end": "2023-12-24T12:00:00",
     "doctor_id": 102,
     "patient_id": 202,
     "confirmed": true

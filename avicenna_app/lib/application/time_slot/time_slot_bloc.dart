@@ -10,9 +10,9 @@ part 'time_slot_state.dart';
 
 class TimeSlotBloc extends Bloc<TimeSlotEvent, TimeSlotState> {
   TimeSlotBloc() : super(TimeSlotsInitial()) {
-    on<GetTimeSlots>(_onGetDoctorsEvent);
+    on<GetTimeSlots>(_onGetTimeSlotsEvent);
   }
-  FutureOr<void> _onGetDoctorsEvent(
+  FutureOr<void> _onGetTimeSlotsEvent(
       GetTimeSlots event, Emitter<TimeSlotState> emit) async {
     emit(TimeSlotsInProgress());
     TimeSlotRepository repository = TimeSlotRepository();
