@@ -2,6 +2,7 @@ import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/presentation/constants/colors.dart';
 import 'package:avicenna_app/presentation/constants/fonts.dart';
 import 'package:avicenna_app/presentation/features/doctor/pages/doctor_schedule_page.dart';
+import 'package:avicenna_app/presentation/features/doctor/widgets/feedbacks_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -31,11 +32,11 @@ class DoctorDetailsPage extends StatelessWidget {
               child: Column(children: [
                 Text(
                   '${doctor.firstName} ${doctor.lastName}',
-                  style: FontStyles.BLACK_MEDIUM_24,
+                  style: FontStyles.BLACK_BOLD_24,
                 ),
                 Text(
                   doctor.specialization,
-                  style: FontStyles.BLACK_REGULAR_18,
+                  style: FontStyles.BLACK_BOLD_18,
                 ),
               ]),
             ),
@@ -50,7 +51,7 @@ class DoctorDetailsPage extends StatelessWidget {
               leading: const Icon(Icons.work),
               subtitle: Text(
                 doctor.address,
-                style: FontStyles.BLACK_REGULAR_18,
+                style: FontStyles.BLACK_BOLD_18,
               ),
             ),
             const SizedBox(
@@ -64,7 +65,7 @@ class DoctorDetailsPage extends StatelessWidget {
               leading: const Icon(Icons.email),
               subtitle: Text(
                 doctor.email,
-                style: FontStyles.BLACK_REGULAR_18,
+                style: FontStyles.BLACK_BOLD_18,
               ),
             ),
             const SizedBox(
@@ -78,7 +79,7 @@ class DoctorDetailsPage extends StatelessWidget {
               leading: const Icon(Icons.phone),
               subtitle: Text(
                 doctor.phoneNumber,
-                style: FontStyles.BLACK_REGULAR_18,
+                style: FontStyles.BLACK_BOLD_18,
               ),
             ),
             const SizedBox(height: 16.0),
@@ -92,14 +93,18 @@ class DoctorDetailsPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => DoctorSchedulePage(),
+                        builder: (context) =>
+                            DoctorSchedulePage(doctor: doctor),
                       ),
                     );
                   },
                   child:
                       Text(AppLocalizations.of(context)!.available_time_slots)),
             ),
-            const SizedBox(height: 8.0),
+            const SizedBox(
+              height: 20,
+            ),
+            FeedbacksWidget(doctor: doctor),
           ],
         ),
       ),
