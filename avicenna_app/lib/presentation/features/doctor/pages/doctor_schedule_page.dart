@@ -93,11 +93,6 @@ class DoctorSchedulePage extends StatelessWidget {
                                       textAlign: TextAlign.start,
                                     ),
                                   ),
-                                  OutlinedButton(
-                                    child: Text(AppLocalizations.of(context)!
-                                        .choose_another_time),
-                                    onPressed: () => Navigator.pop(context),
-                                  ),
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: AppColors.primary),
@@ -116,6 +111,11 @@ class DoctorSchedulePage extends StatelessWidget {
                                       Navigator.popUntil(
                                           context, (route) => route.isFirst);
                                     },
+                                  ),
+                                  TextButton(
+                                    child: Text(AppLocalizations.of(context)!
+                                        .choose_another_time),
+                                    onPressed: () => Navigator.pop(context),
                                   ),
                                 ],
                               ),

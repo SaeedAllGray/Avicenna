@@ -25,5 +25,9 @@
   "choose_another_time": "Choose another time",
   "make_appointment": "Make appointment",
   "appointment_confirmation_message": "You have successfully made an appointment.",
-  "feedbacks": "Feedbacks"
+  "feedbacks": "Feedbacks",
+  "browse": "Browse",
+  "schedules": "Schedules",
+  "account": "Account",
+  "patients": "Patients"
 }
