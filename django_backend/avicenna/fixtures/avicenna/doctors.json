@@ -1,0 +1,92 @@
+[
+    {
+        "model": "avicenna.doctor",
+        "pk": 1,
+        "fields": {
+            "phone_number": "0987654321",
+            "address": "Mystical Lane, 23",
+            "specialization": "ophthalmology"
+        }
+    },
+    {
+        "model": "avicenna.doctor",
+        "pk": 2,
+        "fields": {
+            "phone_number": "0099887766",
+            "address": "Christmas Markt. Strasse, 1",
+            "specialization": "general surgery"
+        }
+    },
+    {
+        "model": "avicenna.doctor",
+        "pk": 3,
+        "fields": {
+            "phone_number": "0123456789",
+            "address": "Coconut Avenue, 42",
+            "specialization": "orthopedic surgery"
+        }
+    },
+    {
+        "model": "avicenna.doctor",
+        "pk": 4,
+        "fields": {
+            "phone_number": "0789564213",
+            "address": "Castle Boulevard, 7",
+            "specialization": "neurosurgery"
+        }
+    },
+    {
+        "model": "avicenna.doctor",
+        "pk": 5,
+        "fields": {
+            "phone_number": "0654321098",
+            "address": "Enchanted Forest Lane, 13",
+            "specialization": "cardiology"
+        }
+    },
+    {
+        "model": "avicenna.doctor",
+        "pk": 6,
+        "fields": {
+            "phone_number": "0546872139",
+            "address": "Magic Tower, 3",
+            "specialization": "dermatology"
+        }
+    },
+    {
+        "model": "avicenna.doctor",
+        "pk": 7,
+        "fields": {
+            "phone_number": "0321654987",
+            "address": "Endocrine Street, 5",
+            "specialization": "gastroenterology"
+        }
+    },
+    {
+        "model": "avicenna.doctor",
+        "pk": 8,
+        "fields": {
+            "phone_number": "0456783210",
+            "address": "Neurological Lane, 9",
+            "specialization": "pediatrics"
+        }
+    },
+    {
+        "model": "avicenna.doctor",
+        "pk": 9,
+        "fields": {
+            "phone_number": "0369852147",
+            "address": "Oncology Square, 12",
+            "specialization": "psychiatry"
+        }
+    },
+    {
+        "model": "avicenna.doctor",
+        "pk": 10,
+        "fields": {
+            "phone_number": "0214785963",
+            "address": "Urology Circle, 8",
+            "specialization": "Internal Medicine"
+        }
+    }
+]
