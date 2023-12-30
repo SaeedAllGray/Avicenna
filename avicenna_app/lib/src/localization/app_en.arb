@@ -29,5 +29,6 @@
   "browse": "Browse",
   "schedules": "Schedules",
   "account": "Account",
-  "patients": "Patients"
+  "patients": "Patients",
+  "name": "Name"
 }

@@ -30,6 +30,8 @@ class SignUpDoctorEvent extends AuthEvent {
   const SignUpDoctorEvent(this.doctor, this.password);
 }
 
+class CheckUserEvent extends AuthEvent {}
+
 class SignUpPatientEvent extends AuthEvent {
   final Patient patient;
   final String password;
