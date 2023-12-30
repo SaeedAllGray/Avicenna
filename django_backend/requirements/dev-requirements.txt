@@ -10,6 +10,10 @@ asgiref==3.7.2
     #   django
 astroid==3.0.2
     # via pylint
+attrs==23.1.0
+    # via
+    #   jsonschema
+    #   referencing
 build==1.0.3
     # via pip-tools
 click==8.1.7
@@ -20,10 +24,21 @@ django==5.0
     # via
     #   -r requirements/requirements.txt
     #   djangorestframework
+    #   drf-spectacular
 djangorestframework==3.14.0
-    # via -r requirements/requirements.txt
+    # via
+    #   -r requirements/requirements.txt
+    #   drf-spectacular
+drf-spectacular==0.27.0
+    # via -r requirements/dev-requirements.in
+inflection==0.5.1
+    # via drf-spectacular
 isort==5.13.2
     # via pylint
+jsonschema==4.20.0
+    # via drf-spectacular
+jsonschema-specifications==2023.12.1
+    # via jsonschema
 markdown==3.5.1
     # via -r requirements/requirements.txt
 mccabe==0.7.0
@@ -51,6 +66,16 @@ pytz==2023.3.post1
     # via
     #   -r requirements/requirements.txt
     #   djangorestframework
+pyyaml==6.0.1
+    # via drf-spectacular
+referencing==0.32.0
+    # via
+    #   jsonschema
+    #   jsonschema-specifications
+rpds-py==0.16.2
+    # via
+    #   jsonschema
+    #   referencing
 ruff==0.1.9
     # via -r requirements/dev-requirements.in
 sqlparse==0.4.4
@@ -59,6 +84,8 @@ sqlparse==0.4.4
     #   django
 tomlkit==0.12.3
     # via pylint
+uritemplate==4.1.1
+    # via drf-spectacular
 wheel==0.42.0
     # via pip-tools
 

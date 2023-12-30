@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -138,4 +139,12 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_RATES": {"user": "1000/day"},
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 20,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Avicenna REST API",
+    "DESCRIPTION": "This API is supposed to be used by the Flutter front-end.",
+    "VERSION": "1.0.0",
+    "OAS_VERSION": "3.1.0",
 }
