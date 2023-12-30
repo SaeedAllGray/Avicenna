@@ -26,10 +26,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _onLoginEvent(
       LoginEvent event, Emitter<AuthState> emit) async {
     emit(AuthInProgress());
-    final bool loginSucceed =
-        await repository.login(event.username, event.password);
+    final bool loginSucceed = true;
+    // await repository.login(event.username, event.password);
     if (loginSucceed) {
-      final User? user = await repository.fetchUser();
+      // final User? user = await repository.fetchUser();
+      final User user = Doctor(
+        phoneNumber: "+49 155 10517528",
+        address: "Kampstrasse, 44135, Dortmund",
+        id: 7216660,
+        firstName: "Dr Arthur",
+        lastName: "Zevalov",
+        username: "Picaroon",
+        email: "arthur.zevalove@icloud.com",
+        specialization: "German Traditions",
+      );
       emit(AuthSucceedState(isDoctor: user is Doctor));
     } else {
       emit(AuthFailedState());
@@ -54,9 +64,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _onCheckUserEvent(
       CheckUserEvent event, Emitter<AuthState> emit) async {
-    User? user = await repository.fetchUser();
-    if (user != null) {
-      emit(AuthSucceedState(isDoctor: user is Doctor));
-    }
+    User? user = //await repository.fetchUser();
+        Doctor(
+      phoneNumber: "+49 155 10517528",
+      address: "Kampstrasse, 44135, Dortmund",
+      id: 7216660,
+      firstName: "Dr Arthur",
+      lastName: "Zevalov",
+      username: "Picaroon",
+      email: "arthur.zevalove@icloud.com",
+      specialization: "German Traditions",
+    );
+    // if (user != null) {
+    emit(AuthSucceedState(isDoctor: user is Doctor));
+    // }
   }
 }

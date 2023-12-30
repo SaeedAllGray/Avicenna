@@ -1,5 +1,5 @@
 import 'package:avicenna_app/presentation/features/doctor/doctors_page.dart';
-
+import 'package:avicenna_app/presentation/features/profile/profile.dart';
 import 'package:avicenna_app/presentation/features/time_stamp/pages/schedules_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     DoctorsPage(),
     const SchedulesPage(),
     Container(),
-    Container(),
+    const ProfilePage()
   ];
 
   void _onItemTapped(int index) {

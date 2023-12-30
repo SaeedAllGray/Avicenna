@@ -14,7 +14,7 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  final AuthBloc _bloc = AuthBloc();
+  final AuthBloc _bloc = AuthBloc()..add(CheckUserEvent());
   bool isChecked = false;
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -28,7 +28,6 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     usernameController.dispose();
     passwordController.dispose();
@@ -47,7 +46,7 @@ class _AuthPageState extends State<AuthPage> {
       create: (context) => _bloc,
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is! AuthSucceedState) {
+          if (state is AuthSucceedState) {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
