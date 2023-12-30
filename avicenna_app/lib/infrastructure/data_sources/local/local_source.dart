@@ -1,3 +1,4 @@
+import 'package:avicenna_app/presentation/constants/api_constant.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LocalSource {
@@ -17,11 +18,19 @@ class LocalSource {
 
   // Methods for reading and writing data
   Future<String?> getToken() async {
-    return await _secureStorage.read(key: 'token');
+    return await _secureStorage.read(key: ApiConstants.TOKEN);
   }
 
   Future<void> setToken(String value) async {
-    await _secureStorage.write(key: 'token', value: value);
+    await _secureStorage.write(key: ApiConstants.TOKEN, value: value);
+  }
+
+  Future<void> saveUser(String value) async {
+    await _secureStorage.write(key: ApiConstants.USER, value: value);
+  }
+
+  Future<String?> getUser() async {
+    return await _secureStorage.read(key: ApiConstants.USER);
   }
 
   // Add more methods as needed for your use case
@@ -29,5 +38,13 @@ class LocalSource {
   // Example method
   Future<void> clearStorage() async {
     await _secureStorage.deleteAll();
+  }
+
+  Future<String?> getType() async {
+    return await _secureStorage.read(key: ApiConstants.TYPE);
+  }
+
+  Future<void> setType(String value) async {
+    await _secureStorage.write(key: ApiConstants.TYPE, value: value);
   }
 }

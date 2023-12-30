@@ -121,19 +121,15 @@ class _CreateTimeStampBottonSheetState
                     backgroundColor: AppColors.primary),
                 child: Text(AppLocalizations.of(context)!.make_appointment),
                 onPressed: () {
-                  BlocProvider.of<TimeSlotBloc>(context).add(
-                    CreateTimeSlot(
+                  BlocProvider.of<TimeSlotBloc>(context).add(CreateTimeSlot(
                       timeSlot: TimeSlot(
-                        confirmed: false,
-                        id: 1,
-                        date: selectedStartDateTime,
-                        start: selectedStartDateTime,
-                        end: selectedEndDateTime,
-                        patientId: 1,
-                        doctorId: 1,
-                      ),
-                    ),
-                  );
+                          confirmed: false,
+                          id: 1,
+                          date: selectedStartDateTime,
+                          start: selectedStartDateTime,
+                          end: selectedEndDateTime,
+                          patientId: 1,
+                          doctorId: 1)));
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(

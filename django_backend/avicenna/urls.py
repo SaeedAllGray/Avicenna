@@ -5,8 +5,8 @@ from avicenna import views
 from avicenna.views import CustomAuthToken
 
 router = DefaultRouter()
-router.register(r"reviews", views.ReviewViewSet)
-router.register(r"time-slots", views.TimeSlotViewSet)
+router.register(r"reviews", views.ReviewViewSet, basename="review")
+router.register(r"time-slots", views.TimeSlotViewSet, basename="timeslot")
 router.register(r"custom-users", views.CustomUserViewSet)
 router.register(r"doctors", views.DoctorViewSet)
 router.register(r"patients", views.PatientViewSet)

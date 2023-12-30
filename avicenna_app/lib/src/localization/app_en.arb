@@ -36,5 +36,6 @@
   "starts": "Starts",
   "ends": "Ends",
   "cancel": "cancel",
-  "time_stamp_creation_confirmation": "Time stamp is created successfully"
+  "time_stamp_creation_confirmation": "Time stamp is created successfully",
+  "name": "Name"
 }
