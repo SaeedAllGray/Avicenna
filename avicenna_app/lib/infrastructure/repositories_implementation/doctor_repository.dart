@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/infrastructure/data_sources/remote/doctor_remote_data_source.dart';
-import 'package:avicenna_app/infrastructure/data_sources/remote/remote_data_source.dart';
 import 'package:avicenna_app/domain/repositories/entity_repository.dart';
 
-class DoctorRepository implements EntityRepository {
+class DoctorRepository
+    implements EntityRepository<Doctor, DoctorRemoteDataSource> {
   @override
-  RemoteDataSource api = DoctorRemoteDataSource();
+  DoctorRemoteDataSource api = DoctorRemoteDataSource();
 
   @override
   Future<List<Doctor>> fetchEntities() async {
@@ -17,7 +17,7 @@ class DoctorRepository implements EntityRepository {
   }
 
   @override
-  Future fetchEntity() {
+  Future<Doctor> fetchEntity() {
     // TODO: implement fetchEntity
     throw UnimplementedError();
   }

@@ -29,5 +29,12 @@
   "browse": "Browse",
   "schedules": "Schedules",
   "account": "Account",
-  "patients": "Patients"
+  "patients": "Patients",
+  "date": "Date", 
+  "from": "From",
+  "to": "To",
+  "starts": "Starts",
+  "ends": "Ends",
+  "cancel": "cancel",
+  "time_stamp_creation_confirmation": "Time stamp is created successfully"
 }
