@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -27,15 +28,33 @@ class CustomAuthToken(ObtainAuthToken):
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
-    # TODO: add a query parameter to only get review for a specific doctor or patient
-    queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned reviews to a given user,
+        by filtering against a `user_id` query parameter in the URL.
+        """
+        queryset = Review.objects.all()
+        user_id = self.request.query_params.get("user_id")
+        if user_id is not None:
+            queryset = queryset.filter(Q(patient__pk=user_id) | Q(doctor__pk=user_id))
+        return queryset
 
 
 class TimeSlotViewSet(viewsets.ModelViewSet):
-    # TODO: same as above
-    queryset = TimeSlot.objects.all()
     serializer_class = TimeSlotSerializer
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned reviews to a given user,
+        by filtering against a `user_id` query parameter in the URL.
+        """
+        queryset = TimeSlot.objects.all()
+        user_id = self.request.query_params.get("user_id")
+        if user_id is not None:
+            queryset = queryset.filter(Q(patient__pk=user_id) | Q(doctor__pk=user_id))
+        return queryset
 
 
 class CustomUserViewSet(viewsets.ModelViewSet):
