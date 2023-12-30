@@ -7,4 +7,5 @@ class AppColors {
   static const Color primary = Colors.teal;
   static const Color white = Colors.white;
   static const Color scaffoldBackgroundColor = Color.fromRGBO(240, 240, 240, 1);
+  static const Color blueGrey = Colors.blueGrey;
 }

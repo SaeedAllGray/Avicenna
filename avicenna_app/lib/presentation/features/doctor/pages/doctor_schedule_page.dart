@@ -1,65 +1,29 @@
 import 'dart:io';
 
 import 'package:avicenna_app/application/time_slot/time_slot_bloc.dart';
+import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/presentation/constants/colors.dart';
 import 'package:avicenna_app/presentation/constants/fonts.dart';
-import 'package:avicenna_app/presentation/features/time_stamp/widgets/create_timestamp_bottom_sheet.dart';
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
-class SchedulesPage extends StatefulWidget {
-  const SchedulesPage({super.key});
-
-  @override
-  State<SchedulesPage> createState() => _SchedulesPageState();
-}
-
-class _SchedulesPageState extends State<SchedulesPage> {
-  late TimeSlotBloc bloc;
-
-  @override
-  void initState() {
-    super.initState();
-    bloc = TimeSlotBloc();
-    bloc.add(const GetDoctorTimeSlots(doctorId: 1));
-  }
-
-  @override
-  void dispose() {
-    bloc.close();
-    super.dispose();
-  }
+class DoctorSchedulePage extends StatelessWidget {
+  final Doctor doctor;
+  const DoctorSchedulePage({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => bloc..add(const GetDoctorTimeSlots(doctorId: 1)),
-      child: CalendarControllerProvider(
-        controller: EventController(),
+    return CalendarControllerProvider(
+      controller: EventController(),
+      child: BlocProvider(
+        create: (context) =>
+            TimeSlotBloc()..add(GetDoctorTimeSlots(doctorId: doctor.id)),
         child: Scaffold(
           appBar: AppBar(
-            centerTitle: true,
-            title: Text(AppLocalizations.of(context)!.schedules),
-            actions: [
-              //TODO: the condition to check whether the user is a [doctor] or a [patient]
-              IconButton(
-                  onPressed: () {
-                    showModalBottomSheet<void>(
-                      context: context,
-                      builder: (BuildContext conte2xt) {
-                        return Provider.value(
-                          value: bloc,
-                          child: const CreateTimeStampBottonSheet(),
-                        );
-                      },
-                    );
-                  },
-                  icon: const Icon(Icons.add_rounded))
-            ],
+            title: Text(AppLocalizations.of(context)!.available_time_slots),
           ),
           body: BlocBuilder<TimeSlotBloc, TimeSlotState>(
             builder: (context, state) {
@@ -72,7 +36,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                               startTime: e.start,
                               endTime: e.end,
                               date: e.date,
-                              title: "doctor.firstName",
+                              title: doctor.firstName,
                               event: e.start,
                               endDate: e.end,
                               color: AppColors.primary),
@@ -102,14 +66,14 @@ class _SchedulesPageState extends State<SchedulesPage> {
 
                               // mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
-                                // Text(
-                                //   '${doctor.firstName} ${doctor.lastName}',
-                                //   style: FontStyles.BLACK_BOLD_24,
-                                // ),
-                                // Text(
-                                //   doctor.specialization,
-                                //   style: FontStyles.BLACK_REGULAR_18,
-                                // ),
+                                Text(
+                                  '${doctor.firstName} ${doctor.lastName}',
+                                  style: FontStyles.BLACK_BOLD_24,
+                                ),
+                                Text(
+                                  doctor.specialization,
+                                  style: FontStyles.BLACK_REGULAR_18,
+                                ),
                                 ListTile(
                                   leading: const Icon(Icons.calendar_month),
                                   dense: true,

@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:avicenna_app/domain/entries/feedback/feedback.dart';
 import 'package:avicenna_app/infrastructure/data_sources/remote/feedback_remote_data_source.dart';
-import 'package:avicenna_app/infrastructure/data_sources/remote/remote_data_source.dart';
 import 'package:avicenna_app/domain/repositories/entity_repository.dart';
 
-class FeedbackRepository implements EntityRepository {
+class FeedbackRepository
+    implements EntityRepository<Feedback, FeedbackRemoteDataSource> {
   @override
-  RemoteDataSource api = FeedbackRemoteDataSource();
+  FeedbackRemoteDataSource api = FeedbackRemoteDataSource();
 
   @override
   Future<List<Feedback>> fetchEntities() async {
@@ -17,7 +17,7 @@ class FeedbackRepository implements EntityRepository {
   }
 
   @override
-  Future fetchEntity() {
+  Future<Feedback> fetchEntity() {
     // TODO: implement fetchEntity
     throw UnimplementedError();
   }

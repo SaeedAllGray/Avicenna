@@ -1,8 +1,8 @@
-import 'package:avicenna_app/presentation/features/doctor/doctors_page.dart';
+import 'package:avicenna_app/presentation/features/doctor/pages/doctors_page.dart';
 import 'package:avicenna_app/presentation/features/profile/profile.dart';
 import 'package:avicenna_app/presentation/features/time_stamp/pages/schedules_page.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   final bool isDoctor;
@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
     DoctorsPage(),
-    const SchedulesPage(),
+    SchedulesPage(),
     Container(),
     const ProfilePage()
   ];
