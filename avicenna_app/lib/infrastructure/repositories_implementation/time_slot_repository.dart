@@ -30,7 +30,7 @@ class TimeSlotRepository
   }
 
   @override
-  Future<TimeSlot> fetchEntity() {
+  Future<TimeSlot> fetchEntity(int id) {
     // TODO: implement fetchEntity
     throw UnimplementedError();
   }

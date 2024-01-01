@@ -17,8 +17,8 @@ class DoctorRepository
   }
 
   @override
-  Future<Doctor> fetchEntity() {
-    // TODO: implement fetchEntity
-    throw UnimplementedError();
+  Future<Doctor> fetchEntity(int id) async {
+    dynamic response = await api.fetchAnEntity(id);
+    return Doctor.fromJson(response);
   }
 }

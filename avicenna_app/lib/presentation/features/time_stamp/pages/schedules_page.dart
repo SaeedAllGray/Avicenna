@@ -1,14 +1,14 @@
-import 'dart:io';
-
 import 'package:avicenna_app/application/time_slot/time_slot_bloc.dart';
+import 'package:avicenna_app/domain/entries/time_slot/time_slot.dart';
 import 'package:avicenna_app/presentation/constants/colors.dart';
-import 'package:avicenna_app/presentation/constants/fonts.dart';
+
 import 'package:avicenna_app/presentation/features/time_stamp/widgets/create_timestamp_bottom_sheet.dart';
+import 'package:avicenna_app/presentation/features/time_stamp/widgets/time_stamp_detail_widget.dart';
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intl/intl.dart';
+
 import 'package:provider/provider.dart';
 
 class SchedulesPage extends StatefulWidget {
@@ -38,7 +38,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => bloc..add(const GetDoctorTimeSlots(doctorId: 1)),
-      child: CalendarControllerProvider(
+      child: CalendarControllerProvider<TimeSlot>(
         controller: EventController(),
         child: Scaffold(
           appBar: AppBar(
@@ -64,22 +64,26 @@ class _SchedulesPageState extends State<SchedulesPage> {
           body: BlocBuilder<TimeSlotBloc, TimeSlotState>(
             builder: (context, state) {
               if (state is TimeSlotsFetched) {
-                CalendarControllerProvider.of(context)
+                CalendarControllerProvider.of<TimeSlot>(context)
                     .controller
                     .addAll(state.timeSlots
                         .map(
-                          (e) => CalendarEventData(
-                              startTime: e.start,
-                              endTime: e.end,
-                              date: e.date,
-                              title: "doctor.firstName",
-                              event: e.start,
-                              endDate: e.end,
-                              color: AppColors.primary),
+                          (e) => CalendarEventData<TimeSlot>(
+                            startTime: e.start,
+                            endTime: e.end,
+                            date: e.date,
+                            title: "doctor.firstName",
+                            event: e,
+                            endDate: e.end,
+                            description: e.id.toString(),
+                            color: e.confirmed
+                                ? AppColors.primary
+                                : AppColors.primaryPale,
+                          ),
                         )
                         .toList());
               }
-              return WeekView(
+              return WeekView<TimeSlot>(
                 headerStyle: HeaderStyle(
                   decoration: BoxDecoration(
                     color: AppColors.primary.withOpacity(0.2),
@@ -91,73 +95,8 @@ class _SchedulesPageState extends State<SchedulesPage> {
                   showModalBottomSheet<void>(
                     context: context,
                     builder: (BuildContext context) {
-                      return SizedBox(
-                        height: 350,
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 25),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-
-                              // mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                // Text(
-                                //   '${doctor.firstName} ${doctor.lastName}',
-                                //   style: FontStyles.BLACK_BOLD_24,
-                                // ),
-                                // Text(
-                                //   doctor.specialization,
-                                //   style: FontStyles.BLACK_REGULAR_18,
-                                // ),
-                                ListTile(
-                                  leading: const Icon(Icons.calendar_month),
-                                  dense: true,
-                                  contentPadding: EdgeInsets.zero,
-                                  title: Text(
-                                    DateFormat('MMMM d', Platform.localeName)
-                                        .format(events.first.startTime!),
-                                    style: FontStyles.BLACK_REGULAR_18,
-                                    textAlign: TextAlign.start,
-                                  ),
-                                ),
-                                ListTile(
-                                  leading: const Icon(Icons.alarm),
-                                  dense: true,
-                                  contentPadding: EdgeInsets.zero,
-                                  title: Text(
-                                    '${DateFormat('HH:mm', Platform.localeName).format(events.first.startTime!)} to ${DateFormat('HH:mm', Platform.localeName).format(events.first.endTime!)}',
-                                    style: FontStyles.BLACK_REGULAR_18,
-                                    textAlign: TextAlign.start,
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: AppColors.primary),
-                                  child: Text(AppLocalizations.of(context)!
-                                      .make_appointment),
-                                  onPressed: () {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          AppLocalizations.of(context)!
-                                              .appointment_confirmation_message,
-                                        ),
-                                      ),
-                                    );
-                                    Navigator.popUntil(
-                                        context, (route) => route.isFirst);
-                                  },
-                                ),
-                                TextButton(
-                                  child: Text(AppLocalizations.of(context)!
-                                      .choose_another_time),
-                                  onPressed: () => Navigator.pop(context),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                      return TimeStampDetailWidget(
+                        events: events,
                       );
                     },
                   );

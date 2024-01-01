@@ -18,3 +18,9 @@ class DoctorsSucceed extends DoctorsState {
   @override
   List<Object> get props => [doctors];
 }
+
+class DoctorDetailsFetched extends DoctorsState {
+  final Doctor doctor;
+
+  const DoctorDetailsFetched(this.doctor);
+}

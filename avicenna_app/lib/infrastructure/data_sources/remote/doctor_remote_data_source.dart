@@ -56,9 +56,19 @@ class DoctorRemoteDataSource implements RemoteDataSource {
 
   @override
   Future fetchAnEntity(int id) async {
-    Response response = await dio.get(
-      '${ApiConstants.baseUrl}/$url/$id',
-    );
-    return response.data;
+    // Response response = await dio.get(
+    //   '${ApiConstants.baseUrl}/$url/$id',
+    // );
+    String mockdata = '''{
+      "id": 3,
+      "first_name": "Dr. Michael",
+      "last_name": "Brown",
+      "specialization": "Pediatrics",
+      "username": "mbrown",
+      "email": "michaelbrown@example.com",
+      "phone_number": "555-123-4567",
+      "address": "789 Pediatric Lane, City, Country"
+    }''';
+    return jsonDecode(mockdata);
   }
 }
