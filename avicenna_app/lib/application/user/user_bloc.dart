@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/patient/patient.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
 import 'package:avicenna_app/infrastructure/repositories_implementation/profile_repository.dart';

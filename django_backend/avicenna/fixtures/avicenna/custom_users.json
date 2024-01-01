@@ -1,0 +1,362 @@
+[
+    {
+        "model": "avicenna.customuser",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$Oc6KyVE2qry2xwUx4gaB4s$lyTJxgnpV5qFP99GCy5S43M72NWwVQ2aV43PUKlOSVA=",
+            "last_login": "2023-12-26T15:25:08Z",
+            "is_superuser": true,
+            "username": "arthur",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-12-26T15:06:55Z",
+            "first_name": "A",
+            "last_name": "Z",
+            "email": "az@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$X9ON4j0e5TQHV5B2clcqua$cnjumAAU+ZREV1nvoyz+4tBmzgmJOmVT/v5/LJQfkzQ=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "droctorDRE",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-26T19:35:55Z",
+            "first_name": "Samuel",
+            "last_name": "Leumas",
+            "email": "sameul@rambler.ru",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$JLH2wL1GOYfy1JjsnoH4xo$N5Ir8iP6lUX1ezF9eg7OaCyqLnwMpTctOnAYj7ILC8w=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "kinkyBooths",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-26T19:37:49Z",
+            "first_name": "Stephen",
+            "last_name": "Stephensson",
+            "email": "stephie@stheph.stph",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 4,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$SpamSpamSpamSpam$EGGEGGEGGEGGEGGEGG",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "SirLancelot",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-26T20:12:34Z",
+            "first_name": "Sir",
+            "last_name": "Lancelot",
+            "email": "brave.sir.lancelot@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 5,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$NiNiNi$EkkiEkkiEkkiEkkiPtangZooBoing",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "TheBlackKnight",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-26T20:20:20Z",
+            "first_name": "The",
+            "last_name": "Black Knight",
+            "email": "none.shall.pass@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 6,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$HolyGrail$WeAreTheKnightsWhoSayNi",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "KingArthur",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-26T21:15:00Z",
+            "first_name": "King",
+            "last_name": "Arthur",
+            "email": "king.arthur@camelot.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 7,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$Coconuts$AfricanOrEuropean",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "Patsy",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-26T22:22:22Z",
+            "first_name": "Patsy",
+            "last_name": "",
+            "email": "patsy@grail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 8,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$Shrubbery$BringMeAShrubbery",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "TheKnightsWhoSayNi",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-26T23:11:11Z",
+            "first_name": "The",
+            "last_name": "KnightsWhoSayNi",
+            "email": "ni@shrubbery.org",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 9,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$Camelot$OnSecondThoughtLetsNotGoThere",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "BraveSirRobin",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-27T00:01:00Z",
+            "first_name": "Brave",
+            "last_name": "Sir Robin",
+            "email": "brave.sir.robin@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 10,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$HolyGrail$BridgeOfDeath",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "TheBridgekeeper",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-27T01:23:45Z",
+            "first_name": "The",
+            "last_name": "Bridgekeeper",
+            "email": "what.is.the.airspeed.velocity@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 11,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$MinistryOfSillyWalks$WalkThisWay",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "SillyWalkEnthusiast",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-27T02:34:56Z",
+            "first_name": "Silly",
+            "last_name": "Walker",
+            "email": "silly.walks@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 12,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$FishSlappingDance$ItsJustAFleshWound",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "BlackKnight",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-27T03:45:00Z",
+            "first_name": "Black",
+            "last_name": "Knight",
+            "email": "none.shall.pass2@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 13,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$SpanishInquisition$UnexpectedVisit",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "CardinalFang",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-27T04:56:12Z",
+            "first_name": "Cardinal",
+            "last_name": "Fang",
+            "email": "nobody.expects@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 14,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$MinistryOfSillyWalks$HopAway",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "HopAlong",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-27T05:01:23Z",
+            "first_name": "Hop",
+            "last_name": "Along",
+            "email": "hop.along@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 15,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$DeadParrot$ThisParrotIsNoMore",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "PetShopOwner",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-27T06:12:34Z",
+            "first_name": "Pet",
+            "last_name": "ShopOwner",
+            "email": "beautiful.plumage@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 16,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$KillerRabbit$RunAway",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "TimTheEnchanter",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-27T07:23:45Z",
+            "first_name": "Tim",
+            "last_name": "TheEnchanter",
+            "email": "tim.enchanter@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 17,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$MinistryOfSillyWalks$MoonWalk",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "Moonwalker",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-27T08:34:56Z",
+            "first_name": "Moon",
+            "last_name": "Walker",
+            "email": "moon.walk@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 18,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$Gumby$MyBrainHurts",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "Gumby",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-27T09:45:00Z",
+            "first_name": "Gumby",
+            "last_name": "",
+            "email": "gumby@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 19,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$Shrubbery$NiceShrubbery",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "Shrubber",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-27T10:56:12Z",
+            "first_name": "Shrub",
+            "last_name": "Ber",
+            "email": "nice.shrubbery@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "avicenna.customuser",
+        "pk": 20,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$MinistryOfSillyWalks$TwistAndShout",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "TwistAndShout",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-12-27T12:01:23Z",
+            "first_name": "Twist",
+            "last_name": "AndShout",
+            "email": "twist.and.shout@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    }
+]

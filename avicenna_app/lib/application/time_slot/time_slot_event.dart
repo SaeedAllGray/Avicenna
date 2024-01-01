@@ -7,6 +7,20 @@ sealed class TimeSlotEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetTimeSlots extends TimeSlotEvent {
-  // TODO: there should be a doctor's ID attribute here
+class GetDoctorTimeSlots extends TimeSlotEvent {
+  final int doctorId;
+
+  const GetDoctorTimeSlots({required this.doctorId});
+}
+
+class GetPatientTimeSlots extends TimeSlotEvent {
+  final int patientId;
+
+  const GetPatientTimeSlots({required this.patientId});
+}
+
+class CreateTimeSlot extends TimeSlotEvent {
+  final TimeSlot timeSlot;
+
+  const CreateTimeSlot({required this.timeSlot});
 }

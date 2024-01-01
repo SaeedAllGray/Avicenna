@@ -1,50 +1,71 @@
 from rest_framework import serializers
 
-from .models import Appointment, CustomUser, Doctor, Patient
+from .models import CustomUser, Doctor, Patient, Review, TimeSlot
 
 
-class AppointmentSerializer(serializers.ModelSerializer):
+class ReviewSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Appointment
-        fields = ['doctor', 'patient', 'appointment_timestamp']
+        model = Review
+        fields = ["url", "rating", "comment", "patient", "doctor"]
 
 
-class UserSerializer(serializers.ModelSerializer):
+class TimeSlotSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = TimeSlot
+        fields = [
+            "url",
+            "day",
+            "beginning",
+            "end",
+            "doctor",
+            "patient",
+            "is_confirmed",
+            "is_booked",
+        ]
+
+
+class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
+    patient = serializers.HyperlinkedIdentityField("patient-detail")
+    doctor = serializers.HyperlinkedIdentityField("doctor-detail")
+
     class Meta:
         model = CustomUser
         fields = [
-            'email',
-            'username',
-            'password',
-            'first_name',
-            'last_name',
-            'is_doctor',
-            'is_patient']
+            "url",
+            "first_name",
+            "last_name",
+            "email",
+            "patient",
+            "doctor",
+            "username",
+            "password",
+            "date_joined",
+            "last_login",
+        ]
 
 
-class DoctorSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+class DoctorSerializer(serializers.HyperlinkedModelSerializer):
+    user = CustomUserSerializer()
+    average_rating = serializers.SerializerMethodField()
 
     class Meta:
         model = Doctor
-        fields = ['user', 'phone_number', 'specialization', 'address']
+        fields = [
+            "url",
+            "user",
+            "phone_number",
+            "specialization",
+            "address",
+            "average_rating",
+        ]
 
-    def create(self, validated_data):
-        user_data = validated_data.pop('user')
-        user = CustomUser.objects.create(**user_data)
-        doctor = Doctor.objects.create(user=user, **validated_data)
-        return doctor
+    def get_average_rating(self, obj) -> float:
+        return obj.get_average_rating()
 
 
-class PatientSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+class PatientSerializer(serializers.HyperlinkedModelSerializer):
+    user = CustomUserSerializer()
 
     class Meta:
         model = Patient
-        fields = ['user', 'ssn']
-
-    def create(self, validated_data):
-        user_data = validated_data.pop('user')
-        user = CustomUser.objects.create(**user_data)
-        patient = Patient.objects.create(user=user, **validated_data)
-        return patient
+        fields = ["url", "user", "ssn", "date_born"]

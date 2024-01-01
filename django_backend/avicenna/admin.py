@@ -1,46 +1,52 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from .models import Appointment, CustomUser, Doctor, Patient
+from .models import CustomUser, Doctor, Patient, Review, TimeSlot
 
 
-class DoctorInline(admin.StackedInline):
+class CommonInfoMixin:
+    """Common fields for the inline models."""
+
+    extra = 0
+    max_num = 1
+    can_delete = False
+
+
+class DoctorInline(admin.TabularInline, CommonInfoMixin):
     model = Doctor
-    can_delete = False
 
 
-class PatientInline(admin.StackedInline):
+class PatientInline(admin.TabularInline, CommonInfoMixin):
     model = Patient
-    can_delete = False
 
 
 class UserAdmin(BaseUserAdmin):
     inlines = [DoctorInline, PatientInline]
 
-    list_display = (
-        "username",
-        "email",
-        "first_name",
-        "last_name",
-        "is_doctor",
-        "is_patient",
-        "is_active")
-
-    fieldsets = (
-        *BaseUserAdmin.fieldsets,  # original form fieldsets, expanded
-        (                      # new fieldset added on to the bottom
-            'Custom Field Heading',
-            # group heading of your choice; set to None for a blank space
-            # instead of a header
+    fieldsets = [
+        (
+            "Personal information",
+            {"fields": [("first_name", "last_name"), "email"]},
+        ),
+        (
+            "Authentication options",
+            {"fields": ["username", "password"]},
+        ),
+        (
+            "Technical options",
             {
-                'fields': (
-                    'is_doctor',
-                    'is_patient'
-                ),
+                "classes": ["collapse"],
+                "fields": [
+                    ("last_login", "date_joined"),
+                    ("is_superuser", "is_active", "is_staff"),
+                    "user_permissions",
+                    "groups",
+                ],
             },
         ),
-    )
+    ]
 
 
 admin.site.register(CustomUser, UserAdmin)
-admin.site.register(Appointment)
+admin.site.register(TimeSlot)
+admin.site.register(Review)

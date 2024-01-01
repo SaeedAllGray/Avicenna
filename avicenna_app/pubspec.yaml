@@ -26,6 +26,7 @@ dependencies:
   calendar_view: ^1.0.4
   intl: ^0.18.1
   flutter_rating_bar: ^4.0.1
+  provider: ^6.1.1
 
 dev_dependencies:
   flutter_test:

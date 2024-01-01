@@ -1,7 +1,7 @@
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/presentation/constants/colors.dart';
 import 'package:avicenna_app/presentation/constants/fonts.dart';
-import 'package:avicenna_app/presentation/features/doctor/doctor_schedule_page.dart';
+import 'package:avicenna_app/presentation/features/doctor/pages/doctor_schedule_page.dart';
 
 import 'package:avicenna_app/presentation/features/doctor/widgets/feedbacks_widget.dart';
 import 'package:flutter/material.dart';
