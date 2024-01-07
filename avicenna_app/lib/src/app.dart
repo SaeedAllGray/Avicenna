@@ -68,6 +68,11 @@ class MyApp extends StatelessWidget {
                     MaterialStateProperty.all<Color>(AppColors.white),
               ),
             ),
+            listTileTheme: ListTileThemeData(
+              tileColor: AppColors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+            ),
           ),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,

@@ -34,13 +34,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         phoneNumber: "+49 155 10517528",
         address: "Kampstrasse, 44135, Dortmund",
         id: 7216660,
-        firstName: "Dr Arthur",
-        lastName: "Zevalov",
+        firstName: "Dr Andy",
+        lastName: "Azmoodeh",
         username: "Picaroon",
-        email: "arthur.zevalove@icloud.com",
+        email: "Andy.Azmoodehe@icloud.com",
         specialization: "German Traditions",
       );
-      emit(AuthSucceedState(isDoctor: user is Doctor));
+      emit(AuthSucceedState(user: user));
     } else {
       emit(AuthFailedState());
     }
@@ -69,14 +69,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       phoneNumber: "+49 155 10517528",
       address: "Kampstrasse, 44135, Dortmund",
       id: 7216660,
-      firstName: "Dr Arthur",
-      lastName: "Zevalov",
+      firstName: "Dr Andy",
+      lastName: "Azmoodeh",
       username: "Picaroon",
-      email: "arthur.zevalove@icloud.com",
+      email: "Andy.Azmoodehe@icloud.com",
       specialization: "German Traditions",
     );
     // if (user != null) {
-    emit(AuthSucceedState(isDoctor: user is Doctor));
+    emit(AuthSucceedState(user: user));
     // }
   }
 }

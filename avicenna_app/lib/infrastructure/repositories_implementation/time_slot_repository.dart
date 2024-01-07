@@ -17,6 +17,12 @@ class TimeSlotRepository
     return response.map((data) => TimeSlot.fromJson(data)).toList();
   }
 
+  Future<List<TimeSlot>> fetchBookedTimeSlots(int doctorId) async {
+    final List<TimeSlot> timeSlotList = await fetchDoctorTimeSlots(doctorId);
+    timeSlotList.removeWhere((element) => !element.confirmed);
+    return timeSlotList;
+  }
+
   Future<List<TimeSlot>> fetchDoctorTimeSlots(int doctorId) async {
     List<dynamic> response = await api.fetchDoctorEntities(doctorId);
     log(response.toString());
