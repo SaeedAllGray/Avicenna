@@ -16,3 +16,8 @@ class SearchDoctors extends DoctorsEvent {
 
   const SearchDoctors({required this.searchTerm});
 }
+
+class GetDoctorDetails extends DoctorsEvent {
+  final int doctorId;
+  const GetDoctorDetails(this.doctorId);
+}

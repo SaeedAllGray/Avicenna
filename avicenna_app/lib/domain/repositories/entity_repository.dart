@@ -1,5 +1,5 @@
 abstract class EntityRepository<T, RemoteDataSourceRepository> {
   abstract RemoteDataSourceRepository api;
   Future<List<T>> fetchEntities();
-  Future<T> fetchEntity();
+  Future<T> fetchEntity(int id);
 }

@@ -39,5 +39,9 @@
   "ends": "Ends",
   "cancel": "cancel",
   "time_stamp_creation_confirmation": "Time stamp is created successfully",
-  "name": "Name"
+  "name": "Name",
+  "close": "Close",
+  "cancel_appointment": "Cancel Appointment",
+  "add_to_calendar": "Add to Calendar",
+  "rate": "Rate"
 }

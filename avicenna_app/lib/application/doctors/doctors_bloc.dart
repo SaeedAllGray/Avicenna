@@ -12,7 +12,16 @@ class DoctorsBloc extends Bloc<DoctorsEvent, DoctorsState> {
   List<Doctor> doctors = [];
   DoctorsBloc() : super(DoctorsInitial()) {
     on<GetDoctors>(_onGetDoctorsEvent);
-    on<SearchDoctors>(_onSearchDoctors);
+    on<SearchDoctors>(_onSearchDoctorsEvent);
+    on<GetDoctorDetails>(_onGetDoctorDetailsEvent);
+  }
+
+  FutureOr<void> _onGetDoctorDetailsEvent(
+      GetDoctorDetails event, Emitter<DoctorsState> emit) async {
+    emit(DoctorsInProgress());
+    DoctorRepository repository = DoctorRepository();
+    Doctor doctor = await repository.fetchEntity(event.doctorId);
+    emit(DoctorDetailsFetched(doctor));
   }
 
   FutureOr<void> _onGetDoctorsEvent(
@@ -23,7 +32,7 @@ class DoctorsBloc extends Bloc<DoctorsEvent, DoctorsState> {
     emit(DoctorsSucceed(doctors));
   }
 
-  FutureOr<void> _onSearchDoctors(
+  FutureOr<void> _onSearchDoctorsEvent(
       SearchDoctors event, Emitter<DoctorsState> emit) async {
     emit(DoctorsSucceed(doctors
         .where((doc) =>

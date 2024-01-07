@@ -17,7 +17,7 @@ class FeedbackRepository
   }
 
   @override
-  Future<Feedback> fetchEntity() {
+  Future<Feedback> fetchEntity(int id) {
     // TODO: implement fetchEntity
     throw UnimplementedError();
   }
