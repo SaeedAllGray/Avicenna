@@ -10,16 +10,18 @@ part 'time_slot_event.dart';
 part 'time_slot_state.dart';
 
 class TimeSlotBloc extends Bloc<TimeSlotEvent, TimeSlotState> {
+  final TimeSlotRepository repository = TimeSlotRepository();
   TimeSlotBloc() : super(TimeSlotsInitial()) {
     on<GetDoctorTimeSlots>(_onGetDoctorTimeSlotsEvent);
     on<GetPatientTimeSlots>(_onGetPatientTimeSlotsEvent);
     on<CreateTimeSlot>(_onCreateTimeSlotEvent);
+    on<GetBookedTimeSlots>(_onGetBookedTimeSlots);
   }
   FutureOr<void> _onGetDoctorTimeSlotsEvent(
       GetDoctorTimeSlots event, Emitter<TimeSlotState> emit) async {
     emit(TimeSlotsInProgress());
-    TimeSlotRepository repository = TimeSlotRepository();
-    List<TimeSlot> timeSlots =
+
+    final List<TimeSlot> timeSlots =
         await repository.fetchDoctorTimeSlots(event.doctorId);
     emit(TimeSlotsFetched(timeSlots: timeSlots));
   }
@@ -27,8 +29,8 @@ class TimeSlotBloc extends Bloc<TimeSlotEvent, TimeSlotState> {
   FutureOr<void> _onGetPatientTimeSlotsEvent(
       GetPatientTimeSlots event, Emitter<TimeSlotState> emit) async {
     emit(TimeSlotsInProgress());
-    TimeSlotRepository repository = TimeSlotRepository();
-    List<TimeSlot> timeSlots =
+
+    final List<TimeSlot> timeSlots =
         await repository.fetchPatientTimeSlots(event.patientId);
     emit(TimeSlotsFetched(timeSlots: timeSlots));
   }
@@ -36,11 +38,19 @@ class TimeSlotBloc extends Bloc<TimeSlotEvent, TimeSlotState> {
   FutureOr<void> _onCreateTimeSlotEvent(
       CreateTimeSlot event, Emitter<TimeSlotState> emit) async {
     emit(TimeSlotsInProgress());
-    TimeSlotRepository repository = TimeSlotRepository();
+
     // TODO: call post function to create a time stamp
     log("_onCreateTimeSlotEvent");
     List<TimeSlot> timeSlots =
-        await repository.fetchDoctorTimeSlots(event.timeSlot.doctorId);
+        await repository.fetchBookedTimeSlots(event.timeSlot.doctorId);
+    emit(TimeSlotsFetched(timeSlots: timeSlots));
+  }
+
+  FutureOr<void> _onGetBookedTimeSlots(
+      GetBookedTimeSlots event, Emitter<TimeSlotState> emit) async {
+    emit(TimeSlotsInProgress());
+    final List<TimeSlot> timeSlots =
+        await repository.fetchDoctorTimeSlots(event.doctorId);
     emit(TimeSlotsFetched(timeSlots: timeSlots));
   }
 }

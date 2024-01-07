@@ -24,3 +24,9 @@ class CreateTimeSlot extends TimeSlotEvent {
 
   const CreateTimeSlot({required this.timeSlot});
 }
+
+class GetBookedTimeSlots extends TimeSlotEvent {
+  final int doctorId;
+
+  const GetBookedTimeSlots({required this.doctorId});
+}

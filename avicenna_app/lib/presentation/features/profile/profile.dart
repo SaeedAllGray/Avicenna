@@ -1,7 +1,6 @@
 import 'package:avicenna_app/application/user/user_bloc.dart';
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/patient/patient.dart';
-import 'package:avicenna_app/presentation/constants/colors.dart';
 import 'package:avicenna_app/presentation/constants/fonts.dart';
 import 'package:avicenna_app/presentation/features/auth/auth_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -16,7 +15,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile"),
+        title: Text(AppLocalizations.of(context)!.profile),
       ),
       body: BlocProvider(
         create: (context) => UserBloc()..add(GetUserEvent()),
@@ -36,9 +35,6 @@ class ProfilePage extends StatelessWidget {
                     children: [
                       if (state.user is Patient)
                         ListTile(
-                          tileColor: AppColors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
                           leading: const Icon(Icons.person),
                           title: Text(AppLocalizations.of(context)!.name),
                           trailing: Text(
@@ -48,9 +44,6 @@ class ProfilePage extends StatelessWidget {
                         ),
                       if (state.user is Doctor)
                         ListTile(
-                          tileColor: AppColors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
                           leading: const Icon(Icons.person),
                           title: Text(AppLocalizations.of(context)!.name),
                           trailing: Text(
@@ -63,10 +56,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                       if (state.user is Patient)
                         ListTile(
-                          tileColor: AppColors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          leading: const Icon(Icons.phone),
+                          leading: const Icon(Icons.numbers),
                           title:
                               Text(AppLocalizations.of(context)!.socialNumber),
                           trailing: Text(
@@ -76,9 +66,6 @@ class ProfilePage extends StatelessWidget {
                         ),
                       if (state.user is Doctor)
                         ListTile(
-                          tileColor: AppColors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
                           leading: const Icon(Icons.phone),
                           title: Text(AppLocalizations.of(context)!.phone),
                           trailing: Text(
@@ -89,23 +76,16 @@ class ProfilePage extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      if (state.user is Patient)
-                        ListTile(
-                          tileColor: AppColors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          leading: const Icon(Icons.remember_me),
-                          title: Text(AppLocalizations.of(context)!.username),
-                          trailing: Text(
-                            (state.user as Patient).username,
-                            style: FontStyles.BLACK_REGULAR_16,
-                          ),
+                      ListTile(
+                        leading: const Icon(Icons.remember_me),
+                        title: Text(AppLocalizations.of(context)!.username),
+                        trailing: Text(
+                          (state.user as Patient).username,
+                          style: FontStyles.BLACK_REGULAR_16,
                         ),
+                      ),
                       if (state.user is Doctor)
                         ListTile(
-                          tileColor: AppColors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
                           leading: const Icon(Icons.email),
                           title: Text(AppLocalizations.of(context)!.email),
                           trailing: Text(
@@ -116,9 +96,6 @@ class ProfilePage extends StatelessWidget {
                       const SizedBox(height: 10),
                       if (state.user is Doctor)
                         ListTile(
-                          tileColor: AppColors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
                           leading: const Icon(Icons.healing),
                           title: Text(AppLocalizations.of(context)!.profession),
                           trailing: Text(
@@ -128,10 +105,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                       if (state.user is Patient)
                         ListTile(
-                          tileColor: AppColors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          leading: const Icon(Icons.phone),
+                          leading: const Icon(Icons.email),
                           title: Text(AppLocalizations.of(context)!.email),
                           trailing: Text(
                             (state.user as Patient).email,
