@@ -104,6 +104,7 @@ class _AuthPageState extends State<AuthPage> {
                               ),
                               ListTile(
                                 title: TextField(
+                                  keyboardType: TextInputType.name,
                                   controller: firstNameController,
                                   onChanged: (v) => _bloc.add(InputEvent()),
                                   decoration: InputDecoration(
@@ -113,6 +114,7 @@ class _AuthPageState extends State<AuthPage> {
                               ),
                               ListTile(
                                 title: TextField(
+                                  keyboardType: TextInputType.name,
                                   controller: lastNameController,
                                   onChanged: (v) => _bloc.add(InputEvent()),
                                   decoration: InputDecoration(
@@ -151,6 +153,7 @@ class _AuthPageState extends State<AuthPage> {
                                 visible: isChecked,
                                 child: ListTile(
                                   title: TextField(
+                                    keyboardType: TextInputType.phone,
                                     controller: phoneController,
                                     onChanged: (v) => _bloc.add(InputEvent()),
                                     decoration: InputDecoration(
@@ -164,6 +167,7 @@ class _AuthPageState extends State<AuthPage> {
                                 visible: isChecked,
                                 child: ListTile(
                                   title: TextField(
+                                    keyboardType: TextInputType.streetAddress,
                                     controller: addressController,
                                     onChanged: (v) => _bloc.add(InputEvent()),
                                     decoration: InputDecoration(
@@ -175,7 +179,7 @@ class _AuthPageState extends State<AuthPage> {
                               ),
                               ListTile(
                                 title: TextField(
-                                  obscureText: true,
+                                  keyboardType: TextInputType.emailAddress,
                                   controller: emailController,
                                   decoration: InputDecoration(
                                     label: Text(
@@ -240,8 +244,9 @@ class _AuthPageState extends State<AuthPage> {
                                               }
                                             }
                                           : null,
-                                  child:
-                                      Text(AppLocalizations.of(context)!.login),
+                                  child: Text(_bloc.signupActive
+                                      ? AppLocalizations.of(context)!.register
+                                      : AppLocalizations.of(context)!.login),
                                 ),
                               ],
                             ),
