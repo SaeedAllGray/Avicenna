@@ -47,11 +47,11 @@ class _AuthPageState extends State<AuthPage> {
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthSucceedState) {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        HomePage(user: (state as AuthSucceedState).user)));
+            // Navigator.pushReplacement(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) =>
+            //             HomePage(user: (state as AuthSucceedState).user)));
           }
         },
         child: BlocBuilder<AuthBloc, AuthState>(
@@ -240,8 +240,9 @@ class _AuthPageState extends State<AuthPage> {
                                               }
                                             }
                                           : null,
-                                  child:
-                                      Text(AppLocalizations.of(context)!.login),
+                                  child: Text(_bloc.signupActive
+                                      ? AppLocalizations.of(context)!.register
+                                      : AppLocalizations.of(context)!.login),
                                 ),
                               ],
                             ),
