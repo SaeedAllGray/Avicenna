@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:avicenna_app/application/time_slot/time_slot_bloc.dart';
+import 'package:avicenna_app/domain/entries/user.dart';
 import 'package:avicenna_app/presentation/constants/colors.dart';
 import 'package:avicenna_app/presentation/constants/fonts.dart';
 import 'package:avicenna_app/presentation/features/time_stamp/widgets/create_timestamp_bottom_sheet.dart';
@@ -12,7 +13,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class SchedulesPage extends StatefulWidget {
-  const SchedulesPage({super.key});
+  final User user;
+  const SchedulesPage({super.key, required this.user});
 
   @override
   State<SchedulesPage> createState() => _SchedulesPageState();
@@ -46,6 +48,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
             title: Text(AppLocalizations.of(context)!.schedules),
             actions: [
               //TODO: the condition to check whether the user is a [doctor] or a [patient]
+
               IconButton(
                   onPressed: () {
                     showModalBottomSheet<void>(

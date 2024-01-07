@@ -45,9 +45,6 @@ class DoctorDetailsPage extends StatelessWidget {
               height: 5,
             ),
             ListTile(
-              tileColor: AppColors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
               title: Text(AppLocalizations.of(context)!.address),
               leading: const Icon(Icons.work),
               subtitle: Text(
@@ -59,9 +56,6 @@ class DoctorDetailsPage extends StatelessWidget {
               height: 5,
             ),
             ListTile(
-              tileColor: AppColors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
               title: Text(AppLocalizations.of(context)!.email),
               leading: const Icon(Icons.email),
               subtitle: Text(
@@ -73,9 +67,6 @@ class DoctorDetailsPage extends StatelessWidget {
               height: 5,
             ),
             ListTile(
-              tileColor: AppColors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
               title: Text(AppLocalizations.of(context)!.phone),
               leading: const Icon(Icons.phone),
               subtitle: Text(

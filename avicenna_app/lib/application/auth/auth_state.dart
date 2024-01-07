@@ -17,9 +17,9 @@ class AuthInitialState extends AuthState {
 class AuthInProgress extends AuthState {}
 
 class AuthSucceedState extends AuthState {
-  final bool isDoctor;
+  final User user;
 
-  const AuthSucceedState({required this.isDoctor});
+  const AuthSucceedState({required this.user});
 }
 
 class AuthFailedState extends AuthState {}
