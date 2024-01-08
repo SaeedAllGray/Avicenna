@@ -36,7 +36,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
         by filtering against a `user_id` query parameter in the URL.
         """
         queryset = Review.objects.all()
-        user_id = self.request.query_params.get("user_id")
+        user_id = self.request.query_params.get("user_id", None)
         if user_id is not None:
             queryset = queryset.filter(Q(patient__pk=user_id) | Q(doctor__pk=user_id))
         return queryset
@@ -51,7 +51,7 @@ class TimeSlotViewSet(viewsets.ModelViewSet):
         by filtering against a `user_id` query parameter in the URL.
         """
         queryset = TimeSlot.objects.all()
-        user_id = self.request.query_params.get("user_id")
+        user_id = self.request.query_params.get("user_id", None)
         if user_id is not None:
             queryset = queryset.filter(Q(patient__pk=user_id) | Q(doctor__pk=user_id))
         return queryset

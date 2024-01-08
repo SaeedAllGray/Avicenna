@@ -1,0 +1,1322 @@
+openapi: 3.0.3
+info:
+  title: Avicenna REST API
+  version: 1.0.0
+  description: This API is supposed to be used by the Flutter front-end.
+paths:
+  /api/api-token-auth/:
+    post:
+      operationId: api_token_auth_create
+      description: Modified ObtainAuthToken returning user_id in addition.
+      tags:
+        - api-token-auth
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/AuthToken"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/AuthToken"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthToken"
+        required: true
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthToken"
+          description: ""
+  /api/custom-users/:
+    get:
+      operationId: custom_users_list
+      description: |-
+        The base User object's fields.
+
+        Specific Doctor or Patient objects should be preferred.
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - custom-users
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedCustomUserList"
+          description: ""
+    post:
+      operationId: custom_users_create
+      description: |-
+        The base User object's fields.
+
+        Specific Doctor or Patient objects should be preferred.
+      tags:
+        - custom-users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomUser"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/CustomUser"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/CustomUser"
+        required: true
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomUser"
+          description: ""
+  /api/custom-users/{id}/:
+    get:
+      operationId: custom_users_retrieve
+      description: |-
+        The base User object's fields.
+
+        Specific Doctor or Patient objects should be preferred.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this user.
+          required: true
+      tags:
+        - custom-users
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomUser"
+          description: ""
+    put:
+      operationId: custom_users_update
+      description: |-
+        The base User object's fields.
+
+        Specific Doctor or Patient objects should be preferred.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this user.
+          required: true
+      tags:
+        - custom-users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomUser"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/CustomUser"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/CustomUser"
+        required: true
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomUser"
+          description: ""
+    patch:
+      operationId: custom_users_partial_update
+      description: |-
+        The base User object's fields.
+
+        Specific Doctor or Patient objects should be preferred.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this user.
+          required: true
+      tags:
+        - custom-users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedCustomUser"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/PatchedCustomUser"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/PatchedCustomUser"
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomUser"
+          description: ""
+    delete:
+      operationId: custom_users_destroy
+      description: |-
+        The base User object's fields.
+
+        Specific Doctor or Patient objects should be preferred.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this user.
+          required: true
+      tags:
+        - custom-users
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "204":
+          description: No response body
+  /api/doctors/:
+    get:
+      operationId: doctors_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - doctors
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedDoctorList"
+          description: ""
+    post:
+      operationId: doctors_create
+      tags:
+        - doctors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Doctor"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Doctor"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Doctor"
+        required: true
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Doctor"
+          description: ""
+  /api/doctors/{user}/:
+    get:
+      operationId: doctors_retrieve
+      parameters:
+        - in: path
+          name: user
+          schema:
+            type: integer
+          description: A unique value identifying this doctor.
+          required: true
+      tags:
+        - doctors
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Doctor"
+          description: ""
+    put:
+      operationId: doctors_update
+      parameters:
+        - in: path
+          name: user
+          schema:
+            type: integer
+          description: A unique value identifying this doctor.
+          required: true
+      tags:
+        - doctors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Doctor"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Doctor"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Doctor"
+        required: true
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Doctor"
+          description: ""
+    patch:
+      operationId: doctors_partial_update
+      parameters:
+        - in: path
+          name: user
+          schema:
+            type: integer
+          description: A unique value identifying this doctor.
+          required: true
+      tags:
+        - doctors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedDoctor"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/PatchedDoctor"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/PatchedDoctor"
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Doctor"
+          description: ""
+    delete:
+      operationId: doctors_destroy
+      parameters:
+        - in: path
+          name: user
+          schema:
+            type: integer
+          description: A unique value identifying this doctor.
+          required: true
+      tags:
+        - doctors
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "204":
+          description: No response body
+  /api/patients/:
+    get:
+      operationId: patients_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - patients
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedPatientList"
+          description: ""
+    post:
+      operationId: patients_create
+      tags:
+        - patients
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Patient"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Patient"
+        required: true
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+          description: ""
+  /api/patients/{user}/:
+    get:
+      operationId: patients_retrieve
+      parameters:
+        - in: path
+          name: user
+          schema:
+            type: integer
+          description: A unique value identifying this patient.
+          required: true
+      tags:
+        - patients
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+          description: ""
+    put:
+      operationId: patients_update
+      parameters:
+        - in: path
+          name: user
+          schema:
+            type: integer
+          description: A unique value identifying this patient.
+          required: true
+      tags:
+        - patients
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Patient"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Patient"
+        required: true
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+          description: ""
+    patch:
+      operationId: patients_partial_update
+      parameters:
+        - in: path
+          name: user
+          schema:
+            type: integer
+          description: A unique value identifying this patient.
+          required: true
+      tags:
+        - patients
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedPatient"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/PatchedPatient"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/PatchedPatient"
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+          description: ""
+    delete:
+      operationId: patients_destroy
+      parameters:
+        - in: path
+          name: user
+          schema:
+            type: integer
+          description: A unique value identifying this patient.
+          required: true
+      tags:
+        - patients
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "204":
+          description: No response body
+  /api/reviews/:
+    get:
+      operationId: reviews_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+        - name: user_id
+          required: false
+          in: query
+          description: Filter time slots by user ID.
+          schema:
+            type: integer
+      tags:
+        - reviews
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedReviewList"
+          description: ""
+    post:
+      operationId: reviews_create
+      tags:
+        - reviews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Review"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Review"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Review"
+        required: true
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Review"
+          description: ""
+  /api/reviews/{id}/:
+    get:
+      operationId: reviews_retrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this review.
+          required: true
+      tags:
+        - reviews
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Review"
+          description: ""
+    put:
+      operationId: reviews_update
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this review.
+          required: true
+      tags:
+        - reviews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Review"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Review"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Review"
+        required: true
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Review"
+          description: ""
+    patch:
+      operationId: reviews_partial_update
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this review.
+          required: true
+      tags:
+        - reviews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedReview"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/PatchedReview"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/PatchedReview"
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Review"
+          description: ""
+    delete:
+      operationId: reviews_destroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this review.
+          required: true
+      tags:
+        - reviews
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "204":
+          description: No response body
+  /api/time-slots/:
+    get:
+      operationId: time_slots_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+        - name: user_id
+          required: false
+          in: query
+          description: Filter time slots by user ID.
+          schema:
+            type: integer
+      tags:
+        - time-slots
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedTimeSlotList"
+          description: ""
+    post:
+      operationId: time_slots_create
+      tags:
+        - time-slots
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TimeSlot"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/TimeSlot"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/TimeSlot"
+        required: true
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeSlot"
+          description: ""
+  /api/time-slots/{id}/:
+    get:
+      operationId: time_slots_retrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this time slot.
+          required: true
+      tags:
+        - time-slots
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeSlot"
+          description: ""
+    put:
+      operationId: time_slots_update
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this time slot.
+          required: true
+      tags:
+        - time-slots
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TimeSlot"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/TimeSlot"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/TimeSlot"
+        required: true
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeSlot"
+          description: ""
+    patch:
+      operationId: time_slots_partial_update
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this time slot.
+          required: true
+      tags:
+        - time-slots
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedTimeSlot"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/PatchedTimeSlot"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/PatchedTimeSlot"
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeSlot"
+          description: ""
+    delete:
+      operationId: time_slots_destroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: A unique integer value identifying this time slot.
+          required: true
+      tags:
+        - time-slots
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        "204":
+          description: No response body
+components:
+  schemas:
+    AuthToken:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        token:
+          type: string
+          readOnly: true
+      required:
+        - password
+        - token
+        - username
+    CustomUser:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          nullable: true
+          title: Email address
+          maxLength: 254
+        patient:
+          type: string
+          format: uri
+          readOnly: true
+        doctor:
+          type: string
+          format: uri
+          readOnly: true
+        username:
+          type: string
+          description:
+            Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        password:
+          type: string
+          maxLength: 128
+        date_joined:
+          type: string
+          format: date-time
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - doctor
+        - first_name
+        - last_name
+        - password
+        - patient
+        - url
+        - username
+    Doctor:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        user:
+          $ref: "#/components/schemas/CustomUser"
+        phone_number:
+          type: string
+          description: Kindly use only numeric characters.
+          pattern: ^\d+$
+          maxLength: 15
+        specialization:
+          $ref: "#/components/schemas/SpecializationEnum"
+        address:
+          type: string
+          maxLength: 150
+        average_rating:
+          type: number
+          format: double
+          readOnly: true
+      required:
+        - address
+        - average_rating
+        - phone_number
+        - specialization
+        - url
+        - user
+    PaginatedCustomUserList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/CustomUser"
+    PaginatedDoctorList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/Doctor"
+    PaginatedPatientList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/Patient"
+    PaginatedReviewList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/Review"
+    PaginatedTimeSlotList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/TimeSlot"
+    PatchedCustomUser:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          nullable: true
+          title: Email address
+          maxLength: 254
+        patient:
+          type: string
+          format: uri
+          readOnly: true
+        doctor:
+          type: string
+          format: uri
+          readOnly: true
+        username:
+          type: string
+          description:
+            Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        password:
+          type: string
+          maxLength: 128
+        date_joined:
+          type: string
+          format: date-time
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+    PatchedDoctor:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        user:
+          $ref: "#/components/schemas/CustomUser"
+        phone_number:
+          type: string
+          description: Kindly use only numeric characters.
+          pattern: ^\d+$
+          maxLength: 15
+        specialization:
+          $ref: "#/components/schemas/SpecializationEnum"
+        address:
+          type: string
+          maxLength: 150
+        average_rating:
+          type: number
+          format: double
+          readOnly: true
+    PatchedPatient:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        user:
+          $ref: "#/components/schemas/CustomUser"
+        ssn:
+          type: string
+          title: Social Security number
+          description: "Kindly use the following format: <em>NNN-NN-NNNN</em>."
+          maxLength: 11
+        date_born:
+          type: string
+          format: date
+          title: Date of birth
+    PatchedReview:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        rating:
+          type: integer
+          maximum: 5
+          minimum: 0
+        comment:
+          type: string
+          maxLength: 500
+        patient:
+          type: string
+          format: uri
+          description: Provider of the review.
+        doctor:
+          type: string
+          format: uri
+          description: Receiver of the review.
+    PatchedTimeSlot:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        day:
+          type: string
+          format: date
+          title: Day of the appointment
+        beginning:
+          type: string
+          format: time
+          title: Appointment begins at
+        end:
+          type: string
+          format: time
+          title: Appointment ends at
+        doctor:
+          type: string
+          format: uri
+        patient:
+          type: string
+          format: uri
+          nullable: true
+        is_confirmed:
+          type: boolean
+          title: Confirmed by the doctor
+        is_booked:
+          type: boolean
+          description: |-
+            Return True if the time slot is booked, False otherwise.
+
+            Returns:
+                bool: True if patient is set, False if None.
+          readOnly: true
+    Patient:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        user:
+          $ref: "#/components/schemas/CustomUser"
+        ssn:
+          type: string
+          title: Social Security number
+          description: "Kindly use the following format: <em>NNN-NN-NNNN</em>."
+          maxLength: 11
+        date_born:
+          type: string
+          format: date
+          title: Date of birth
+      required:
+        - date_born
+        - ssn
+        - url
+        - user
+    Review:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        rating:
+          type: integer
+          maximum: 5
+          minimum: 0
+        comment:
+          type: string
+          maxLength: 500
+        patient:
+          type: string
+          format: uri
+          description: Provider of the review.
+        doctor:
+          type: string
+          format: uri
+          description: Receiver of the review.
+      required:
+        - doctor
+        - patient
+        - rating
+        - url
+    SpecializationEnum:
+      enum:
+        - cardiology
+        - dermatology
+        - endocrinology
+        - gastroenterology
+        - neurology
+        - oncology
+        - orthopedics
+        - pediatrics
+        - psychiatry
+        - urology
+        - nephrology
+        - pulmonology
+        - rheumatology
+        - general surgery
+        - orthopedic surgery
+        - neurosurgery
+        - obstetrics
+        - gynecology
+        - ophthalmology
+        - otolaryngology
+      type: string
+      description: |-
+        * `cardiology` - Cardiology
+        * `dermatology` - Dermatology
+        * `endocrinology` - Endocrinology
+        * `gastroenterology` - Gastroenterology
+        * `neurology` - Neurology
+        * `oncology` - Oncology
+        * `orthopedics` - Orthopedics
+        * `pediatrics` - Pediatrics
+        * `psychiatry` - Psychiatry
+        * `urology` - Urology
+        * `nephrology` - Nephrology
+        * `pulmonology` - Pulmonology
+        * `rheumatology` - Rheumatology
+        * `general surgery` - General Surgery
+        * `orthopedic surgery` - Orthopedic Surgery
+        * `neurosurgery` - Neurosurgery
+        * `obstetrics` - Obstetrics
+        * `gynecology` - Gynecology
+        * `ophthalmology` - Ophthalmology
+        * `otolaryngology` - Otolaryngology
+    TimeSlot:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        day:
+          type: string
+          format: date
+          title: Day of the appointment
+        beginning:
+          type: string
+          format: time
+          title: Appointment begins at
+        end:
+          type: string
+          format: time
+          title: Appointment ends at
+        doctor:
+          type: string
+          format: uri
+        patient:
+          type: string
+          format: uri
+          nullable: true
+        is_confirmed:
+          type: boolean
+          title: Confirmed by the doctor
+        is_booked:
+          type: boolean
+          description: |-
+            Return True if the time slot is booked, False otherwise.
+
+            Returns:
+                bool: True if patient is set, False if None.
+          readOnly: true
+      required:
+        - beginning
+        - day
+        - doctor
+        - end
+        - is_booked
+        - url
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"

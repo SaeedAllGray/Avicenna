@@ -3,3 +3,4 @@ ruff
 pip-tools
 pylint
 pylint-django
+drf-spectacular
