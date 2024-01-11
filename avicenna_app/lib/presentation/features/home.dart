@@ -1,3 +1,4 @@
+import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
 import 'package:avicenna_app/domain/entries/user/user.dart';
 import 'package:avicenna_app/presentation/features/doctor/pages/doctors_page.dart';
@@ -29,7 +30,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: getTabs().elementAt(_selectedIndex),
+        child: widget.user is Doctor
+            ? getDoctorTabs().elementAt(_selectedIndex)
+            : getPatientTabs().elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -57,7 +60,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  List<Widget> getTabs() => <Widget>[
+  List<Widget> getDoctorTabs() => <Widget>[
+        SchedulesPage(user: widget.user),
+        AppointmentPage(
+          user: widget.user,
+        ),
+        const ProfilePage()
+      ];
+  List<Widget> getPatientTabs() => <Widget>[
         DoctorsPage(),
         SchedulesPage(user: widget.user),
         AppointmentPage(
