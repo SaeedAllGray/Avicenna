@@ -1,12 +1,13 @@
 import 'package:avicenna_app/application/time_slot/time_slot_bloc.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppointmentPage extends StatefulWidget {
-  final User user;
+  final AbstractUser user;
   const AppointmentPage({super.key, required this.user});
 
   @override

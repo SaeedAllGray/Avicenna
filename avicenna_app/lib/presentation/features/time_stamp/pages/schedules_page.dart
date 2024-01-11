@@ -1,6 +1,7 @@
 import 'package:avicenna_app/application/time_slot/time_slot_bloc.dart';
 import 'package:avicenna_app/domain/entries/time_slot/time_slot.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
+import 'package:avicenna_app/domain/entries/user/user.dart';
 import 'package:avicenna_app/presentation/constants/colors.dart';
 
 import 'package:avicenna_app/presentation/features/time_stamp/widgets/create_timestamp_bottom_sheet.dart';
@@ -13,7 +14,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class SchedulesPage extends StatefulWidget {
-  final User user;
+  final AbstractUser user;
   const SchedulesPage({super.key, required this.user});
 
   @override

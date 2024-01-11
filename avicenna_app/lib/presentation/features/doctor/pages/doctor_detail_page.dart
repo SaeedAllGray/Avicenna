@@ -32,7 +32,7 @@ class DoctorDetailsPage extends StatelessWidget {
                   color: AppColors.white),
               child: Column(children: [
                 Text(
-                  '${doctor.firstName} ${doctor.lastName}',
+                  '${doctor.user.firstName} ${doctor.user.lastName}',
                   style: FontStyles.BLACK_BOLD_24,
                 ),
                 Text(
@@ -65,7 +65,7 @@ class DoctorDetailsPage extends StatelessWidget {
               title: Text(AppLocalizations.of(context)!.email),
               leading: const Icon(Icons.email),
               subtitle: Text(
-                doctor.email,
+                doctor.user.email,
                 style: FontStyles.BLACK_BOLD_18,
               ),
             ),

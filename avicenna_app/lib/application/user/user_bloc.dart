@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:avicenna_app/domain/entries/patient/patient.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
+import 'package:avicenna_app/domain/entries/user/user.dart';
 import 'package:avicenna_app/infrastructure/repositories_implementation/profile_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -24,7 +25,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   FutureOr<void> _onGetUserEvent(
       GetUserEvent event, Emitter<UserState> emit) async {
-    User? user; //= await userRepository.fetchUser();
+    AbstractUser? user; //= await userRepository.fetchUser();
     // user = Doctor(
     //   phoneNumber: "+49 155 10517528",
     //   address: "Kampstrasse, 44135, Dortmund",
@@ -36,13 +37,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     //   specialization: "German Traditions",
     // );
     user = Patient(
-        birthDate: DateTime(2001, 3, 9),
-        id: 7216660,
-        firstName: "Dr Andy",
-        lastName: "Azmoodeh",
-        username: "Picaroon",
-        ssn: '7216660',
-        email: "Andy.Azmoodehe@icloud.com");
+        ssn: '32233232',
+        birthDate: DateTime.now(),
+        user: User(
+            id: 1,
+            firstName: 'firstName',
+            lastName: 'lastName',
+            username: 'username',
+            email: 'email'));
     // if (user != null) {
     emit(UserFetchedState(user: user));
     // }

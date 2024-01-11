@@ -72,7 +72,7 @@ class TimeStampDetailWidget extends StatelessWidget {
                         dense: true,
                         contentPadding: EdgeInsets.zero,
                         title: Text(
-                          'Dr. ${state.doctor.firstName} ${state.doctor.lastName}',
+                          'Dr. ${state.doctor.user.firstName} ${state.doctor.user.lastName}',
                           textAlign: TextAlign.start,
                         ),
                         subtitle: Text(state.doctor.specialization),
@@ -105,7 +105,7 @@ class TimeStampDetailWidget extends StatelessWidget {
                         dense: true,
                         contentPadding: EdgeInsets.zero,
                         title: Text(
-                          '${state.patient.firstName} ${state.patient.lastName}',
+                          '${state.patient.user.firstName} ${state.patient.user.lastName}',
                           textAlign: TextAlign.start,
                         ),
                       );

@@ -1,1 +1,1 @@
-abstract class User {}
+abstract class AbstractUser {}

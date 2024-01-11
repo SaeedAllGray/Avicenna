@@ -20,7 +20,7 @@ class DoctorSchedulePage extends StatelessWidget {
       controller: EventController(),
       child: BlocProvider(
         create: (context) =>
-            TimeSlotBloc()..add(GetDoctorTimeSlots(doctorId: doctor.id)),
+            TimeSlotBloc()..add(GetDoctorTimeSlots(doctorId: doctor.user.id!)),
         child: Scaffold(
           appBar: AppBar(
             title: Text(AppLocalizations.of(context)!.available_time_slots),
@@ -36,7 +36,7 @@ class DoctorSchedulePage extends StatelessWidget {
                               startTime: e.start,
                               endTime: e.end,
                               date: e.date,
-                              title: doctor.firstName,
+                              title: doctor.user.firstName,
                               event: e.start,
                               endDate: e.end,
                               color: AppColors.primary),
@@ -67,7 +67,7 @@ class DoctorSchedulePage extends StatelessWidget {
                               // mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
                                 Text(
-                                  '${doctor.firstName} ${doctor.lastName}',
+                                  '${doctor.user.firstName} ${doctor.user.lastName}',
                                   style: FontStyles.BLACK_BOLD_24,
                                 ),
                                 Text(

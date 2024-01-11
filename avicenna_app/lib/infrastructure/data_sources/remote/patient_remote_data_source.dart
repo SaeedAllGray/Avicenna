@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:avicenna_app/infrastructure/data_sources/remote/remote_data_source.dart';
-import 'package:avicenna_app/presentation/constants/api_constant.dart';
+
 import 'package:dio/dio.dart';
 // import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 

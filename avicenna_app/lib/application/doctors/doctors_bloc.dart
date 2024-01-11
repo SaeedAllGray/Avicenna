@@ -39,10 +39,10 @@ class DoctorsBloc extends Bloc<DoctorsEvent, DoctorsState> {
             doc.specialization
                 .toLowerCase()
                 .startsWith(event.searchTerm.toLowerCase()) ||
-            doc.firstName
+            doc.user.firstName
                 .toLowerCase()
                 .startsWith(event.searchTerm.toLowerCase()) ||
-            doc.lastName
+            doc.user.lastName
                 .toLowerCase()
                 .startsWith(event.searchTerm.toLowerCase()))
         .toList()));

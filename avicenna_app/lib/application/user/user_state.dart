@@ -10,7 +10,7 @@ sealed class UserState extends Equatable {
 final class UserInitialState extends UserState {}
 
 final class UserFetchedState extends UserState {
-  final User user;
+  final AbstractUser user;
 
   const UserFetchedState({required this.user});
 }

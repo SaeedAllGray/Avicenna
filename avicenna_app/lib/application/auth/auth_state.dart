@@ -17,7 +17,7 @@ class AuthInitialState extends AuthState {
 class AuthInProgress extends AuthState {}
 
 class AuthSucceedState extends AuthState {
-  final User user;
+  final AbstractUser user;
 
   const AuthSucceedState({required this.user});
 }
