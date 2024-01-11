@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/patient/patient.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
+
 import 'package:avicenna_app/presentation/constants/api_constant.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -30,7 +31,7 @@ class AuthDataSource {
     return response;
   }
 
-  FutureOr<Response> signup(User user) async {
+  FutureOr<Response> signup(AbstractUser user) async {
     if (user is Doctor) {
       Response response = await signupDoctor(user);
       return response;

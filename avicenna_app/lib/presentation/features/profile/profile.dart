@@ -38,7 +38,7 @@ class ProfilePage extends StatelessWidget {
                           leading: const Icon(Icons.person),
                           title: Text(AppLocalizations.of(context)!.name),
                           trailing: Text(
-                            '${(state.user as Patient).firstName} ${(state.user as Patient).lastName}',
+                            '${(state.user as Patient).user.firstName} ${(state.user as Patient).user.lastName}',
                             style: FontStyles.BLACK_REGULAR_16,
                           ),
                         ),
@@ -47,7 +47,7 @@ class ProfilePage extends StatelessWidget {
                           leading: const Icon(Icons.person),
                           title: Text(AppLocalizations.of(context)!.name),
                           trailing: Text(
-                            '${(state.user as Doctor).firstName} ${(state.user as Doctor).lastName}',
+                            '${(state.user as Doctor).user.firstName} ${(state.user as Doctor).user.lastName}',
                             style: FontStyles.BLACK_REGULAR_16,
                           ),
                         ),
@@ -80,7 +80,7 @@ class ProfilePage extends StatelessWidget {
                         leading: const Icon(Icons.remember_me),
                         title: Text(AppLocalizations.of(context)!.username),
                         trailing: Text(
-                          (state.user as Patient).username,
+                          (state.user as Patient).user.username,
                           style: FontStyles.BLACK_REGULAR_16,
                         ),
                       ),
@@ -89,7 +89,7 @@ class ProfilePage extends StatelessWidget {
                           leading: const Icon(Icons.email),
                           title: Text(AppLocalizations.of(context)!.email),
                           trailing: Text(
-                            (state.user as Doctor).email,
+                            (state.user as Doctor).user.email,
                             style: FontStyles.BLACK_REGULAR_16,
                           ),
                         ),
@@ -108,7 +108,7 @@ class ProfilePage extends StatelessWidget {
                           leading: const Icon(Icons.email),
                           title: Text(AppLocalizations.of(context)!.email),
                           trailing: Text(
-                            (state.user as Patient).email,
+                            (state.user as Patient).user.email,
                             style: FontStyles.BLACK_REGULAR_16,
                           ),
                         ),

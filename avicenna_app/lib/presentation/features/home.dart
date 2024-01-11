@@ -1,4 +1,5 @@
 import 'package:avicenna_app/domain/entries/user.dart';
+import 'package:avicenna_app/domain/entries/user/user.dart';
 import 'package:avicenna_app/presentation/features/doctor/pages/doctors_page.dart';
 import 'package:avicenna_app/presentation/features/appointment/appointment_page.dart';
 import 'package:avicenna_app/presentation/features/profile/profile.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
-  final User user;
+  final AbstractUser user;
   const HomePage({super.key, required this.user});
 
   @override

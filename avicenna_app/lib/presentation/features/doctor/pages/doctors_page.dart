@@ -94,7 +94,7 @@ class DoctorsPage extends StatelessWidget {
                           tileColor: AppColors.white,
                           trailing: const Icon(Icons.chevron_right),
                           title: Text(
-                              "${state.doctors[index].firstName} ${state.doctors[index].lastName}"),
+                              "${state.doctors[index].user.firstName} ${state.doctors[index].user.lastName}"),
                           subtitle: Text(state.doctors[index].specialization),
                         ),
                       ),
