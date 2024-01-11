@@ -139,3 +139,14 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 20,
 }
+
+
+if DEBUG:
+    INSTALLED_APPS.append("drf_spectacular")
+    REST_FRAMEWORK["DEFAULT_SCHEMA_CLASS"] = "drf_spectacular.openapi.AutoSchema"
+
+    SPECTACULAR_SETTINGS = {
+        "TITLE": "Avicenna REST API",
+        "DESCRIPTION": "This API is supposed to be used by the Flutter front-end.",
+        "VERSION": "1.0.0",
+    }
