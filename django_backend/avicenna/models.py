@@ -136,6 +136,9 @@ class Review(models.Model):
     doctor = models.ForeignKey(
         Doctor, on_delete=models.CASCADE, help_text="Receiver of the review."
     )
+    date_left = models.DateField(
+        auto_now_add=True, help_text="Day on which the review was left."
+    )
 
     def __str__(self) -> str:
         return f"Rating of {self.rating} stars from {self.patient} to {self.doctor}."
