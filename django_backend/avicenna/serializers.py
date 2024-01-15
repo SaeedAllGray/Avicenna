@@ -6,7 +6,7 @@ from .models import CustomUser, Doctor, Patient, Review, TimeSlot
 class ReviewSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Review
-        fields = ["url", "rating", "comment", "patient", "doctor"]
+        fields = ["url", "id", "rating", "comment", "patient", "doctor"]
 
 
 class TimeSlotSerializer(serializers.HyperlinkedModelSerializer):
@@ -14,6 +14,7 @@ class TimeSlotSerializer(serializers.HyperlinkedModelSerializer):
         model = TimeSlot
         fields = [
             "url",
+            "id",
             "day",
             "beginning",
             "end",
@@ -32,6 +33,7 @@ class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
         model = CustomUser
         fields = [
             "url",
+            "id",
             "first_name",
             "last_name",
             "email",
