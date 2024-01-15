@@ -24,7 +24,20 @@ class CustomAuthToken(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data["user"]
         token, created = Token.objects.get_or_create(user=user)
-        return Response({"token": token.key, "user_id": user.pk})
+
+        user_data = {}
+        if hasattr(user, "patient"):
+            user_serializer = PatientSerializer(
+                user.patient, context={"request": request}
+            )
+        elif hasattr(user, "doctor"):
+            user_serializer = DoctorSerializer(
+                user.doctor, context={"request": request}
+            )
+        else:
+            raise ValueError("Unknown user type.")
+        user_data = user_serializer.data
+        return Response({"token": token.key, **user_data})
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
