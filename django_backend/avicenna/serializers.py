@@ -6,7 +6,7 @@ from .models import CustomUser, Doctor, Patient, Review, TimeSlot
 class ReviewSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Review
-        fields = ["url", "id", "rating", "comment", "patient", "doctor"]
+        fields = ["url", "id", "rating", "comment", "patient", "doctor", "date_left"]
 
 
 class TimeSlotSerializer(serializers.HyperlinkedModelSerializer):
@@ -26,8 +26,8 @@ class TimeSlotSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
-    patient = serializers.HyperlinkedIdentityField("patient-detail")
-    doctor = serializers.HyperlinkedIdentityField("doctor-detail")
+    date_joined = serializers.DateTimeField(read_only=True)
+    last_login = serializers.DateTimeField(read_only=True)
 
     class Meta:
         model = CustomUser
@@ -47,14 +47,13 @@ class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class DoctorSerializer(serializers.HyperlinkedModelSerializer):
-    user = CustomUserSerializer()
+    basic_user_info = CustomUserSerializer(source="user")
     average_rating = serializers.SerializerMethodField()
 
     class Meta:
         model = Doctor
         fields = [
-            "url",
-            "user",
+            "basic_user_info",
             "phone_number",
             "specialization",
             "address",
@@ -66,8 +65,8 @@ class DoctorSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PatientSerializer(serializers.HyperlinkedModelSerializer):
-    user = CustomUserSerializer()
+    basic_user_info = CustomUserSerializer(source="user")
 
     class Meta:
         model = Patient
-        fields = ["url", "user", "ssn", "date_born"]
+        fields = ["basic_user_info", "ssn", "date_born"]
