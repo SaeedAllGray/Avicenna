@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
+import 'package:avicenna_app/domain/entries/patient/patient.dart';
 import 'package:avicenna_app/domain/entries/time_slot/time_slot.dart';
+import 'package:avicenna_app/domain/entries/user.dart';
+import 'package:avicenna_app/infrastructure/repositories_implementation/profile_repository.dart';
 import 'package:avicenna_app/infrastructure/repositories_implementation/time_slot_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -20,18 +24,19 @@ class TimeSlotBloc extends Bloc<TimeSlotEvent, TimeSlotState> {
   FutureOr<void> _onGetUserTimeSlotsEvent(
       GetUserTimeSlots event, Emitter<TimeSlotState> emit) async {
     emit(TimeSlotsInProgress());
+    int? userId = await UserRepository().fetchUserId();
 
-    final List<TimeSlot> timeSlots =
-        await repository.fetchUserTimeSlots(event.userID);
-    emit(TimeSlotsFetched(timeSlots: timeSlots));
+    if (userId != null) {
+      final List<TimeSlot> timeSlots =
+          await repository.fetchUserTimeSlots(userId);
+      emit(TimeSlotsFetched(timeSlots: timeSlots));
+    }
   }
 
   FutureOr<void> _onCreateTimeSlotEvent(
       CreateTimeSlot event, Emitter<TimeSlotState> emit) async {
     emit(TimeSlotsInProgress());
     await repository.createTimeSlot(event.timeSlot);
-
-    // TODO: call post function to create a time stamp
     log("_onCreateTimeSlotEvent");
     List<TimeSlot> timeSlots =
         await repository.fetchUserTimeSlots(event.timeSlot.doctorId);

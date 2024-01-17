@@ -28,7 +28,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
   void initState() {
     super.initState();
     bloc = TimeSlotBloc();
-    bloc.add(const GetUserTimeSlots(userID: 1));
+    bloc.add(const GetUserTimeSlots());
   }
 
   @override
@@ -41,7 +41,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       // TODO: implement this in the bloc, don't pass it from here
-      create: (context) => bloc..add(const GetUserTimeSlots(userID: 1)),
+      create: (context) => bloc..add(const GetUserTimeSlots()),
       child: CalendarControllerProvider<TimeSlot>(
         controller: EventController(),
         child: Scaffold(

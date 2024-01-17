@@ -8,9 +8,7 @@ sealed class TimeSlotEvent extends Equatable {
 }
 
 class GetUserTimeSlots extends TimeSlotEvent {
-  final int userID;
-
-  const GetUserTimeSlots({required this.userID});
+  const GetUserTimeSlots();
 }
 
 class CreateTimeSlot extends TimeSlotEvent {
