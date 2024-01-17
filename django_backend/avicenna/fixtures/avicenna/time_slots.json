@@ -20,7 +20,8 @@
             "day": "2023-12-26",
             "beginning": "20:42:58",
             "end": "00:00:00",
-            "is_confirmed": false
+            "is_confirmed": false,
+            "is_cancelled": true
         }
     },
     {

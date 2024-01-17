@@ -6,7 +6,8 @@
             "comment": "So good, I've beaten my friend so that he'd use your services too!",
             "rating": 5,
             "patient": 13,
-            "doctor": 2
+            "doctor": 2,
+            "date_left": "2024-01-15"
         }
     },
     {
@@ -16,7 +17,8 @@
             "comment": "Exceptional service! I recommend this doctor to everyone.",
             "rating": 4,
             "patient": 14,
-            "doctor": 3
+            "doctor": 3,
+            "date_left": "2024-01-15"
         }
     },
     {
@@ -26,7 +28,8 @@
             "comment": "Caring and knowledgeable doctor. Helped me through a tough time.",
             "rating": 5,
             "patient": 15,
-            "doctor": 4
+            "doctor": 4,
+            "date_left": "2024-01-15"
         }
     },
     {
@@ -36,7 +39,8 @@
             "comment": "Great bedside manner and excellent communication. Highly recommended.",
             "rating": 4,
             "patient": 16,
-            "doctor": 5
+            "doctor": 5,
+            "date_left": "2024-01-15"
         }
     },
     {
@@ -46,7 +50,8 @@
             "comment": "Very professional. Explained everything clearly. I felt at ease.",
             "rating": 5,
             "patient": 17,
-            "doctor": 6
+            "doctor": 6,
+            "date_left": "2024-01-15"
         }
     },
     {
@@ -56,7 +61,8 @@
             "comment": "Helpful and friendly staff. The doctor was thorough in examination.",
             "rating": 4,
             "patient": 18,
-            "doctor": 7
+            "doctor": 7,
+            "date_left": "2024-01-15"
         }
     },
     {
@@ -66,7 +72,8 @@
             "comment": "Quick and efficient service. Solved my health concern effectively.",
             "rating": 5,
             "patient": 19,
-            "doctor": 8
+            "doctor": 8,
+            "date_left": "2024-01-15"
         }
     },
     {
@@ -76,7 +83,8 @@
             "comment": "Courteous and professional. The doctor went above and beyond.",
             "rating": 4,
             "patient": 20,
-            "doctor": 9
+            "doctor": 9,
+            "date_left": "2024-01-15"
         }
     },
     {
@@ -86,7 +94,8 @@
             "comment": "Excellent experience. I appreciate the doctor's expertise.",
             "rating": 5,
             "patient": 11,
-            "doctor": 10
+            "doctor": 10,
+            "date_left": "2024-01-15"
         }
     },
     {
@@ -96,7 +105,8 @@
             "comment": "Couldn't have asked for better care. Top-notch service.",
             "rating": 5,
             "patient": 12,
-            "doctor": 10
+            "doctor": 10,
+            "date_left": "2024-01-15"
         }
     }
 ]
