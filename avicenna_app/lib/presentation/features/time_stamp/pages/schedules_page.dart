@@ -28,7 +28,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
   void initState() {
     super.initState();
     bloc = TimeSlotBloc();
-    bloc.add(const GetDoctorTimeSlots(doctorId: 1));
+    bloc.add(const GetUserTimeSlots(userID: 1));
   }
 
   @override
@@ -40,7 +40,8 @@ class _SchedulesPageState extends State<SchedulesPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => bloc..add(const GetDoctorTimeSlots(doctorId: 1)),
+      // TODO: implement this in the bloc, don't pass it from here
+      create: (context) => bloc..add(const GetUserTimeSlots(userID: 1)),
       child: CalendarControllerProvider<TimeSlot>(
         controller: EventController(),
         child: Scaffold(
@@ -68,19 +69,23 @@ class _SchedulesPageState extends State<SchedulesPage> {
           body: BlocBuilder<TimeSlotBloc, TimeSlotState>(
             builder: (context, state) {
               if (state is TimeSlotsFetched) {
+                // TODO: fix this
                 CalendarControllerProvider.of<TimeSlot>(context)
                     .controller
                     .addAll(state.timeSlots
                         .map(
                           (e) => CalendarEventData<TimeSlot>(
-                            startTime: e.start,
-                            endTime: e.end,
-                            date: e.date,
-                            title: "doctor.firstName",
+                            startTime: e.day.add(Duration(
+                                hours: e.beginning.hour,
+                                minutes: e.beginning.minute)),
+                            endTime: e.day.add(Duration(
+                                hours: e.end.hour, minutes: e.end.minute)),
+                            date: e.day,
+                            title: "Appointment",
                             event: e,
-                            endDate: e.end,
+                            endDate: e.day,
                             description: e.id.toString(),
-                            color: e.confirmed
+                            color: e.isConfirmed ?? false
                                 ? AppColors.primary
                                 : AppColors.primaryPale,
                           ),

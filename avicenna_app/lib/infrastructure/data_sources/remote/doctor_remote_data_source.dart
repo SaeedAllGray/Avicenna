@@ -12,6 +12,7 @@ class DoctorRemoteDataSource implements RemoteDataSource {
 
   @override
   Future<List<dynamic>> fetchEntities() async {
+    // TODO: implement dynamic token
     dio.interceptors.add(PrettyDioLogger());
     Response response = await dio.get('${ApiConstants.baseUrl}$url',
         options: Options(headers: {

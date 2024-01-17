@@ -38,7 +38,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     // );
     user = Patient(
         ssn: '32233232',
-        birthDate: DateTime.now(),
+        dateBorn: ' DateTime.now()',
         user: User(
             id: 1,
             firstName: 'firstName',

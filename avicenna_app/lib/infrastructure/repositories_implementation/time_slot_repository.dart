@@ -13,26 +13,25 @@ class TimeSlotRepository
   Future<List<TimeSlot>> fetchEntities() async {
     List<dynamic> response = await api.fetchEntities();
     log(response.toString());
-    print(response.map((data) => TimeSlot.fromJson(data).start).toList());
+    print(response.map((data) => TimeSlot.fromJson(data).beginning).toList());
     return response.map((data) => TimeSlot.fromJson(data)).toList();
   }
 
   Future<List<TimeSlot>> fetchBookedTimeSlots(int doctorId) async {
-    final List<TimeSlot> timeSlotList = await fetchDoctorTimeSlots(doctorId);
-    timeSlotList.removeWhere((element) => !element.confirmed);
+    final List<TimeSlot> timeSlotList = await fetchUserTimeSlots(doctorId);
     return timeSlotList;
   }
 
-  Future<List<TimeSlot>> fetchDoctorTimeSlots(int doctorId) async {
-    List<dynamic> response = await api.fetchDoctorEntities(doctorId);
+  Future<List<TimeSlot>> fetchUserTimeSlots(int doctorId) async {
+    List<dynamic> response = await api.fetchUserTimeSlotsEntities(doctorId);
     log(response.toString());
     return response.map((data) => TimeSlot.fromJson(data)).toList();
   }
 
-  Future<List<TimeSlot>> fetchPatientTimeSlots(int patientId) async {
-    List<dynamic> response = await api.fetchPatientEntities(patientId);
-    log(response.toString());
-    return response.map((data) => TimeSlot.fromJson(data)).toList();
+  Future<TimeSlot> createTimeSlot(TimeSlot timeSlot) async {
+    dynamic response = await api.createEntity(timeSlot.toJson());
+
+    return TimeSlot.fromJson(response);
   }
 
   @override
