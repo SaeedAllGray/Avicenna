@@ -28,10 +28,13 @@ class CustomUserSerializer(serializers.ModelSerializer):
     date_joined = serializers.DateTimeField(read_only=True)
     last_login = serializers.DateTimeField(read_only=True)
     patient_id = serializers.PrimaryKeyRelatedField(
-        allow_null=True, queryset=Patient.objects.all(), source="patient"
+        allow_null=True,
+        queryset=Patient.objects.all(),
+        source="patient",
+        required=False,
     )
     doctor_id = serializers.PrimaryKeyRelatedField(
-        allow_null=True, queryset=Doctor.objects.all(), source="doctor"
+        allow_null=True, queryset=Doctor.objects.all(), source="doctor", required=False
     )
 
     class Meta:
@@ -68,9 +71,34 @@ class DoctorSerializer(serializers.ModelSerializer):
         return obj.get_average_rating()
 
 
+class DoctorCreateSerializer(serializers.ModelSerializer):
+    user_id = serializers.PrimaryKeyRelatedField(
+        source="user", queryset=CustomUser.objects.all()
+    )
+
+    class Meta:
+        model = Doctor
+        fields = [
+            "user_id",
+            "phone_number",
+            "specialization",
+            "address",
+        ]
+
+
 class PatientSerializer(serializers.ModelSerializer):
     user = CustomUserSerializer()
 
     class Meta:
         model = Patient
-        fields = ["basic_user_info", "ssn", "date_born"]
+        fields = ["user", "ssn", "date_born"]
+
+
+class PatientCreateSerializer(serializers.ModelSerializer):
+    user_id = serializers.PrimaryKeyRelatedField(
+        source="user", queryset=CustomUser.objects.all()
+    )
+
+    class Meta:
+        model = Patient
+        fields = ["user_id", "ssn", "date_born"]

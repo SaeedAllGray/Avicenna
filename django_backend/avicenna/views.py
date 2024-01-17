@@ -9,7 +9,9 @@ from rest_framework.response import Response
 from .models import CustomUser, Doctor, Patient, Review, TimeSlot
 from .serializers import (
     CustomUserSerializer,
+    DoctorCreateSerializer,
     DoctorSerializer,
+    PatientCreateSerializer,
     PatientSerializer,
     ReviewSerializer,
     TimeSlotSerializer,
@@ -127,7 +129,7 @@ class CreateDoctorViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     """
 
     queryset = Doctor.objects.all()
-    serializer_class = DoctorSerializer
+    serializer_class = DoctorCreateSerializer
     authentication_classes = []
     permission_classes = [AllowAny]
 
@@ -157,6 +159,6 @@ class CreatePatientViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     """
 
     queryset = Patient.objects.all()
-    serializer_class = PatientSerializer
+    serializer_class = PatientCreateSerializer
     authentication_classes = []
     permission_classes = [AllowAny]
