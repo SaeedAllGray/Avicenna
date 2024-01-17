@@ -3,42 +3,46 @@ from rest_framework import serializers
 from .models import CustomUser, Doctor, Patient, Review, TimeSlot
 
 
-class ReviewSerializer(serializers.HyperlinkedModelSerializer):
+class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ["url", "id", "rating", "comment", "patient", "doctor", "date_left"]
+        fields = ["id", "rating", "comment", "patient_id", "doctor_id", "date_left"]
 
 
-class TimeSlotSerializer(serializers.HyperlinkedModelSerializer):
+class TimeSlotSerializer(serializers.ModelSerializer):
     class Meta:
         model = TimeSlot
         fields = [
-            "url",
             "id",
             "day",
             "beginning",
             "end",
-            "doctor",
-            "patient",
+            "doctor_id",
+            "patient_id",
             "is_confirmed",
             "is_booked",
         ]
 
 
-class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
+class CustomUserSerializer(serializers.ModelSerializer):
     date_joined = serializers.DateTimeField(read_only=True)
     last_login = serializers.DateTimeField(read_only=True)
+    patient_id = serializers.PrimaryKeyRelatedField(
+        allow_null=True, queryset=Patient.objects.all(), source="patient"
+    )
+    doctor_id = serializers.PrimaryKeyRelatedField(
+        allow_null=True, queryset=Doctor.objects.all(), source="doctor"
+    )
 
     class Meta:
         model = CustomUser
         fields = [
-            "url",
             "id",
             "first_name",
             "last_name",
             "email",
-            "patient",
-            "doctor",
+            "patient_id",
+            "doctor_id",
             "username",
             "password",
             "date_joined",
@@ -46,14 +50,14 @@ class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class DoctorSerializer(serializers.HyperlinkedModelSerializer):
-    basic_user_info = CustomUserSerializer(source="user")
+class DoctorSerializer(serializers.ModelSerializer):
+    user = CustomUserSerializer()
     average_rating = serializers.SerializerMethodField()
 
     class Meta:
         model = Doctor
         fields = [
-            "basic_user_info",
+            "user",
             "phone_number",
             "specialization",
             "address",
@@ -64,8 +68,8 @@ class DoctorSerializer(serializers.HyperlinkedModelSerializer):
         return obj.get_average_rating()
 
 
-class PatientSerializer(serializers.HyperlinkedModelSerializer):
-    basic_user_info = CustomUserSerializer(source="user")
+class PatientSerializer(serializers.ModelSerializer):
+    user = CustomUserSerializer()
 
     class Meta:
         model = Patient
