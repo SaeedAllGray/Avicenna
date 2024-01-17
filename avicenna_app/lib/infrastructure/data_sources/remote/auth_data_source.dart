@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/patient/patient.dart';
@@ -14,9 +15,16 @@ class AuthDataSource {
     dio.interceptors.add(PrettyDioLogger());
   }
   FutureOr<Response> login(String username, String password) async {
-    Response response = await dio.post('${ApiConstants.baseUrl}/login',
-        data: {"username": username, "password": password});
-    return response;
+    late Response response1;
+    try {
+      Response response = await dio.post(
+          '${ApiConstants.baseUrl}api-token-auth/',
+          data: {"username": username, "password": password});
+      response1 = response;
+    } catch (e) {
+      log(e.toString());
+    }
+    return response1;
   }
 
   FutureOr<Response> signupDoctor(Doctor doctor) async {

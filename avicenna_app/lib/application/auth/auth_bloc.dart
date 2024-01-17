@@ -28,17 +28,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _onLoginEvent(
       LoginEvent event, Emitter<AuthState> emit) async {
     emit(AuthInProgress());
-    final bool loginSucceed = true;
-    // await repository.login(event.username, event.password);
+    final bool loginSucceed =
+        await repository.login(event.username, event.password);
+
     if (loginSucceed) {
-      // final User? user = await repository.fetchUser();
-      final AbstractUser user = Doctor(
-          specialization: 'specialization',
-          phoneNumber: 'phoneNumber',
-          address: 'address',
-          user: User(
-              email: ' ', firstName: ' ', id: 1, lastName: ' ', username: ' '));
-      emit(AuthSucceedState(user: user));
+      final AbstractUser? user = await repository.fetchUser();
+      print(user);
+      if (user != null) {
+        emit(AuthSucceedState(user: user));
+      }
     } else {
       emit(AuthFailedState());
     }
@@ -62,19 +60,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _onCheckUserEvent(
       CheckUserEvent event, Emitter<AuthState> emit) async {
-    AbstractUser? user = //await repository.fetchUser();
-        Doctor(
-            phoneNumber: "+49 155 10517528",
-            address: "Kampstrasse, 44135, Dortmund",
-            specialization: ' ',
-            user: User(
-                id: 2,
-                firstName: 'firstName',
-                lastName: 'lastName',
-                username: 'username',
-                email: 'email@deu.com'));
-    // if (user != null) {
-    emit(AuthSucceedState(user: user));
-    // }
+    print('-----------------BFOR EROR------------');
+    AbstractUser? user = await repository.fetchUser();
+
+    if (user != null) {
+      emit(AuthSucceedState(user: user));
+    }
   }
 }

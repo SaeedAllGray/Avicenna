@@ -5,4 +5,6 @@ class ApiConstants {
   static const String TYPE = 'type';
   static const String DOCTOR = 'doctors';
   static const String PATIENT = 'patient';
+  static const String PATIENT_ID = 'patient_id';
+  static const String DOCTOR_ID = 'doctor_id';
 }

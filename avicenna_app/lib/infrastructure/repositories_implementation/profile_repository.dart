@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/patient/patient.dart';
@@ -13,15 +14,20 @@ class UserRepository {
   final LocalSource _localSource = LocalSource.getInstance();
   final AuthDataSource _authDataSource = AuthDataSource();
   Future<AbstractUser?> fetchUser() async {
-    String type = await _localSource.getType() ?? '';
     String user = await _localSource.getUser() ?? '';
+    print(user);
+    Map<String, dynamic> userMap = json.decode(user);
 
-    Map<String, dynamic> userMap = jsonDecode(user);
-    if (type == ApiConstants.DOCTOR) {
+    if (userMap[ApiConstants.USER][ApiConstants.DOCTOR_ID] != null) {
       return Doctor.fromJson(userMap);
-    } else if (type == ApiConstants.PATIENT) {
-      return Patient.fromJson(userMap);
+    } else if (userMap[ApiConstants.USER][ApiConstants.PATIENT_ID] != null) {
+      try {
+        return Patient.fromJson(userMap);
+      } catch (e) {
+        log(e.toString());
+      }
     }
+
     return null;
   }
 
@@ -32,9 +38,9 @@ class UserRepository {
   Future<bool> login(String username, String password) async {
     final Response response = await _authDataSource.login(username, password);
     if (response.statusCode == 200) {
-      _localSource.saveUser(response.data[ApiConstants.USER]);
-      _localSource.setToken(response.data[ApiConstants.TOKEN]);
-      _localSource.setType(response.data[ApiConstants.TYPE]);
+      _localSource.saveUser(jsonEncode(response.data));
+      _localSource.setToken(response.data[ApiConstants.TOKEN].toString());
+
       return true;
     }
     return false;
@@ -45,7 +51,6 @@ class UserRepository {
     if (response.statusCode == 200) {
       _localSource.saveUser(response.data[ApiConstants.USER]);
       _localSource.setToken(response.data[ApiConstants.TOKEN]);
-      _localSource.setType(response.data[ApiConstants.TYPE]);
 
       return true;
     }
