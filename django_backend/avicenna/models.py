@@ -2,6 +2,7 @@
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, RegexValidator
 from django.db import models
 
@@ -18,6 +19,10 @@ class CustomUser(AbstractUser):
 
     def __str__(self) -> str:
         return self.get_full_name()
+
+    def clean(self):
+        if hasattr(self, "doctor") and hasattr(self, "patient"):
+            raise ValidationError("A user is both a doctor and a patient.")
 
 
 class Doctor(models.Model):
@@ -98,6 +103,11 @@ class Doctor(models.Model):
     def __str__(self) -> str:
         return f"DR. {str(self.user)}"
 
+    def clean(self):
+        print("*"*400)
+        if hasattr(self, "user.doctor") and hasattr(self, "user.patient"):
+            raise ValidationError("A user is both a doctor and a patient.")
+
 
 class Patient(models.Model):
     """Fields pertaining to the patient.
@@ -116,16 +126,12 @@ class Patient(models.Model):
     )
     date_born = models.DateField("date of birth")
 
-    # def save(self, *args, **kwargs):
-    #    if not self.user:
-    #        user_data = kwargs.pop("user_data", {})
-    #        # the second element is a boolean "created"
-    #        self.user = CustomUser.objects.update_or_create(user_data)[0]
-    #
-    #    super().save(*args, **kwargs)
-
     def __str__(self) -> str:
         return str(self.user)
+
+    def clean(self):
+        if hasattr(self, "user.doctor") and hasattr(self, "user.patient"):
+            raise ValidationError("A user is both a doctor and a patient.")
 
 
 class Review(models.Model):
