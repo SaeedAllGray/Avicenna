@@ -20,7 +20,8 @@ class DoctorSchedulePage extends StatelessWidget {
       controller: EventController(),
       child: BlocProvider(
         create: (context) =>
-            TimeSlotBloc()..add(GetDoctorTimeSlots(doctorId: doctor.user.id!)),
+            // TODO: fix this and don't pass the ID from here. Feed it from a helper class in the bloc.
+            TimeSlotBloc()..add(GetUserTimeSlots(userID: doctor.user.id!)),
         child: Scaffold(
           appBar: AppBar(
             title: Text(AppLocalizations.of(context)!.available_time_slots),
@@ -33,12 +34,16 @@ class DoctorSchedulePage extends StatelessWidget {
                     .addAll(state.timeSlots
                         .map(
                           (e) => CalendarEventData(
-                              startTime: e.start,
-                              endTime: e.end,
-                              date: e.date,
-                              title: doctor.user.firstName,
-                              event: e.start,
-                              endDate: e.end,
+                              //TODO: Fix this
+                              startTime: e.day.add(Duration(
+                                  hours: e.beginning.hour,
+                                  minutes: e.beginning.minute)),
+                              endTime: e.day.add(Duration(
+                                  hours: e.end.hour, minutes: e.end.minute)),
+                              date: e.day,
+                              title: "Appointment",
+                              event: e,
+                              endDate: e.day,
                               color: AppColors.primary),
                         )
                         .toList());

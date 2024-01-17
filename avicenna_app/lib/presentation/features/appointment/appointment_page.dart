@@ -34,9 +34,9 @@ class _AppointmentPageState extends State<AppointmentPage> {
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: ListTile(
                     title: Text(DateFormat('EEEE d.MM.yyyy')
-                        .format(state.timeSlots[indext].date)),
+                        .format(state.timeSlots[indext].day)),
                     subtitle: Text(
-                        '${DateFormat('h:mm a').format(state.timeSlots[indext].start)} - ${DateFormat('h:mm a').format(state.timeSlots[indext].end)}'),
+                        '${state.timeSlots[indext].beginning} - ${state.timeSlots[indext].end}'),
                     trailing: SizedBox(
                       width: 100,
                       child: Row(children: [

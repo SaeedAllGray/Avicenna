@@ -61,59 +61,60 @@ class TimeStampDetailWidget extends StatelessWidget {
                     }),
               ),
               // When the current user is patient, fetch doctor's info
-              BlocProvider(
-                create: (context) => DoctorsBloc()
-                  ..add(GetDoctorDetails(events.first.event!.doctorId)),
-                child: BlocBuilder<DoctorsBloc, DoctorsState>(
-                  builder: (context, state) {
-                    if (state is DoctorDetailsFetched) {
-                      return ListTile(
-                        leading: const Icon(Icons.medical_services),
-                        dense: true,
-                        contentPadding: EdgeInsets.zero,
-                        title: Text(
-                          'Dr. ${state.doctor.user.firstName} ${state.doctor.user.lastName}',
-                          textAlign: TextAlign.start,
-                        ),
-                        subtitle: Text(state.doctor.specialization),
-                        trailing: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primary,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: Text(AppLocalizations.of(context)!.rate),
-                            onPressed: () {
-                              // TODO: Feedback UI and logic
-                            }),
-                      );
-                    }
-                    return const LinearProgressIndicator();
-                  },
-                ),
-              ),
+              // BlocProvider(
+              //   create: (context) => DoctorsBloc()
+              //     ..add(GetDoctorDetails(events.first.event!.doctorId)),
+              //   child: BlocBuilder<DoctorsBloc, DoctorsState>(
+              //     builder: (context, state) {
+              //       if (state is DoctorDetailsFetched) {
+              //         return ListTile(
+              //           leading: const Icon(Icons.medical_services),
+              //           dense: true,
+              //           contentPadding: EdgeInsets.zero,
+              //           title: Text(
+              //             'Dr. ${state.doctor.user.firstName} ${state.doctor.user.lastName}',
+              //             textAlign: TextAlign.start,
+              //           ),
+              //           subtitle: Text(state.doctor.specialization),
+              //           trailing: ElevatedButton(
+              //               style: ElevatedButton.styleFrom(
+              //                 backgroundColor: AppColors.primary,
+              //                 shape: RoundedRectangleBorder(
+              //                   borderRadius: BorderRadius.circular(10),
+              //                 ),
+              //               ),
+              //               child: Text(AppLocalizations.of(context)!.rate),
+              //               onPressed: () {
+              //                 // TODO: Feedback UI and logic
+              //               }),
+              //         );
+              //       }
+              //       return const LinearProgressIndicator();
+              //     },
+              //   ),
+              // ),
               // When the current user is doctor, fetch patient's info
-              BlocProvider(
-                create: (context) => PatientsBloc()
-                  ..add(GetPatientDetails(events.first.event!.patientId)),
-                child: BlocBuilder<PatientsBloc, PatientsState>(
-                  builder: (context, state) {
-                    if (state is PatientDetailsFetched) {
-                      return ListTile(
-                        leading: const Icon(Icons.medical_services),
-                        dense: true,
-                        contentPadding: EdgeInsets.zero,
-                        title: Text(
-                          '${state.patient.user.firstName} ${state.patient.user.lastName}',
-                          textAlign: TextAlign.start,
-                        ),
-                      );
-                    }
-                    return const LinearProgressIndicator();
-                  },
+              if (events.first.event!.patientId != null)
+                BlocProvider(
+                  create: (context) => PatientsBloc()
+                    ..add(GetPatientDetails(events.first.event!.patientId!)),
+                  child: BlocBuilder<PatientsBloc, PatientsState>(
+                    builder: (context, state) {
+                      if (state is PatientDetailsFetched) {
+                        return ListTile(
+                          leading: const Icon(Icons.medical_services),
+                          dense: true,
+                          contentPadding: EdgeInsets.zero,
+                          title: Text(
+                            '${state.patient.user.firstName} ${state.patient.user.lastName}',
+                            textAlign: TextAlign.start,
+                          ),
+                        );
+                      }
+                      return const LinearProgressIndicator();
+                    },
+                  ),
                 ),
-              ),
               // Options for the doctor: cancel/confirm the time stamp
               // options for the patient: cancel the time stamp
               const Spacer(),

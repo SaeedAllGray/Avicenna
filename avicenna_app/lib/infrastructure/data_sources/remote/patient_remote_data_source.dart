@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:avicenna_app/infrastructure/data_sources/remote/remote_data_source.dart';
+import 'package:avicenna_app/presentation/constants/api_constant.dart';
 
 import 'package:dio/dio.dart';
-// import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class PatientRemoteDataSource implements RemoteDataSource {
   @override
@@ -12,16 +14,15 @@ class PatientRemoteDataSource implements RemoteDataSource {
 
   @override
   Future fetchAnEntity(int id) async {
-    // TODO: implement fetchAnEntity
-    String mockString = '''{ "id": 1,
-  "ssn": "123-45-6789",
-  "first_name": "John",
-  "last_name": "Doe",
-  "birth_date": "1950-12-26T14:00:00",
-  "username": "johndoe123",
-  "email": "johndoe@example.com"
-}''';
-    return jsonDecode(mockString);
+    log('pp');
+    dio.interceptors.add(PrettyDioLogger());
+    Response response = await dio.get('${ApiConstants.baseUrl}$url/$id/',
+        options: Options(headers: {
+          'Authorization': 'Token dcee07d8713c07984e33ef33a17c67ac012cbb1b'
+        }));
+    log('response.data');
+
+    return response.data;
   }
 
   @override
