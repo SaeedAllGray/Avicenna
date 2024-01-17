@@ -50,8 +50,7 @@ class _AuthPageState extends State<AuthPage> {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        HomePage(user: (state as AuthSucceedState).user)));
+                    builder: (context) => HomePage(user: state.user)));
           }
         },
         child: BlocBuilder<AuthBloc, AuthState>(
