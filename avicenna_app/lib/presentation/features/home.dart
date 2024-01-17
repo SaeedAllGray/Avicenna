@@ -37,18 +37,20 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.search),
-            label: AppLocalizations.of(context)!.browse,
-          ),
+          if (widget.user is! Doctor)
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.search),
+              label: AppLocalizations.of(context)!.browse,
+            ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.schedule),
             label: AppLocalizations.of(context)!.schedules,
           ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.bookmark),
-            label: AppLocalizations.of(context)!.appointment,
-          ),
+          if (widget.user is Doctor)
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.bookmark),
+              label: AppLocalizations.of(context)!.appointment,
+            ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.person),
             label: AppLocalizations.of(context)!.account,
@@ -70,9 +72,6 @@ class _HomePageState extends State<HomePage> {
   List<Widget> getPatientTabs() => <Widget>[
         DoctorsPage(),
         SchedulesPage(user: widget.user),
-        AppointmentPage(
-          user: widget.user,
-        ),
         const ProfilePage()
       ];
 }
