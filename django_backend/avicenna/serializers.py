@@ -8,7 +8,7 @@ class ReviewSerializer(serializers.ModelSerializer):
         queryset=Doctor.objects.all(), source="doctor"
     )
     patient_id = serializers.PrimaryKeyRelatedField(
-        queryset=Patient.objects.all(), source="doctor"
+        queryset=Patient.objects.all(), source="patient"
     )
 
     class Meta:
@@ -21,7 +21,10 @@ class TimeSlotSerializer(serializers.ModelSerializer):
         queryset=Doctor.objects.all(), source="doctor"
     )
     patient_id = serializers.PrimaryKeyRelatedField(
-        queryset=Patient.objects.all(), source="doctor", required=False, allow_null=True
+        queryset=Patient.objects.all(),
+        source="patient",
+        required=False,
+        allow_null=True,
     )
 
     class Meta:

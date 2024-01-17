@@ -14,7 +14,7 @@ class CustomUser(AbstractUser):
 
     first_name = models.CharField("first name", max_length=150)
     last_name = models.CharField("last name", max_length=150)
-    email = models.EmailField("email address", blank=True, null=True, unique=True)
+    email = models.EmailField("email address", unique=True)
 
     def __str__(self) -> str:
         return self.get_full_name()
