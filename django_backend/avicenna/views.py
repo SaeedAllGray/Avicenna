@@ -2,6 +2,8 @@ from django.db.models import Q
 from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.generics import mixins
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from .models import CustomUser, Doctor, Patient, Review, TimeSlot
@@ -70,21 +72,91 @@ class TimeSlotViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class CustomUserViewSet(viewsets.ModelViewSet):
+class CustomUserViewSet(
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
     """The base User object's fields.
 
-    Specific Doctor or Patient objects should be preferred.
+    Creating is not allowed due to it's being an
+    unauthenticated action within this code's logic.
     """
 
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
 
 
-class DoctorViewSet(viewsets.ModelViewSet):
+class CreateCustomUserViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    """The base User object's fields.
+
+    Creating is an action requiring no authentication
+    within this code's logic.
+    """
+
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
+
+class DoctorViewSet(
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
+    """Doctor endpoint supporting all operations except creating.
+
+    Creating is not allowed due to it's being an
+    unauthenticated action within this code's logic.
+    """
+
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
 
 
-class PatientViewSet(viewsets.ModelViewSet):
+class CreateDoctorViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    """Doctor endpoint supporting only creating.
+
+    Creating is an action requiring no authentication
+    within this code's logic.
+    """
+
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorSerializer
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
+
+class PatientViewSet(
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
+    """Patient endpoint supporting all operations except creating.
+
+    Creating is not allowed due to it's being an
+    unauthenticated action within this code's logic.
+    """
+
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
+
+
+class CreatePatientViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    """Patient endpoint supporting only creating.
+
+    Creating is an action requiring no authentication
+    within this code's logic.
+    """
+
+    queryset = Patient.objects.all()
+    serializer_class = PatientSerializer
+    authentication_classes = []
+    permission_classes = [AllowAny]
