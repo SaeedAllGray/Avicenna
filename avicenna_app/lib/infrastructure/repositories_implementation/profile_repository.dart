@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/patient/patient.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
+import 'package:avicenna_app/domain/entries/user/user.dart';
 
 import 'package:avicenna_app/infrastructure/data_sources/local/local_source.dart';
 import 'package:avicenna_app/infrastructure/data_sources/remote/auth_data_source.dart';
@@ -16,12 +17,14 @@ class UserRepository {
   Future<AbstractUser?> fetchUser() async {
     String user = await _localSource.getUser() ?? '';
     print(user);
-    Map<String, dynamic> userMap = jsonDecode(user);
-
-    if (userMap[ApiConstants.USER][ApiConstants.DOCTOR_ID] != null) {
-      return Doctor.fromJson(userMap);
-    } else if (userMap[ApiConstants.USER][ApiConstants.PATIENT_ID] != null) {
-      return Patient.fromJson(userMap);
+    if (user.isNotEmpty) {
+      Map<String, dynamic> userMap = json.decode(user);
+      print(userMap);
+      if (userMap[ApiConstants.USER][ApiConstants.DOCTOR_ID] != null) {
+        return Doctor.fromJson(userMap);
+      } else if (userMap[ApiConstants.USER][ApiConstants.PATIENT_ID] != null) {
+        return Patient.fromJson(userMap);
+      }
     }
 
     return null;
@@ -45,15 +48,17 @@ class UserRepository {
     _localSource.clearStorage();
   }
 
-  Future<bool> login(String username, String password) async {
+  Future<AbstractUser?> login(String username, String password) async {
     final Response response = await _authDataSource.login(username, password);
     if (response.statusCode == 200) {
       _localSource.saveUser(jsonEncode(response.data));
       _localSource.setToken(response.data[ApiConstants.TOKEN].toString());
-
-      return true;
+      if (response.data["user"]["doctor_id"] != null) {
+        return Doctor.fromJson(response.data);
+      } else {
+        return Patient.fromJson(response.data);
+      }
     }
-    return false;
   }
 
   Future<bool> signup(AbstractUser user) async {

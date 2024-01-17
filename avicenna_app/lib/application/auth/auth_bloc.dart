@@ -28,15 +28,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _onLoginEvent(
       LoginEvent event, Emitter<AuthState> emit) async {
     emit(AuthInProgress());
-    final bool loginSucceed =
+    final AbstractUser? user =
         await repository.login(event.username, event.password);
 
-    if (loginSucceed) {
-      final AbstractUser? user = await repository.fetchUser();
-      print(user);
-      if (user != null) {
-        emit(AuthSucceedState(user: user));
-      }
+    if (user != null) {
+      emit(AuthSucceedState(user: user));
     } else {
       emit(AuthFailedState());
     }
