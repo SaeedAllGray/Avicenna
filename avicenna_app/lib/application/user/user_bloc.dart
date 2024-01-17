@@ -24,7 +24,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   FutureOr<void> _onGetUserEvent(
       GetUserEvent event, Emitter<UserState> emit) async {
     AbstractUser? user = await userRepository.fetchUser();
-
+    print(user);
+    print('---------------');
     if (user != null) {
       emit(UserFetchedState(user: user));
     }

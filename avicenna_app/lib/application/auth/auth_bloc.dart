@@ -60,7 +60,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _onCheckUserEvent(
       CheckUserEvent event, Emitter<AuthState> emit) async {
-    print('-----------------BFOR EROR------------');
     AbstractUser? user = await repository.fetchUser();
 
     if (user != null) {

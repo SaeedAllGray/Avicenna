@@ -15,16 +15,9 @@ class AuthDataSource {
     dio.interceptors.add(PrettyDioLogger());
   }
   FutureOr<Response> login(String username, String password) async {
-    late Response response1;
-    try {
-      Response response = await dio.post(
-          '${ApiConstants.baseUrl}api-token-auth/',
-          data: {"username": username, "password": password});
-      response1 = response;
-    } catch (e) {
-      log(e.toString());
-    }
-    return response1;
+    Response response = await dio.post('${ApiConstants.baseUrl}api-token-auth/',
+        data: {"username": username, "password": password});
+    return response;
   }
 
   FutureOr<Response> signupDoctor(Doctor doctor) async {
