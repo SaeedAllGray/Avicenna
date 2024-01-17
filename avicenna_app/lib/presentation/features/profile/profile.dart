@@ -76,14 +76,15 @@ class ProfilePage extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      ListTile(
-                        leading: const Icon(Icons.remember_me),
-                        title: Text(AppLocalizations.of(context)!.username),
-                        trailing: Text(
-                          (state.user as Patient).user.username,
-                          style: FontStyles.BLACK_REGULAR_16,
+                      if (state.user is Patient)
+                        ListTile(
+                          leading: const Icon(Icons.remember_me),
+                          title: Text(AppLocalizations.of(context)!.username),
+                          trailing: Text(
+                            (state.user as Patient).user.username,
+                            style: FontStyles.BLACK_REGULAR_16,
+                          ),
                         ),
-                      ),
                       if (state.user is Doctor)
                         ListTile(
                           leading: const Icon(Icons.email),

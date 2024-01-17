@@ -16,16 +16,12 @@ class UserRepository {
   Future<AbstractUser?> fetchUser() async {
     String user = await _localSource.getUser() ?? '';
     print(user);
-    Map<String, dynamic> userMap = json.decode(user);
+    Map<String, dynamic> userMap = jsonDecode(user);
 
     if (userMap[ApiConstants.USER][ApiConstants.DOCTOR_ID] != null) {
       return Doctor.fromJson(userMap);
     } else if (userMap[ApiConstants.USER][ApiConstants.PATIENT_ID] != null) {
-      try {
-        return Patient.fromJson(userMap);
-      } catch (e) {
-        log(e.toString());
-      }
+      return Patient.fromJson(userMap);
     }
 
     return null;
