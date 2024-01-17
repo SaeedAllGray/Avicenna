@@ -116,6 +116,14 @@ class Patient(models.Model):
     )
     date_born = models.DateField("date of birth")
 
+    # def save(self, *args, **kwargs):
+    #    if not self.user:
+    #        user_data = kwargs.pop("user_data", {})
+    #        # the second element is a boolean "created"
+    #        self.user = CustomUser.objects.update_or_create(user_data)[0]
+    #
+    #    super().save(*args, **kwargs)
+
     def __str__(self) -> str:
         return str(self.user)
 
@@ -159,6 +167,9 @@ class TimeSlot(models.Model):
     beginning = models.TimeField("appointment begins at")
     end = models.TimeField("appointment ends at")
     is_confirmed = models.BooleanField("confirmed by the doctor", default=False)
+    is_cancelled = models.BooleanField(
+        "cancelled by the doctor or the patient", default=False
+    )
 
     @property
     def is_booked(self) -> bool:

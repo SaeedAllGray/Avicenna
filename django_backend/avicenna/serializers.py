@@ -4,12 +4,26 @@ from .models import CustomUser, Doctor, Patient, Review, TimeSlot
 
 
 class ReviewSerializer(serializers.ModelSerializer):
+    doctor_id = serializers.PrimaryKeyRelatedField(
+        queryset=Doctor.objects.all(), source="doctor"
+    )
+    patient_id = serializers.PrimaryKeyRelatedField(
+        queryset=Patient.objects.all(), source="doctor"
+    )
+
     class Meta:
         model = Review
         fields = ["id", "rating", "comment", "patient_id", "doctor_id", "date_left"]
 
 
 class TimeSlotSerializer(serializers.ModelSerializer):
+    doctor_id = serializers.PrimaryKeyRelatedField(
+        queryset=Doctor.objects.all(), source="doctor"
+    )
+    patient_id = serializers.PrimaryKeyRelatedField(
+        queryset=Patient.objects.all(), source="doctor", required=False, allow_null=True
+    )
+
     class Meta:
         model = TimeSlot
         fields = [
@@ -21,6 +35,7 @@ class TimeSlotSerializer(serializers.ModelSerializer):
             "patient_id",
             "is_confirmed",
             "is_booked",
+            "is_cancelled",
         ]
 
 
@@ -51,6 +66,12 @@ class CustomUserSerializer(serializers.ModelSerializer):
             "date_joined",
             "last_login",
         ]
+
+    def create(self, validated_data):
+        user = CustomUser(**validated_data)
+        user.set_password(validated_data["password"])
+        user.save()
+        return user
 
 
 class DoctorSerializer(serializers.ModelSerializer):
