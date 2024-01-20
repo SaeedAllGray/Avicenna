@@ -8,6 +8,7 @@ import 'package:avicenna_app/presentation/features/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});

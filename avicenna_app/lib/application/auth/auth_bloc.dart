@@ -34,7 +34,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     if (user != null) {
       signupActive = false;
-      emit(AuthInitialState());
+      emit(AuthSucceedState(user: user));
     } else {
       emit(AuthFailedState());
     }

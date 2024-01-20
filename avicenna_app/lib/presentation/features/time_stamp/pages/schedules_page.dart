@@ -1,4 +1,5 @@
 import 'package:avicenna_app/application/time_slot/time_slot_bloc.dart';
+import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/time_slot/time_slot.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
 import 'package:avicenna_app/domain/entries/user/user.dart';
@@ -28,7 +29,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
   void initState() {
     super.initState();
     bloc = TimeSlotBloc();
-    bloc.add(const GetUserTimeSlots());
+    bloc.add(GetUserTimeSlots());
   }
 
   @override
@@ -41,7 +42,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       // TODO: implement this in the bloc, don't pass it from here
-      create: (context) => bloc..add(const GetUserTimeSlots()),
+      create: (context) => bloc..add(GetUserTimeSlots()),
       child: CalendarControllerProvider<TimeSlot>(
         controller: EventController(),
         child: Scaffold(
@@ -51,19 +52,20 @@ class _SchedulesPageState extends State<SchedulesPage> {
             actions: [
               //TODO: the condition to check whether the user is a [doctor] or a [patient]
 
-              IconButton(
-                  onPressed: () {
-                    showModalBottomSheet<void>(
-                      context: context,
-                      builder: (BuildContext conte2xt) {
-                        return Provider.value(
-                          value: bloc,
-                          child: const CreateTimeStampBottonSheet(),
-                        );
-                      },
-                    );
-                  },
-                  icon: const Icon(Icons.add_rounded))
+              if (widget.user is Doctor)
+                IconButton(
+                    onPressed: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext conte2xt) {
+                          return Provider.value(
+                            value: bloc,
+                            child: const CreateTimeStampBottonSheet(),
+                          );
+                        },
+                      );
+                    },
+                    icon: const Icon(Icons.add_rounded))
             ],
           ),
           body: BlocBuilder<TimeSlotBloc, TimeSlotState>(

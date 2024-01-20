@@ -10,13 +10,14 @@ part 'feedback_state.dart';
 
 class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
   FeedbackBloc() : super(FeedbackInitial()) {
-    on<GetFeedBacks>(_onGeFeedBacksEvent);
+    on<GetUserFeedBacks>(_onGeFeedBacksEvent);
   }
   FutureOr<void> _onGeFeedBacksEvent(
-      FeedbackEvent event, Emitter<FeedbackState> emit) async {
+      GetUserFeedBacks event, Emitter<FeedbackState> emit) async {
     emit(FeedBackInProgress());
     FeedbackRepository repository = FeedbackRepository();
-    List<Feedback> feedbacks = await repository.fetchEntities();
+    List<Feedback> feedbacks =
+        await repository.fetchUserEntities(event.doctorId);
     emit(FeedBacksFetched(feedbacks: feedbacks));
   }
 }

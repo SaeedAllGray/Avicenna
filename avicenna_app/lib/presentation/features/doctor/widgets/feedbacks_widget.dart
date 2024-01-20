@@ -16,7 +16,7 @@ class FeedbacksWidget extends StatelessWidget {
     return SafeArea(
       child: BlocProvider(
         create: (context) =>
-            FeedbackBloc()..add(GetFeedBacks(doctorId: doctor.user.id!)),
+            FeedbackBloc()..add(GetUserFeedBacks(doctorId: doctor.user.id!)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

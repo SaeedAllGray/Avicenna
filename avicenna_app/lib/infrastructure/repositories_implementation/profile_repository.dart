@@ -59,7 +59,6 @@ class UserRepository {
         return Patient.fromJson(response.data);
       }
     }
-    return null;
   }
 
   Future<User?> createUser(User user, String password) async {
