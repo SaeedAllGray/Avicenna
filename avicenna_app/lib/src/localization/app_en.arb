@@ -43,5 +43,9 @@
   "close": "Close",
   "cancel_appointment": "Cancel Appointment",
   "add_to_calendar": "Add to Calendar",
-  "rate": "Rate"
+  "rate": "Rate",
+  "accept": "Accept",
+  "decline": "Decline",
+  "no_request_message": "You have no appointment requests.",
+  "appointment_cancelation_message": "The appointment is cancelled."
 }

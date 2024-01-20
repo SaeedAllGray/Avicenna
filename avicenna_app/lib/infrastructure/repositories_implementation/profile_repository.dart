@@ -30,6 +30,20 @@ class UserRepository {
     return null;
   }
 
+  Future<int?> fetchUserId() async {
+    String user = await _localSource.getUser() ?? '';
+    print(user);
+    Map<String, dynamic> userMap = jsonDecode(user);
+
+    if (userMap[ApiConstants.USER][ApiConstants.DOCTOR_ID] != null) {
+      return Doctor.fromJson(userMap).user.id;
+    } else if (userMap[ApiConstants.USER][ApiConstants.PATIENT_ID] != null) {
+      return Patient.fromJson(userMap).user.id;
+    }
+
+    return null;
+  }
+
   void logout() {
     _localSource.clearStorage();
   }

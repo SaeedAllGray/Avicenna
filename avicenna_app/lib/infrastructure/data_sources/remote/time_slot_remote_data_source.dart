@@ -32,6 +32,20 @@ class TimeSlotRemoteDataSource implements RemoteDataSource {
     return response.data;
   }
 
+  Future<dynamic> updateEntity(int id, Map<String, dynamic> data) async {
+    dio.interceptors.add(PrettyDioLogger());
+    Response response = await dio.put(
+      '${ApiConstants.baseUrl}$url/$id/',
+      data: data,
+      options: Options(
+        headers: {
+          'Authorization': 'Token dcee07d8713c07984e33ef33a17c67ac012cbb1b'
+        },
+      ),
+    );
+    return response.data;
+  }
+
   Future<List<dynamic>> fetchUserTimeSlotsEntities(int doctorId) async {
     dio.interceptors.add(PrettyDioLogger());
     Response response = await dio.get(
