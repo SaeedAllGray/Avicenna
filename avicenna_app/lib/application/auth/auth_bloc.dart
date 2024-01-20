@@ -23,6 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignUpDoctorEvent>(_onSignUpDoctorEvent);
     on<SignUpPatientEvent>(_onSignUpPatientEvent);
     on<ToggleAuthEvent>(_onToggleEvent);
+    on<CreateUserEvent>(_onCreateUserEvent);
   }
 
   FutureOr<void> _onLoginEvent(
@@ -32,6 +33,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await repository.login(event.username, event.password);
 
     if (user != null) {
+      signupActive = false;
       emit(AuthSucceedState(user: user));
     } else {
       emit(AuthFailedState());
@@ -39,13 +41,37 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   FutureOr<void> _onSignUpDoctorEvent(
-      SignUpDoctorEvent event, Emitter<AuthState> emit) async {}
+      SignUpDoctorEvent event, Emitter<AuthState> emit) async {
+    if (state is UserCreatedState) {
+      emit(AuthInProgress());
+      Doctor? doctor = await repository.signupDoctor(event.doctor);
+      if (doctor != null) {
+        signupActive = false;
+        emit(AuthInitialState());
+      } else {
+        emit(AuthFailedState());
+      }
+    }
+  }
 
   FutureOr<void> _onSignUpPatientEvent(
-      SignUpPatientEvent event, Emitter<AuthState> emit) async {}
+      SignUpPatientEvent event, Emitter<AuthState> emit) async {
+    if (state is UserCreatedState) {
+      Patient? patient = await repository.signupPatient(event.patient);
+      if (patient != null) {
+        emit(AuthSucceedState(user: patient));
+      } else {
+        emit(AuthFailedState());
+      }
+    }
+  }
 
   FutureOr<void> _onInputEvent(InputEvent event, Emitter<AuthState> emit) {
-    emit(AuthInitialState());
+    if (state is AuthInitialState) {
+      emit(AuthInitialState());
+    } else if (state is UserCreatedState) {
+      emit(UserCreatedState(user: (state as UserCreatedState).user));
+    }
   }
 
   FutureOr<void> _onToggleEvent(
@@ -60,6 +86,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     if (user != null) {
       emit(AuthSucceedState(user: user));
+    }
+  }
+
+  FutureOr<void> _onCreateUserEvent(
+      CreateUserEvent event, Emitter<AuthState> emit) async {
+    final User? user = await repository.createUser(event.user, event.password);
+    if (user != null) {
+      print(user);
+      emit(UserCreatedState(user: user));
     }
   }
 }

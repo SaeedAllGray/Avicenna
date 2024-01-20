@@ -1,10 +1,14 @@
 import 'package:avicenna_app/application/auth/auth_bloc.dart';
+import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
+import 'package:avicenna_app/domain/entries/patient/patient.dart';
+import 'package:avicenna_app/domain/entries/user/user.dart';
 import 'package:avicenna_app/presentation/constants/colors.dart';
 import 'package:avicenna_app/presentation/constants/fonts.dart';
 import 'package:avicenna_app/presentation/features/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -25,6 +29,7 @@ class _AuthPageState extends State<AuthPage> {
   final TextEditingController ssnController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController professionController = TextEditingController();
+  final TextEditingController birthdateController = TextEditingController();
 
   @override
   void dispose() {
@@ -83,172 +88,10 @@ class _AuthPageState extends State<AuthPage> {
                   padding: const EdgeInsets.all(10),
                   child: Column(
                     children: [
-                      Visibility(
-                        maintainAnimation: true,
-                        maintainState: true,
-                        visible: _bloc.signupActive,
-                        child: AnimatedOpacity(
-                          duration: Duration(milliseconds: 500),
-                          opacity: _bloc.signupActive ? 1 : 0.0,
-                          child: Column(
-                            children: [
-                              ListTile(
-                                title: Text(
-                                    AppLocalizations.of(context)!.iAmADoctor),
-                                trailing: Checkbox(
-                                  value: isChecked,
-                                  onChanged: (bool? value) =>
-                                      setState(() => isChecked = value!),
-                                ),
-                              ),
-                              ListTile(
-                                title: TextField(
-                                  keyboardType: TextInputType.name,
-                                  controller: firstNameController,
-                                  onChanged: (v) => _bloc.add(InputEvent()),
-                                  decoration: InputDecoration(
-                                      label: Text(AppLocalizations.of(context)!
-                                          .firstName)),
-                                ),
-                              ),
-                              ListTile(
-                                title: TextField(
-                                  keyboardType: TextInputType.name,
-                                  controller: lastNameController,
-                                  onChanged: (v) => _bloc.add(InputEvent()),
-                                  decoration: InputDecoration(
-                                      label: Text(AppLocalizations.of(context)!
-                                          .lastName)),
-                                ),
-                              ),
-                              Visibility(
-                                visible: !isChecked,
-                                child: ListTile(
-                                  title: TextField(
-                                    keyboardType: TextInputType.number,
-                                    onChanged: (v) => _bloc.add(InputEvent()),
-                                    controller: ssnController,
-                                    decoration: InputDecoration(
-                                      label: Text(AppLocalizations.of(context)!
-                                          .socialNumber),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Visibility(
-                                visible: isChecked,
-                                child: ListTile(
-                                  title: TextField(
-                                    controller: professionController,
-                                    onChanged: (v) => _bloc.add(InputEvent()),
-                                    decoration: InputDecoration(
-                                        label: Text(
-                                            AppLocalizations.of(context)!
-                                                .profession)),
-                                  ),
-                                ),
-                              ),
-                              Visibility(
-                                visible: isChecked,
-                                child: ListTile(
-                                  title: TextField(
-                                    keyboardType: TextInputType.phone,
-                                    controller: phoneController,
-                                    onChanged: (v) => _bloc.add(InputEvent()),
-                                    decoration: InputDecoration(
-                                        label: Text(
-                                            AppLocalizations.of(context)!
-                                                .phone)),
-                                  ),
-                                ),
-                              ),
-                              Visibility(
-                                visible: isChecked,
-                                child: ListTile(
-                                  title: TextField(
-                                    keyboardType: TextInputType.streetAddress,
-                                    controller: addressController,
-                                    onChanged: (v) => _bloc.add(InputEvent()),
-                                    decoration: InputDecoration(
-                                      label: Text(AppLocalizations.of(context)!
-                                          .address),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              ListTile(
-                                title: TextField(
-                                  keyboardType: TextInputType.emailAddress,
-                                  controller: emailController,
-                                  decoration: InputDecoration(
-                                    label: Text(
-                                        AppLocalizations.of(context)!.email),
-                                  ),
-                                  onChanged: (v) => _bloc.add(InputEvent()),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      ListTile(
-                        title: TextFormField(
-                          controller: usernameController,
-                          decoration: InputDecoration(
-                            label: Text(AppLocalizations.of(context)!.username),
-                          ),
-                          onChanged: (v) => _bloc.add(InputEvent()),
-                        ),
-                      ),
-                      ListTile(
-                        title: TextField(
-                          obscureText: true,
-                          controller: passwordController,
-                          decoration: InputDecoration(
-                            label: Text(AppLocalizations.of(context)!.password),
-                          ),
-                          onChanged: (v) => _bloc.add(InputEvent()),
-                        ),
-                      ),
-                      state is AuthInProgress
-                          ? const Center(
-                              child: CircularProgressIndicator.adaptive(),
-                            )
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    _bloc.add(ToggleAuthEvent());
-                                  },
-                                  child: Text(_bloc.signupActive
-                                      ? AppLocalizations.of(context)!
-                                          .iHaveAnAccount
-                                      : AppLocalizations.of(context)!.register),
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: AppColors.primary),
-                                  onPressed:
-                                      usernameController.text.isNotEmpty &&
-                                              passwordController.text.isNotEmpty
-                                          ? () {
-                                              if (_bloc.signupActive) {
-                                              } else {
-                                                _bloc.add(
-                                                  LoginEvent(
-                                                      usernameController.text,
-                                                      passwordController.text),
-                                                );
-                                              }
-                                            }
-                                          : null,
-                                  child: Text(_bloc.signupActive
-                                      ? AppLocalizations.of(context)!.register
-                                      : AppLocalizations.of(context)!.login),
-                                ),
-                              ],
-                            ),
+                      if (state is UserCreatedState)
+                        getSecondFormWidget(state)
+                      else
+                        getFirstFormWidget(state),
                     ],
                   ),
                 ),
@@ -259,4 +102,215 @@ class _AuthPageState extends State<AuthPage> {
       ),
     );
   }
+
+  Widget getSecondFormWidget(UserCreatedState state) => Column(
+        children: [
+          ListTile(
+            title: Text(AppLocalizations.of(context)!.iAmADoctor),
+            trailing: Checkbox(
+              value: isChecked,
+              onChanged: (bool? value) => setState(() => isChecked = value!),
+            ),
+          ),
+          Visibility(
+            visible: !isChecked,
+            child: ListTile(
+              title: TextField(
+                keyboardType: TextInputType.number,
+                onChanged: (v) => _bloc.add(InputEvent()),
+                controller: ssnController,
+                decoration: InputDecoration(
+                  label: Text(AppLocalizations.of(context)!.socialNumber),
+                ),
+              ),
+            ),
+          ),
+          Visibility(
+            visible: isChecked,
+            child: ListTile(
+              title: TextField(
+                controller: professionController,
+                onChanged: (v) => _bloc.add(InputEvent()),
+                decoration: InputDecoration(
+                    label: Text(AppLocalizations.of(context)!.profession)),
+              ),
+            ),
+          ),
+          Visibility(
+            visible: isChecked,
+            child: ListTile(
+              title: TextField(
+                keyboardType: TextInputType.phone,
+                controller: phoneController,
+                onChanged: (v) => _bloc.add(InputEvent()),
+                decoration: InputDecoration(
+                    label: Text(AppLocalizations.of(context)!.phone)),
+              ),
+            ),
+          ),
+          Visibility(
+            visible: !isChecked,
+            child: ListTile(
+              title: TextField(
+                keyboardType: TextInputType.datetime,
+                controller: birthdateController,
+                onChanged: (v) => _bloc.add(InputEvent()),
+                decoration: InputDecoration(
+                    label: Text(AppLocalizations.of(context)!.date)),
+              ),
+            ),
+          ),
+          Visibility(
+            visible: isChecked,
+            child: ListTile(
+              title: TextField(
+                keyboardType: TextInputType.streetAddress,
+                controller: addressController,
+                onChanged: (v) => _bloc.add(InputEvent()),
+                decoration: InputDecoration(
+                  label: Text(AppLocalizations.of(context)!.address),
+                ),
+              ),
+            ),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
+            onPressed: () {
+              if (isChecked) {
+                _bloc.add(
+                  SignUpDoctorEvent(
+                    doctor: Doctor(
+                        user: state.user,
+                        address: addressController.text,
+                        phoneNumber: phoneController.text,
+                        specialization: professionController.text),
+                  ),
+                );
+              } else {
+                _bloc.add(
+                  SignUpPatientEvent(
+                    patient: Patient(
+                        dateBorn: birthdateController.text,
+                        ssn: ssnController.text,
+                        user: state.user),
+                  ),
+                );
+              }
+            },
+            child: Text(AppLocalizations.of(context)!.proceed),
+          ),
+        ],
+      );
+
+  Widget getFirstFormWidget(AuthState state) => Column(
+        children: [
+          Visibility(
+            maintainAnimation: true,
+            maintainState: true,
+            visible: _bloc.signupActive,
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity: _bloc.signupActive ? 1 : 0.0,
+              child: Column(
+                children: [
+                  ListTile(
+                    title: TextField(
+                      keyboardType: TextInputType.name,
+                      controller: firstNameController,
+                      onChanged: (v) => _bloc.add(InputEvent()),
+                      decoration: InputDecoration(
+                          label: Text(AppLocalizations.of(context)!.firstName)),
+                    ),
+                  ),
+                  ListTile(
+                    title: TextField(
+                      keyboardType: TextInputType.name,
+                      controller: lastNameController,
+                      onChanged: (v) => _bloc.add(InputEvent()),
+                      decoration: InputDecoration(
+                          label: Text(AppLocalizations.of(context)!.lastName)),
+                    ),
+                  ),
+                  ListTile(
+                    title: TextField(
+                      keyboardType: TextInputType.emailAddress,
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        label: Text(AppLocalizations.of(context)!.email),
+                      ),
+                      onChanged: (v) => _bloc.add(InputEvent()),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          ListTile(
+            title: TextFormField(
+              controller: usernameController,
+              decoration: InputDecoration(
+                label: Text(AppLocalizations.of(context)!.username),
+              ),
+              onChanged: (v) => _bloc.add(InputEvent()),
+            ),
+          ),
+          ListTile(
+            title: TextField(
+              obscureText: true,
+              controller: passwordController,
+              decoration: InputDecoration(
+                label: Text(AppLocalizations.of(context)!.password),
+              ),
+              onChanged: (v) => _bloc.add(InputEvent()),
+            ),
+          ),
+          state is AuthInProgress
+              ? const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        _bloc.add(ToggleAuthEvent());
+                      },
+                      child: Text(_bloc.signupActive
+                          ? AppLocalizations.of(context)!.iHaveAnAccount
+                          : AppLocalizations.of(context)!.register),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary),
+                      onPressed: usernameController.text.isNotEmpty &&
+                              passwordController.text.isNotEmpty
+                          ? () {
+                              if (_bloc.signupActive) {
+                                _bloc.add(
+                                  CreateUserEvent(
+                                    password: passwordController.text,
+                                    user: User(
+                                        id: null,
+                                        firstName: firstNameController.text,
+                                        lastName: lastNameController.text,
+                                        username: usernameController.text,
+                                        email: emailController.text),
+                                  ),
+                                );
+                              } else {
+                                _bloc.add(
+                                  LoginEvent(usernameController.text,
+                                      passwordController.text),
+                                );
+                              }
+                            }
+                          : null,
+                      child: Text(_bloc.signupActive
+                          ? AppLocalizations.of(context)!.register
+                          : AppLocalizations.of(context)!.login),
+                    ),
+                  ],
+                ),
+        ],
+      );
 }
