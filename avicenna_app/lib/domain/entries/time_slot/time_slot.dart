@@ -10,6 +10,7 @@ class TimeSlot {
   final int? patientId;
   final int doctorId;
   final bool? isConfirmed;
+  final bool? isCancelled;
   final bool? isBooked;
   @JsonKey(toJson: _dateTimeToJson)
   final DateTime day;
@@ -28,6 +29,7 @@ class TimeSlot {
     required this.beginning,
     required this.end,
     this.patientId,
+    this.isCancelled,
     required this.doctorId,
   });
 

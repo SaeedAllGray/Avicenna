@@ -1,5 +1,6 @@
 import 'package:avicenna_app/application/time_slot/time_slot_bloc.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
+import 'package:avicenna_app/presentation/constants/colors.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,17 +29,18 @@ class _AppointmentPageState extends State<AppointmentPage> {
           builder: (context, state) {
             if (state is TimeSlotsFetched) {
               return ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.all(10),
                 itemCount: state.timeSlots.length,
                 itemBuilder: (context, indext) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: ListTile(
-                    title: Text(DateFormat('EEEE d.MM.yyyy')
-                        .format(state.timeSlots[indext].day)),
+                    tileColor: AppColors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
                     subtitle: Text(
-                        '${state.timeSlots[indext].beginning} - ${state.timeSlots[indext].end}'),
+                        '${state.timeSlots[indext].beginning.format(context)} - ${state.timeSlots[indext].end.format(context)}'),
                     trailing: SizedBox(
-                      width: 100,
+                      width: 80,
                       child: Row(children: [
                         IconButton(
                           onPressed: () {},
