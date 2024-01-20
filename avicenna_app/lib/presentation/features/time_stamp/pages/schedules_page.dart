@@ -28,7 +28,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
   void initState() {
     super.initState();
     bloc = TimeSlotBloc();
-    bloc.add(const GetUserTimeSlots(userID: 1));
+    bloc.add(const GetUserTimeSlots());
   }
 
   @override
@@ -41,7 +41,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       // TODO: implement this in the bloc, don't pass it from here
-      create: (context) => bloc..add(const GetUserTimeSlots(userID: 1)),
+      create: (context) => bloc..add(const GetUserTimeSlots()),
       child: CalendarControllerProvider<TimeSlot>(
         controller: EventController(),
         child: Scaffold(
@@ -72,6 +72,9 @@ class _SchedulesPageState extends State<SchedulesPage> {
                 // TODO: fix this
                 CalendarControllerProvider.of<TimeSlot>(context)
                     .controller
+                    .removeWhere((element) => true);
+                CalendarControllerProvider.of<TimeSlot>(context)
+                    .controller
                     .addAll(state.timeSlots
                         .map(
                           (e) => CalendarEventData<TimeSlot>(
@@ -85,9 +88,11 @@ class _SchedulesPageState extends State<SchedulesPage> {
                             event: e,
                             endDate: e.day,
                             description: e.id.toString(),
-                            color: e.isConfirmed ?? false
+                            color: e.isConfirmed!
                                 ? AppColors.primary
-                                : AppColors.primaryPale,
+                                : e.isCancelled!
+                                    ? AppColors.warning
+                                    : AppColors.primaryPale,
                           ),
                         )
                         .toList());
@@ -104,8 +109,11 @@ class _SchedulesPageState extends State<SchedulesPage> {
                   showModalBottomSheet<void>(
                     context: context,
                     builder: (BuildContext context) {
-                      return TimeStampDetailWidget(
-                        events: events,
+                      return Provider.value(
+                        value: bloc,
+                        child: TimeStampDetailWidget(
+                          events: events,
+                        ),
                       );
                     },
                   );

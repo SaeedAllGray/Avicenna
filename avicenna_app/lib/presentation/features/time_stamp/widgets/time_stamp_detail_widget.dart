@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:avicenna_app/application/doctors/doctors_bloc.dart';
 import 'package:avicenna_app/application/patients/patients_bloc.dart';
+import 'package:avicenna_app/application/time_slot/time_slot_bloc.dart';
 import 'package:avicenna_app/domain/entries/time_slot/time_slot.dart';
 import 'package:avicenna_app/presentation/constants/colors.dart';
 import 'package:avicenna_app/presentation/constants/fonts.dart';
@@ -124,11 +125,18 @@ class TimeStampDetailWidget extends StatelessWidget {
                     side: const BorderSide(color: AppColors.warning)),
                 child: Text(AppLocalizations.of(context)!.cancel_appointment),
                 onPressed: () {
+                  TimeSlot timeSlot = events.first.event!;
+                  timeSlot.isCancelled = true;
+                  BlocProvider.of<TimeSlotBloc>(context).add(
+                    UpdateTimeSlot(
+                      timeSlot: timeSlot,
+                    ),
+                  );
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
                         AppLocalizations.of(context)!
-                            .appointment_confirmation_message,
+                            .appointment_cancelation_message,
                       ),
                     ),
                   );
@@ -137,7 +145,9 @@ class TimeStampDetailWidget extends StatelessWidget {
               ),
               TextButton(
                 child: Text(AppLocalizations.of(context)!.close),
-                onPressed: () => Navigator.pop(context),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
             ],
           ),

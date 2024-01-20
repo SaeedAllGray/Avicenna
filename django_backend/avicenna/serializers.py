@@ -3,55 +3,87 @@ from rest_framework import serializers
 from .models import CustomUser, Doctor, Patient, Review, TimeSlot
 
 
-class ReviewSerializer(serializers.HyperlinkedModelSerializer):
+class ReviewSerializer(serializers.ModelSerializer):
+    doctor_id = serializers.PrimaryKeyRelatedField(
+        queryset=Doctor.objects.all(), source="doctor"
+    )
+    patient_id = serializers.PrimaryKeyRelatedField(
+        queryset=Patient.objects.all(), source="patient"
+    )
+
     class Meta:
         model = Review
-        fields = ["url", "rating", "comment", "patient", "doctor"]
+        fields = ["id", "rating", "comment", "patient_id", "doctor_id", "date_left"]
 
 
-class TimeSlotSerializer(serializers.HyperlinkedModelSerializer):
+class TimeSlotSerializer(serializers.ModelSerializer):
+    doctor_id = serializers.PrimaryKeyRelatedField(
+        queryset=Doctor.objects.all(), source="doctor"
+    )
+    patient_id = serializers.PrimaryKeyRelatedField(
+        queryset=Patient.objects.all(),
+        source="patient",
+        required=False,
+        allow_null=True,
+    )
+
     class Meta:
         model = TimeSlot
         fields = [
-            "url",
+            "id",
             "day",
             "beginning",
             "end",
-            "doctor",
-            "patient",
+            "doctor_id",
+            "patient_id",
             "is_confirmed",
             "is_booked",
+            "is_cancelled",
         ]
 
 
-class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
-    patient = serializers.HyperlinkedIdentityField("patient-detail")
-    doctor = serializers.HyperlinkedIdentityField("doctor-detail")
+class CustomUserSerializer(serializers.ModelSerializer):
+    date_joined = serializers.DateTimeField(read_only=True)
+    last_login = serializers.DateTimeField(read_only=True)
+    patient_id = serializers.PrimaryKeyRelatedField(
+        allow_null=True,
+        queryset=Patient.objects.all(),
+        source="patient",
+        required=False,
+    )
+    doctor_id = serializers.PrimaryKeyRelatedField(
+        allow_null=True, queryset=Doctor.objects.all(), source="doctor", required=False
+    )
 
     class Meta:
         model = CustomUser
         fields = [
-            "url",
+            "id",
             "first_name",
             "last_name",
             "email",
-            "patient",
-            "doctor",
+            "patient_id",
+            "doctor_id",
             "username",
             "password",
             "date_joined",
             "last_login",
         ]
 
+    def create(self, validated_data):
+        user = CustomUser(**validated_data)
+        user.set_password(validated_data["password"])
+        user.save()
+        return user
 
-class DoctorSerializer(serializers.HyperlinkedModelSerializer):
+
+class DoctorSerializer(serializers.ModelSerializer):
     user = CustomUserSerializer()
     average_rating = serializers.SerializerMethodField()
 
     class Meta:
         model = Doctor
         fields = [
-            "url",
             "user",
             "phone_number",
             "specialization",
@@ -63,9 +95,34 @@ class DoctorSerializer(serializers.HyperlinkedModelSerializer):
         return obj.get_average_rating()
 
 
-class PatientSerializer(serializers.HyperlinkedModelSerializer):
+class DoctorCreateSerializer(serializers.ModelSerializer):
+    user_id = serializers.PrimaryKeyRelatedField(
+        source="user", queryset=CustomUser.objects.all()
+    )
+
+    class Meta:
+        model = Doctor
+        fields = [
+            "user_id",
+            "phone_number",
+            "specialization",
+            "address",
+        ]
+
+
+class PatientSerializer(serializers.ModelSerializer):
     user = CustomUserSerializer()
 
     class Meta:
         model = Patient
-        fields = ["url", "user", "ssn", "date_born"]
+        fields = ["user", "ssn", "date_born"]
+
+
+class PatientCreateSerializer(serializers.ModelSerializer):
+    user_id = serializers.PrimaryKeyRelatedField(
+        source="user", queryset=CustomUser.objects.all()
+    )
+
+    class Meta:
+        model = Patient
+        fields = ["user_id", "ssn", "date_born"]

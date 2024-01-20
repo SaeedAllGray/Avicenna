@@ -3,7 +3,7 @@
         "model": "avicenna.customuser",
         "pk": 1,
         "fields": {
-            "password": "pbkdf2_sha256$720000$Oc6KyVE2qry2xwUx4gaB4s$lyTJxgnpV5qFP99GCy5S43M72NWwVQ2aV43PUKlOSVA=",
+            "password": "pbkdf2_sha256$720000$QQCU4CB2PAPvzO7icxPKH1$o1GB9R3w1BcesW6Piojh8Kx5eKcxXQWSLUqn+KrJHec=",
             "last_login": "2023-12-26T15:25:08Z",
             "is_superuser": true,
             "username": "arthur",
@@ -21,7 +21,7 @@
         "model": "avicenna.customuser",
         "pk": 2,
         "fields": {
-            "password": "pbkdf2_sha256$720000$X9ON4j0e5TQHV5B2clcqua$cnjumAAU+ZREV1nvoyz+4tBmzgmJOmVT/v5/LJQfkzQ=",
+            "password": "pbkdf2_sha256$720000$JGdUUJK3g9prMjZ4sRTsic$67zK2jAP1NaF3R6RULjn6ynU066ZwWlrGtTqFxEm4d0=",
             "last_login": null,
             "is_superuser": false,
             "username": "droctorDRE",
@@ -39,7 +39,7 @@
         "model": "avicenna.customuser",
         "pk": 3,
         "fields": {
-            "password": "pbkdf2_sha256$720000$JLH2wL1GOYfy1JjsnoH4xo$N5Ir8iP6lUX1ezF9eg7OaCyqLnwMpTctOnAYj7ILC8w=",
+            "password": "pbkdf2_sha256$720000$LiYP5sHezmxksINKRLiAWr$Of/uO82qVLauavHgqgGoRkiyPAp0ny9FgO00lqq4hx8=",
             "last_login": null,
             "is_superuser": false,
             "username": "kinkyBooths",
@@ -57,7 +57,7 @@
         "model": "avicenna.customuser",
         "pk": 4,
         "fields": {
-            "password": "pbkdf2_sha256$720000$SpamSpamSpamSpam$EGGEGGEGGEGGEGGEGG",
+            "password": "pbkdf2_sha256$720000$OzqbLh8JMYcmGzD062bt4v$tGswV2DYV97CU3RLmr7XvVWdccBIkN7lzhZQ+4BUQaw=",
             "last_login": null,
             "is_superuser": false,
             "username": "SirLancelot",
@@ -75,7 +75,7 @@
         "model": "avicenna.customuser",
         "pk": 5,
         "fields": {
-            "password": "pbkdf2_sha256$720000$NiNiNi$EkkiEkkiEkkiEkkiPtangZooBoing",
+            "password": "pbkdf2_sha256$720000$Fgp5VY6nmztkQLmLU3exfr$re/nDK8b+qT8887K6kuyfaJq8UvfTwZvcrAZySaUd9c=",
             "last_login": null,
             "is_superuser": false,
             "username": "TheBlackKnight",
@@ -93,7 +93,7 @@
         "model": "avicenna.customuser",
         "pk": 6,
         "fields": {
-            "password": "pbkdf2_sha256$720000$HolyGrail$WeAreTheKnightsWhoSayNi",
+            "password": "pbkdf2_sha256$720000$CparXaQFUv2ZLbqZPpNqP0$uQc7EA+qHiTCIlFO2iXX8MMY/QIar4DapZd28C4xpZ4=",
             "last_login": null,
             "is_superuser": false,
             "username": "KingArthur",
@@ -111,7 +111,7 @@
         "model": "avicenna.customuser",
         "pk": 7,
         "fields": {
-            "password": "pbkdf2_sha256$720000$Coconuts$AfricanOrEuropean",
+            "password": "pbkdf2_sha256$720000$uIjy4AMGrLUTQkbpr0BQaP$l8ml3NHHaZXJferVncmn1UeFZTO1UC8Qp/jW9ELm530=",
             "last_login": null,
             "is_superuser": false,
             "username": "Patsy",
@@ -129,7 +129,7 @@
         "model": "avicenna.customuser",
         "pk": 8,
         "fields": {
-            "password": "pbkdf2_sha256$720000$Shrubbery$BringMeAShrubbery",
+            "password": "pbkdf2_sha256$720000$j6Ka8bCoFnliSEhV3Uu2Bc$KfhRp0ri7nm30/Ad34JnBECd7kmNueS+26xKWTtCJ9k=",
             "last_login": null,
             "is_superuser": false,
             "username": "TheKnightsWhoSayNi",
@@ -147,7 +147,7 @@
         "model": "avicenna.customuser",
         "pk": 9,
         "fields": {
-            "password": "pbkdf2_sha256$720000$Camelot$OnSecondThoughtLetsNotGoThere",
+            "password": "pbkdf2_sha256$720000$Uu6SSlK6gsmEd39iCxwavL$ijc8wAAqZshwl3A9m9bpkBgazhW7GYbO3YguVYuDQhw=",
             "last_login": null,
             "is_superuser": false,
             "username": "BraveSirRobin",
@@ -165,7 +165,7 @@
         "model": "avicenna.customuser",
         "pk": 10,
         "fields": {
-            "password": "pbkdf2_sha256$720000$HolyGrail$BridgeOfDeath",
+            "password": "pbkdf2_sha256$720000$MkEJ006d9Ae7WdHJvcZ0Iq$A1bPlcvjV795K/gb6m7Mn6/W+/mZ8Z0Js26XJJ841hQ=",
             "last_login": null,
             "is_superuser": false,
             "username": "TheBridgekeeper",
@@ -183,7 +183,7 @@
         "model": "avicenna.customuser",
         "pk": 11,
         "fields": {
-            "password": "pbkdf2_sha256$720000$MinistryOfSillyWalks$WalkThisWay",
+            "password": "pbkdf2_sha256$720000$B6UnfRJGPoAKB8RleuP7mw$rL+Sb+W6JqhA81rcgU1sa3C7bF4zIbdHEs3gLdaaAfs=",
             "last_login": null,
             "is_superuser": false,
             "username": "SillyWalkEnthusiast",
@@ -201,7 +201,7 @@
         "model": "avicenna.customuser",
         "pk": 12,
         "fields": {
-            "password": "pbkdf2_sha256$720000$FishSlappingDance$ItsJustAFleshWound",
+            "password": "pbkdf2_sha256$720000$QOZj1B1bxvF3fuCcJ8JUFV$tCDxrbpJyXSFkvrevD91Cg9/GIvbwaVs198VOhWEimw=",
             "last_login": null,
             "is_superuser": false,
             "username": "BlackKnight",
@@ -219,7 +219,7 @@
         "model": "avicenna.customuser",
         "pk": 13,
         "fields": {
-            "password": "pbkdf2_sha256$720000$SpanishInquisition$UnexpectedVisit",
+            "password": "pbkdf2_sha256$720000$ofmx2HgFYic1Y7PKrNwXCY$gV3VDjz7vwYy8FkiKHGfdqFKL4z6Iin+QZYtlJe+rVk=",
             "last_login": null,
             "is_superuser": false,
             "username": "CardinalFang",
@@ -237,7 +237,7 @@
         "model": "avicenna.customuser",
         "pk": 14,
         "fields": {
-            "password": "pbkdf2_sha256$720000$MinistryOfSillyWalks$HopAway",
+            "password": "pbkdf2_sha256$720000$At1fasQcJbeDrpsFCT6wfk$043AzVf1WSS3/FizQK72jI0vK2DVHDEzTGiURNffydA=",
             "last_login": null,
             "is_superuser": false,
             "username": "HopAlong",
@@ -255,7 +255,7 @@
         "model": "avicenna.customuser",
         "pk": 15,
         "fields": {
-            "password": "pbkdf2_sha256$720000$DeadParrot$ThisParrotIsNoMore",
+            "password": "pbkdf2_sha256$720000$KGZDKz0zRG4CzOY2cBE9qD$WQyb+ykL73HxWjYHQoun9No6iizs6tO6ZnAvcE4eFsE=",
             "last_login": null,
             "is_superuser": false,
             "username": "PetShopOwner",
@@ -273,7 +273,7 @@
         "model": "avicenna.customuser",
         "pk": 16,
         "fields": {
-            "password": "pbkdf2_sha256$720000$KillerRabbit$RunAway",
+            "password": "pbkdf2_sha256$720000$Qk3sjZZn0k5Y3WmE2daO9n$4+LY515J1h+yf9kgCBi1jWHno0+INVztonrUQJ7/pUE=",
             "last_login": null,
             "is_superuser": false,
             "username": "TimTheEnchanter",
@@ -291,7 +291,7 @@
         "model": "avicenna.customuser",
         "pk": 17,
         "fields": {
-            "password": "pbkdf2_sha256$720000$MinistryOfSillyWalks$MoonWalk",
+            "password": "pbkdf2_sha256$720000$09Tlfwj4M1JaI5gPB9vDxn$qXzhySdEwjhoSy//gsj0XtMoLlGz2SmSkIsOzV2Dn4g=",
             "last_login": null,
             "is_superuser": false,
             "username": "Moonwalker",
@@ -309,7 +309,7 @@
         "model": "avicenna.customuser",
         "pk": 18,
         "fields": {
-            "password": "pbkdf2_sha256$720000$Gumby$MyBrainHurts",
+            "password": "pbkdf2_sha256$720000$V6wXlpUQnEwgdLnsqBrCsx$iL8bJJ3mxJEL5/3fgS1kao0eEmxJGwmgHl1ueNw/IZ8=",
             "last_login": null,
             "is_superuser": false,
             "username": "Gumby",
@@ -327,7 +327,7 @@
         "model": "avicenna.customuser",
         "pk": 19,
         "fields": {
-            "password": "pbkdf2_sha256$720000$Shrubbery$NiceShrubbery",
+            "password": "pbkdf2_sha256$720000$t1GTHk5QaH4XyTUDQChKpf$hNz18a9q8fKH8aDiteSy0oDJRkoFidGdDB1ZVlXntIA=",
             "last_login": null,
             "is_superuser": false,
             "username": "Shrubber",
@@ -345,7 +345,7 @@
         "model": "avicenna.customuser",
         "pk": 20,
         "fields": {
-            "password": "pbkdf2_sha256$720000$MinistryOfSillyWalks$TwistAndShout",
+            "password": "pbkdf2_sha256$720000$xU11fC3Rix29iIUtylqfXc$2G1UW7e0pieMOWcyYhJX5JSdjvAGCD8QpvaNJzRwB6E=",
             "last_login": null,
             "is_superuser": false,
             "username": "TwistAndShout",

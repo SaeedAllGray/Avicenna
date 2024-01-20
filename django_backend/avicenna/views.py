@@ -2,16 +2,27 @@ from django.db.models import Q
 from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.generics import mixins
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from .models import CustomUser, Doctor, Patient, Review, TimeSlot
 from .serializers import (
     CustomUserSerializer,
+    DoctorCreateSerializer,
     DoctorSerializer,
+    PatientCreateSerializer,
     PatientSerializer,
     ReviewSerializer,
     TimeSlotSerializer,
 )
+
+
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 100
+    page_size_query_param = "page_size"
+    max_page_size = 1000
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -24,11 +35,25 @@ class CustomAuthToken(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data["user"]
         token, created = Token.objects.get_or_create(user=user)
-        return Response({"token": token.key, "user_id": user.pk})
+
+        user_data = {}
+        if hasattr(user, "patient"):
+            user_serializer = PatientSerializer(
+                user.patient, context={"request": request}
+            )
+        elif hasattr(user, "doctor"):
+            user_serializer = DoctorSerializer(
+                user.doctor, context={"request": request}
+            )
+        else:
+            raise ValueError("Unknown user type.")
+        user_data = user_serializer.data
+        return Response({"token": token.key, **user_data})
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
+    pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         """
@@ -44,6 +69,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
 class TimeSlotViewSet(viewsets.ModelViewSet):
     serializer_class = TimeSlotSerializer
+    pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         """
@@ -57,21 +83,94 @@ class TimeSlotViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class CustomUserViewSet(viewsets.ModelViewSet):
+class CustomUserViewSet(
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
     """The base User object's fields.
 
-    Specific Doctor or Patient objects should be preferred.
+    Creating is not allowed due to it's being an
+    unauthenticated action within this code's logic.
     """
 
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
+    pagination_class = StandardResultsSetPagination
 
 
-class DoctorViewSet(viewsets.ModelViewSet):
+class CreateCustomUserViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    """The base User object's fields.
+
+    Creating is an action requiring no authentication
+    within this code's logic.
+    """
+
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
+
+class DoctorViewSet(
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
+    """Doctor endpoint supporting all operations except creating.
+
+    Creating is not allowed due to it's being an
+    unauthenticated action within this code's logic.
+    """
+
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
+    pagination_class = StandardResultsSetPagination
 
 
-class PatientViewSet(viewsets.ModelViewSet):
+class CreateDoctorViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    """Doctor endpoint supporting only creating.
+
+    Creating is an action requiring no authentication
+    within this code's logic.
+    """
+
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorCreateSerializer
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
+
+class PatientViewSet(
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
+    """Patient endpoint supporting all operations except creating.
+
+    Creating is not allowed due to it's being an
+    unauthenticated action within this code's logic.
+    """
+
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
+    pagination_class = StandardResultsSetPagination
+
+
+class CreatePatientViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    """Patient endpoint supporting only creating.
+
+    Creating is an action requiring no authentication
+    within this code's logic.
+    """
+
+    queryset = Patient.objects.all()
+    serializer_class = PatientCreateSerializer
+    authentication_classes = []
+    permission_classes = [AllowAny]

@@ -2,6 +2,7 @@
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, RegexValidator
 from django.db import models
 
@@ -14,10 +15,14 @@ class CustomUser(AbstractUser):
 
     first_name = models.CharField("first name", max_length=150)
     last_name = models.CharField("last name", max_length=150)
-    email = models.EmailField("email address", blank=True, null=True, unique=True)
+    email = models.EmailField("email address", unique=True)
 
     def __str__(self) -> str:
         return self.get_full_name()
+
+    def clean(self):
+        if hasattr(self, "doctor") and hasattr(self, "patient"):
+            raise ValidationError("A user is both a doctor and a patient.")
 
 
 class Doctor(models.Model):
@@ -98,6 +103,11 @@ class Doctor(models.Model):
     def __str__(self) -> str:
         return f"DR. {str(self.user)}"
 
+    def clean(self):
+        print("*"*400)
+        if hasattr(self, "user.doctor") and hasattr(self, "user.patient"):
+            raise ValidationError("A user is both a doctor and a patient.")
+
 
 class Patient(models.Model):
     """Fields pertaining to the patient.
@@ -119,6 +129,10 @@ class Patient(models.Model):
     def __str__(self) -> str:
         return str(self.user)
 
+    def clean(self):
+        if hasattr(self, "user.doctor") and hasattr(self, "user.patient"):
+            raise ValidationError("A user is both a doctor and a patient.")
+
 
 class Review(models.Model):
     """A review consisting of a rating and an optional comment.
@@ -135,6 +149,9 @@ class Review(models.Model):
     )
     doctor = models.ForeignKey(
         Doctor, on_delete=models.CASCADE, help_text="Receiver of the review."
+    )
+    date_left = models.DateField(
+        auto_now_add=True, help_text="Day on which the review was left."
     )
 
     def __str__(self) -> str:
@@ -156,6 +173,9 @@ class TimeSlot(models.Model):
     beginning = models.TimeField("appointment begins at")
     end = models.TimeField("appointment ends at")
     is_confirmed = models.BooleanField("confirmed by the doctor", default=False)
+    is_cancelled = models.BooleanField(
+        "cancelled by the doctor or the patient", default=False
+    )
 
     @property
     def is_booked(self) -> bool:
