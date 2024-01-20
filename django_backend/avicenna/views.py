@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.generics import mixins
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
@@ -16,6 +17,12 @@ from .serializers import (
     ReviewSerializer,
     TimeSlotSerializer,
 )
+
+
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 100
+    page_size_query_param = "page_size"
+    max_page_size = 1000
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -46,6 +53,7 @@ class CustomAuthToken(ObtainAuthToken):
 
 class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
+    pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         """
@@ -61,6 +69,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
 class TimeSlotViewSet(viewsets.ModelViewSet):
     serializer_class = TimeSlotSerializer
+    pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         """
@@ -89,6 +98,7 @@ class CustomUserViewSet(
 
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
+    pagination_class = StandardResultsSetPagination
 
 
 class CreateCustomUserViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
@@ -119,6 +129,7 @@ class DoctorViewSet(
 
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
+    pagination_class = StandardResultsSetPagination
 
 
 class CreateDoctorViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
@@ -149,6 +160,7 @@ class PatientViewSet(
 
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
+    pagination_class = StandardResultsSetPagination
 
 
 class CreatePatientViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
