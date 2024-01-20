@@ -8,10 +8,10 @@ part 'time_slot.g.dart';
 class TimeSlot {
   final int? id;
   final int? patientId;
-  final int doctorId;
-  final bool? isConfirmed;
-  final bool? isCancelled;
-  final bool? isBooked;
+  int? doctorId;
+  bool? isConfirmed;
+  bool? isCancelled;
+  bool? isBooked;
   @JsonKey(toJson: _dateTimeToJson)
   final DateTime day;
 
@@ -30,7 +30,7 @@ class TimeSlot {
     required this.end,
     this.patientId,
     this.isCancelled,
-    required this.doctorId,
+    this.doctorId,
   });
 
   factory TimeSlot.fromJson(Map<String, dynamic> json) =>

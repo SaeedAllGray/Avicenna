@@ -34,6 +34,12 @@ class TimeSlotRepository
     return TimeSlot.fromJson(response);
   }
 
+  Future<TimeSlot> cancelTimeSlot(TimeSlot timeSlot) async {
+    dynamic response = await api.updateEntity(timeSlot.id!, timeSlot.toJson());
+
+    return TimeSlot.fromJson(response);
+  }
+
   @override
   Future<TimeSlot> fetchEntity(int id) {
     // TODO: implement fetchEntity

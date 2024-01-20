@@ -15,7 +15,7 @@ TimeSlot _$TimeSlotFromJson(Map<String, dynamic> json) => TimeSlot(
       end: TimeSlot._timeOfDayFromJson(json['end'] as String),
       patientId: json['patient_id'] as int?,
       isCancelled: json['is_cancelled'] as bool?,
-      doctorId: json['doctor_id'] as int,
+      doctorId: json['doctor_id'] as int?,
     );
 
 Map<String, dynamic> _$TimeSlotToJson(TimeSlot instance) {
@@ -29,7 +29,7 @@ Map<String, dynamic> _$TimeSlotToJson(TimeSlot instance) {
 
   writeNotNull('id', instance.id);
   writeNotNull('patient_id', instance.patientId);
-  val['doctor_id'] = instance.doctorId;
+  writeNotNull('doctor_id', instance.doctorId);
   writeNotNull('is_confirmed', instance.isConfirmed);
   writeNotNull('is_cancelled', instance.isCancelled);
   writeNotNull('is_booked', instance.isBooked);
