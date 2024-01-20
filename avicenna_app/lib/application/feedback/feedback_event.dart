@@ -7,8 +7,8 @@ sealed class FeedbackEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetFeedBacks extends FeedbackEvent {
+class GetUserFeedBacks extends FeedbackEvent {
   final int doctorId;
 
-  const GetFeedBacks({required this.doctorId});
+  const GetUserFeedBacks({required this.doctorId});
 }

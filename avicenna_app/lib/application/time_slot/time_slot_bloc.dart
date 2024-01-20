@@ -20,10 +20,20 @@ class TimeSlotBloc extends Bloc<TimeSlotEvent, TimeSlotState> {
     on<CreateTimeSlot>(_onCreateTimeSlotEvent);
     on<GetPendingTimeSlots>(_onGetPendingTimeSlots);
     on<UpdateTimeSlot>(_onCancelTimeSlotEvent);
+    on<GetDoctorAvailableTimeSlots>(_onGetDoctorAvailableTimeSlotsEvent);
   }
   FutureOr<void> _onCancelTimeSlotEvent(
       UpdateTimeSlot event, Emitter<TimeSlotState> emit) async {
     await repository.cancelTimeSlot(event.timeSlot);
+  }
+
+  FutureOr<void> _onGetDoctorAvailableTimeSlotsEvent(
+      GetDoctorAvailableTimeSlots event, Emitter<TimeSlotState> emit) async {
+    emit(TimeSlotsInProgress());
+
+    final List<TimeSlot> timeSlots =
+        await repository.fetchUserTimeSlots(event.doctorId);
+    emit(TimeSlotsFetched(timeSlots: timeSlots));
   }
 
   FutureOr<void> _onGetUserTimeSlotsEvent(

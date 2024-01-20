@@ -21,7 +21,8 @@ class DoctorSchedulePage extends StatelessWidget {
       child: BlocProvider(
         create: (context) =>
             // TODO: fix this and don't pass the ID from here. Feed it from a helper class in the bloc.
-            TimeSlotBloc()..add(const GetUserTimeSlots()),
+            TimeSlotBloc()
+              ..add(GetDoctorAvailableTimeSlots(doctorId: doctor.user.id!)),
         child: Scaffold(
           appBar: AppBar(
             title: Text(AppLocalizations.of(context)!.available_time_slots),
@@ -41,7 +42,7 @@ class DoctorSchedulePage extends StatelessWidget {
                               endTime: e.day.add(Duration(
                                   hours: e.end.hour, minutes: e.end.minute)),
                               date: e.day,
-                              title: "Appointment",
+                              title: "Free",
                               event: e,
                               endDate: e.day,
                               color: AppColors.primary),

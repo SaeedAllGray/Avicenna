@@ -7,9 +7,13 @@ sealed class TimeSlotEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetUserTimeSlots extends TimeSlotEvent {
-  const GetUserTimeSlots();
+class GetDoctorAvailableTimeSlots extends TimeSlotEvent {
+  final int doctorId;
+
+  const GetDoctorAvailableTimeSlots({required this.doctorId});
 }
+
+class GetUserTimeSlots extends TimeSlotEvent {}
 
 class CreateTimeSlot extends TimeSlotEvent {
   final TimeSlot timeSlot;
