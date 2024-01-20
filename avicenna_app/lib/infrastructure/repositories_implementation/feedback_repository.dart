@@ -12,7 +12,11 @@ class FeedbackRepository
   @override
   Future<List<Feedback>> fetchEntities() async {
     List<dynamic> response = await api.fetchEntities();
-    log(response.toString());
+    return response.map((data) => Feedback.fromJson(data)).toList();
+  }
+
+  Future<List<Feedback>> fetchUserEntities(int id) async {
+    List<dynamic> response = await api.fetchUserEntities(id);
     return response.map((data) => Feedback.fromJson(data)).toList();
   }
 
