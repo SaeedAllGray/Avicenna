@@ -6,13 +6,13 @@
 #
 asgiref==3.7.2
     # via django
-django==5.0
+django==5.0.1
     # via
     #   -r requirements/requirements.in
     #   djangorestframework
 djangorestframework==3.14.0
     # via -r requirements/requirements.in
-markdown==3.5.1
+markdown==3.5.2
     # via -r requirements/requirements.in
 pygments==2.17.2
     # via -r requirements/requirements.in
