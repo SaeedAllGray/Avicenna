@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/patient/patient.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
+import 'package:avicenna_app/domain/entries/user/user.dart';
 
 import 'package:avicenna_app/presentation/constants/api_constant.dart';
 import 'package:dio/dio.dart';
@@ -21,24 +22,22 @@ class AuthDataSource {
   }
 
   FutureOr<Response> signupDoctor(Doctor doctor) async {
-    Response response =
-        await dio.post('${ApiConstants.baseUrl}/signup', data: doctor.toJson());
+    Response response = await dio.post('${ApiConstants.baseUrl}create-doctors/',
+        data: doctor.toJson()..addAll({"user_id": doctor.user.id}));
     return response;
   }
 
   FutureOr<Response> signupPatient(Patient patient) async {
-    Response response = await dio.post('${ApiConstants.baseUrl}/signup',
-        data: patient.toJson());
+    Response response = await dio.post(
+        '${ApiConstants.baseUrl}create-patients/',
+        data: patient.toJson()..addAll({"user_id": patient.user.id}));
     return response;
   }
 
-  FutureOr<Response> signup(AbstractUser user) async {
-    if (user is Doctor) {
-      Response response = await signupDoctor(user);
-      return response;
-    } else {
-      Response response = await signupPatient(user as Patient);
-      return response;
-    }
+  FutureOr<Response> createUser(User user, String password) async {
+    Response response = await dio.post(
+        '${ApiConstants.baseUrl}create-custom-users/',
+        data: user.toJson()..addAll({"password": password}));
+    return response;
   }
 }

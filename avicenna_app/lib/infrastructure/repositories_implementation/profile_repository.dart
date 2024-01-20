@@ -45,16 +45,31 @@ class UserRepository {
         return Patient.fromJson(response.data);
       }
     }
+    return null;
   }
 
-  Future<bool> signup(AbstractUser user) async {
-    Response response = await _authDataSource.signup(user);
-    if (response.statusCode == 200) {
-      _localSource.saveUser(response.data[ApiConstants.USER]);
-      _localSource.setToken(response.data[ApiConstants.TOKEN]);
+  Future<User?> createUser(User user, String password) async {
+    Response response = await _authDataSource.createUser(user, password);
 
-      return true;
+    if (response.statusCode! < 400) {
+      return User.fromJson(response.data);
     }
-    return false;
+    return null;
+  }
+
+  Future<Patient?> signupPatient(Patient patient) async {
+    Response response = await _authDataSource.signupPatient(patient);
+    if (response.statusCode == 200) {
+      return Patient.fromJson(response.data);
+    }
+    return null;
+  }
+
+  Future<Doctor?> signupDoctor(Doctor doctor) async {
+    Response response = await _authDataSource.signupDoctor(doctor);
+    if (response.statusCode == 200) {
+      return Doctor.fromJson(response.data);
+    }
+    return null;
   }
 }

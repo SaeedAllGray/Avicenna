@@ -7,6 +7,8 @@ abstract class AuthEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class CheckUserEvent extends AuthEvent {}
+
 class InputEvent extends AuthEvent {
   final String uuid = const Uuid().v4();
 
@@ -24,19 +26,26 @@ class LoginEvent extends AuthEvent {
   List<Object> get props => [username, password];
 }
 
-class SignUpDoctorEvent extends AuthEvent {
-  final Doctor doctor;
+class CreateUserEvent extends AuthEvent {
+  final User user;
   final String password;
-  const SignUpDoctorEvent(this.doctor, this.password);
-}
 
-class CheckUserEvent extends AuthEvent {}
+  const CreateUserEvent({
+    required this.user,
+    required this.password,
+  });
+}
 
 class SignUpPatientEvent extends AuthEvent {
   final Patient patient;
-  final String password;
 
-  const SignUpPatientEvent(this.patient, this.password);
+  const SignUpPatientEvent({required this.patient});
+}
+
+class SignUpDoctorEvent extends AuthEvent {
+  final Doctor doctor;
+
+  const SignUpDoctorEvent({required this.doctor});
 }
 
 class ToggleAuthEvent extends AuthEvent {

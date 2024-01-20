@@ -22,4 +22,14 @@ class AuthSucceedState extends AuthState {
   const AuthSucceedState({required this.user});
 }
 
+class UserCreatedState extends AuthState {
+  final String uuid = const Uuid().v4();
+  final User user;
+
+  UserCreatedState({required this.user});
+
+  @override
+  List<Object> get props => [uuid];
+}
+
 class AuthFailedState extends AuthState {}

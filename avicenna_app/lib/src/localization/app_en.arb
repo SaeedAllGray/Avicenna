@@ -32,7 +32,7 @@
   "schedules": "Schedules",
   "account": "Account",
   "patients": "Patients",
-  "date": "Date", 
+  "date": "Date (e.g: 1999-11-06)", 
   "from": "From",
   "to": "To",
   "starts": "Starts",
@@ -43,5 +43,6 @@
   "close": "Close",
   "cancel_appointment": "Cancel Appointment",
   "add_to_calendar": "Add to Calendar",
-  "rate": "Rate"
+  "rate": "Rate",
+  "proceed":"Proceed"
 }
