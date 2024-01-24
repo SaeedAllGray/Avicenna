@@ -115,6 +115,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                         value: bloc,
                         child: TimeStampDetailWidget(
                           events: events,
+                          abstractUser: widget.user,
                         ),
                       );
                     },

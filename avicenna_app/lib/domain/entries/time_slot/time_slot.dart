@@ -7,7 +7,7 @@ part 'time_slot.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false)
 class TimeSlot {
   final int? id;
-  final int? patientId;
+  int? patientId;
   int? doctorId;
   bool? isConfirmed;
   bool? isCancelled;

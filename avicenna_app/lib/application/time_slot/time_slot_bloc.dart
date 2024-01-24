@@ -19,12 +19,25 @@ class TimeSlotBloc extends Bloc<TimeSlotEvent, TimeSlotState> {
     on<GetUserTimeSlots>(_onGetUserTimeSlotsEvent);
     on<CreateTimeSlot>(_onCreateTimeSlotEvent);
     on<GetPendingTimeSlots>(_onGetPendingTimeSlots);
-    on<UpdateTimeSlot>(_onCancelTimeSlotEvent);
+    on<UpdateTimeSlot>(_onUpdateTimeSlotEvent);
+    on<ReserveTimeSlot>(_onReserveTimeSlotEvent);
     on<GetDoctorAvailableTimeSlots>(_onGetDoctorAvailableTimeSlotsEvent);
   }
-  FutureOr<void> _onCancelTimeSlotEvent(
+  FutureOr<void> _onReserveTimeSlotEvent(
+      ReserveTimeSlot event, Emitter<TimeSlotState> emit) async {
+    int? userId = await UserRepository().fetchUserId();
+
+    if (userId != null) {
+      TimeSlot timeSlot = event.timeSlot;
+      timeSlot.patientId = userId;
+
+      await repository.updateTimeSlot(timeSlot);
+    }
+  }
+
+  FutureOr<void> _onUpdateTimeSlotEvent(
       UpdateTimeSlot event, Emitter<TimeSlotState> emit) async {
-    await repository.cancelTimeSlot(event.timeSlot);
+    await repository.updateTimeSlot(event.timeSlot);
   }
 
   FutureOr<void> _onGetDoctorAvailableTimeSlotsEvent(

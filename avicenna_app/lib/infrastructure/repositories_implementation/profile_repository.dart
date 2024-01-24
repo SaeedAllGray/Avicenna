@@ -30,6 +30,13 @@ class UserRepository {
     return null;
   }
 
+  Future<bool> deleteUser(User user) async {
+    final String token = await _localSource.getToken() ?? '';
+    Response response = await _authDataSource.deleteUser(user.id!, token);
+    await _localSource.clearStorage();
+    return response.statusCode == 204;
+  }
+
   Future<int?> fetchUserId() async {
     String user = await _localSource.getUser() ?? '';
     print(user);

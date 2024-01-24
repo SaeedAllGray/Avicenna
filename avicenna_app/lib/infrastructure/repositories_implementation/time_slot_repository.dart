@@ -34,7 +34,7 @@ class TimeSlotRepository
     return TimeSlot.fromJson(response);
   }
 
-  Future<TimeSlot> cancelTimeSlot(TimeSlot timeSlot) async {
+  Future<TimeSlot> updateTimeSlot(TimeSlot timeSlot) async {
     dynamic response = await api.updateEntity(timeSlot.id!, timeSlot.toJson());
 
     return TimeSlot.fromJson(response);

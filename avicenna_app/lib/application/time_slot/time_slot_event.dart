@@ -30,3 +30,9 @@ class UpdateTimeSlot extends TimeSlotEvent {
 
   const UpdateTimeSlot({required this.timeSlot});
 }
+
+class ReserveTimeSlot extends TimeSlotEvent {
+  final TimeSlot timeSlot;
+
+  const ReserveTimeSlot({required this.timeSlot});
+}
