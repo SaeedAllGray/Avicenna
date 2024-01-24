@@ -90,7 +90,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                             event: e,
                             endDate: e.day,
                             description: e.id.toString(),
-                            color: e.isConfirmed!
+                            color: e.isConfirmed! && !e.isCancelled!
                                 ? AppColors.primary
                                 : e.isCancelled!
                                     ? AppColors.warning
