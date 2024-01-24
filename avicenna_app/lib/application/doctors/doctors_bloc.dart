@@ -18,7 +18,6 @@ class DoctorsBloc extends Bloc<DoctorsEvent, DoctorsState> {
 
   FutureOr<void> _onGetDoctorDetailsEvent(
       GetDoctorDetails event, Emitter<DoctorsState> emit) async {
-    print('-------------------');
     emit(DoctorsInProgress());
     DoctorRepository repository = DoctorRepository();
     Doctor doctor = await repository.fetchEntity(event.doctorId);

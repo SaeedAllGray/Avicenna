@@ -21,6 +21,26 @@ class AuthDataSource {
     return response;
   }
 
+  Future<Response> deleteUser(int id, String token) async {
+    late Response response;
+    dio.interceptors.add(PrettyDioLogger());
+
+    try {
+      response = await dio.delete(
+        '${ApiConstants.baseUrl}custom-users/$id/',
+        options: Options(
+          headers: {
+            'Authorization': 'Token $token',
+            // Add any other headers as needed
+          },
+        ),
+      );
+    } catch (e) {
+      print(e);
+    }
+    return response;
+  }
+
   FutureOr<Response> signupDoctor(Doctor doctor) async {
     Response response = await dio.post('${ApiConstants.baseUrl}create-doctors/',
         data: doctor.toJson()..addAll({"user_id": doctor.user.id}));
