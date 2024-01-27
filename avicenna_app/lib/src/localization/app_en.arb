@@ -13,6 +13,7 @@
   "phone": "Phone Number",
   "address":"Address",
   "login": "Login",
+  "error":"Wrong entry. Please try again.",
   "iHaveAnAccount": "I have an account.",
   "iAmADoctor": "I am a doctor.",
   "firstName":"First Name",

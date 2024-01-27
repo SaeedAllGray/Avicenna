@@ -29,11 +29,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _onLoginEvent(
       LoginEvent event, Emitter<AuthState> emit) async {
     emit(AuthInProgress());
+
     final AbstractUser? user =
         await repository.login(event.username, event.password);
-
     if (user != null) {
-      signupActive = false;
       emit(AuthSucceedState(user: user));
     } else {
       emit(AuthFailedState());
@@ -49,7 +48,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         signupActive = false;
         emit(AuthInitialState());
       } else {
-        emit(AuthFailedState());
+        print('eeeeee');
+
+        emit(SignupFailedState(user: event.doctor.user));
       }
     }
   }
@@ -61,7 +62,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (patient != null) {
         emit(AuthSucceedState(user: patient));
       } else {
-        emit(AuthFailedState());
+        print('ddjddjhdjdjdjdjddjdjdjjdjdjddj');
+
+        emit(SignupFailedState(user: event.patient.user));
       }
     }
   }
@@ -95,6 +98,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (user != null) {
       print(user);
       emit(UserCreatedState(user: user));
+    } else {
+      emit(AuthFailedState());
     }
   }
 }

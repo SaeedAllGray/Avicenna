@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/patient/patient.dart';
-import 'package:avicenna_app/domain/entries/user.dart';
 import 'package:avicenna_app/domain/entries/user/user.dart';
 
 import 'package:avicenna_app/presentation/constants/api_constant.dart';
