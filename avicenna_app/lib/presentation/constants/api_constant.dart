@@ -1,7 +1,7 @@
 import 'package:avicenna_app/infrastructure/data_sources/local/local_source.dart';
 
 class ApiConstants {
-  static const String baseUrl = 'http://10.215.157.17:8000/api/';
+  static const String baseUrl = 'http://10.215.157.12:8000/api/';
   static const String TOKEN = 'token';
   static const String USER = 'user';
   static const String TYPE = 'type';
