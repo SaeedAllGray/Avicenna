@@ -8,6 +8,7 @@ import 'package:avicenna_app/domain/entries/time_slot/time_slot.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
 import 'package:avicenna_app/presentation/constants/colors.dart';
 import 'package:avicenna_app/presentation/constants/fonts.dart';
+import 'package:avicenna_app/presentation/features/time_stamp/widgets/rating_bottom_bottom_sheet.dart';
 import 'package:avicenna_app/presentation/helpers/device_calendar_helper.dart';
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -119,7 +120,14 @@ class TimeStampDetailWidget extends StatelessWidget {
                                   child:
                                       Text(AppLocalizations.of(context)!.rate),
                                   onPressed: () {
-                                    // TODO: Feedback UI and logic
+                                    showModalBottomSheet<void>(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return RatingBottomSheet(
+                                          doctor: state.doctor,
+                                        );
+                                      },
+                                    );
                                   }),
                             ),
                           ],

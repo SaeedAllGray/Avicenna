@@ -129,7 +129,6 @@ class _CreateTimeStampBottonSheetState
                             TimeOfDay.fromDateTime(selectedStartDateTime),
                         end: TimeOfDay.fromDateTime(selectedEndDateTime),
                         // TODO: fix this in the bloc
-                        doctorId: 1,
                       ),
                     ),
                   );

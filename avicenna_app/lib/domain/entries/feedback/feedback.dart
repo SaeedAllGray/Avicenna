@@ -4,18 +4,18 @@ part 'feedback.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Feedback {
-  final int id;
+  int? id;
   final int rating;
-  final int doctorId;
-  final int patientId;
+  int? doctorId;
+  int? patientId;
   final String? comment;
 
   Feedback({
-    required this.id,
+    this.id,
     required this.rating,
-    required this.doctorId,
-    required this.patientId,
-    required this.comment,
+    this.doctorId,
+    this.patientId,
+    this.comment,
   });
 
   factory Feedback.fromJson(Map<String, dynamic> json) =>

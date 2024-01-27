@@ -12,3 +12,9 @@ class GetUserFeedBacks extends FeedbackEvent {
 
   const GetUserFeedBacks({required this.doctorId});
 }
+
+class LeaveFeedBack extends FeedbackEvent {
+  final Feedback feedback;
+
+  const LeaveFeedBack({required this.feedback});
+}

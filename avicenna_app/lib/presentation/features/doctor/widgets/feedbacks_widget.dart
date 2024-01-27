@@ -56,9 +56,7 @@ class FeedbacksWidget extends StatelessWidget {
                                     Icons.star_rounded,
                                     color: AppColors.primary,
                                   ),
-                                  onRatingUpdate: (rating) {
-                                    print(rating);
-                                  },
+                                  onRatingUpdate: (rating) {},
                                 ),
                               ))
                           .toList(),

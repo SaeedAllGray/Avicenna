@@ -26,8 +26,8 @@ class TimeSlotRemoteDataSource implements RemoteDataSource {
     Response response = await dio.post(
       '${ApiConstants.baseUrl}$url/',
       data: data,
-      options: Options(
-          headers: {'Authorization': 'Token ${await ApiConstants.getToken}'}),
+      options:
+          Options(headers: {'Authorization': 'Token ${ApiConstants.getToken}'}),
     );
     return response.data;
   }

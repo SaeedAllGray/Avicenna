@@ -16,3 +16,5 @@ class FeedBacksFetched extends FeedbackState {
 
   const FeedBacksFetched({required this.feedbacks});
 }
+
+class FeedBackCreated extends FeedbackState {}
