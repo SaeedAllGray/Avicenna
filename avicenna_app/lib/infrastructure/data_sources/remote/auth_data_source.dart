@@ -29,10 +29,7 @@ class AuthDataSource {
       response = await dio.delete(
         '${ApiConstants.baseUrl}custom-users/$id/',
         options: Options(
-          headers: {
-            'Authorization': 'Token $token',
-            // Add any other headers as needed
-          },
+          headers: {'Authorization': 'Token ${ApiConstants.getToken}'},
         ),
       );
     } catch (e) {

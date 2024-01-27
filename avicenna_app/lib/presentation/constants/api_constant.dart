@@ -1,3 +1,5 @@
+import 'package:avicenna_app/infrastructure/data_sources/local/local_source.dart';
+
 class ApiConstants {
   static const String baseUrl = 'http://10.209.131.55:8000/api/';
   static const String TOKEN = 'token';
@@ -7,4 +9,14 @@ class ApiConstants {
   static const String PATIENT = 'patient';
   static const String PATIENT_ID = 'patient_id';
   static const String DOCTOR_ID = 'doctor_id';
+
+  static String userToken = '';
+
+  static String get getToken {
+    return userToken;
+  }
+
+  static Future<void> setToken() async {
+    userToken = await LocalSource.getInstance().getToken() ?? '';
+  }
 }
