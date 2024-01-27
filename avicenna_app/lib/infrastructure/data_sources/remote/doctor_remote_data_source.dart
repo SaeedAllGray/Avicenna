@@ -15,9 +15,8 @@ class DoctorRemoteDataSource implements RemoteDataSource {
     // TODO: implement dynamic token
     dio.interceptors.add(PrettyDioLogger());
     Response response = await dio.get('${ApiConstants.baseUrl}$url',
-        options: Options(headers: {
-          'Authorization': 'Token dcee07d8713c07984e33ef33a17c67ac012cbb1b'
-        }));
+        options: Options(
+            headers: {'Authorization': 'Token ${ApiConstants.getToken}'}));
 
     // return response.data;
 //     String mockresponse = '''[
@@ -180,9 +179,8 @@ class DoctorRemoteDataSource implements RemoteDataSource {
   @override
   Future<dynamic> fetchAnEntity(int id) async {
     Response response = await dio.get('${ApiConstants.baseUrl}$url/$id',
-        options: Options(headers: {
-          'Authorization': 'Token dcee07d8713c07984e33ef33a17c67ac012cbb1b'
-        }));
+        options: Options(
+            headers: {'Authorization': 'Token ${ApiConstants.getToken}'}));
 
     return response.data;
   }

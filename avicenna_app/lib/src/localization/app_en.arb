@@ -49,5 +49,6 @@
   "accept": "Accept",
   "decline": "Decline",
   "no_request_message": "You have no appointment requests.",
-  "appointment_cancelation_message": "The appointment is cancelled."
+  "appointment_cancelation_message": "The appointment is cancelled.",
+  "pending": "Pending"
 }

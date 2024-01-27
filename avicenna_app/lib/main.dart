@@ -1,3 +1,4 @@
+import 'package:avicenna_app/presentation/constants/api_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -11,7 +12,7 @@ void main() async {
   // Flutter Widgets.
   WidgetsFlutterBinding.ensureInitialized();
   final settingsController = SettingsController(SettingsService());
-
+  ApiConstants.setToken();
   // Load the user's preferred theme while the splash screen is displayed.
   // This prevents a sudden theme change when the app is first displayed.
   await settingsController.loadSettings();

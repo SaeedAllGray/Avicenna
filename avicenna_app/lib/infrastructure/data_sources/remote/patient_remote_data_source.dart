@@ -17,9 +17,8 @@ class PatientRemoteDataSource implements RemoteDataSource {
     log('pp');
     dio.interceptors.add(PrettyDioLogger());
     Response response = await dio.get('${ApiConstants.baseUrl}$url/$id/',
-        options: Options(headers: {
-          'Authorization': 'Token dcee07d8713c07984e33ef33a17c67ac012cbb1b'
-        }));
+        options: Options(
+            headers: {'Authorization': 'Token ${ApiConstants.getToken}'}));
     log('response.data');
 
     return response.data;

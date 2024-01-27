@@ -1,9 +1,12 @@
+import 'package:avicenna_app/infrastructure/data_sources/local/local_source.dart';
 import 'package:avicenna_app/infrastructure/data_sources/remote/remote_data_source.dart';
 import 'package:avicenna_app/presentation/constants/api_constant.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class TimeSlotRemoteDataSource implements RemoteDataSource {
+  LocalSource localSource = LocalSource.getInstance();
+
   @override
   String url = "time-slots";
   Dio dio = Dio();
@@ -24,10 +27,7 @@ class TimeSlotRemoteDataSource implements RemoteDataSource {
       '${ApiConstants.baseUrl}$url/',
       data: data,
       options: Options(
-        headers: {
-          'Authorization': 'Token dcee07d8713c07984e33ef33a17c67ac012cbb1b'
-        },
-      ),
+          headers: {'Authorization': 'Token ${await ApiConstants.getToken}'}),
     );
     return response.data;
   }
@@ -37,11 +37,8 @@ class TimeSlotRemoteDataSource implements RemoteDataSource {
     Response response = await dio.put(
       '${ApiConstants.baseUrl}$url/$id/',
       data: data,
-      options: Options(
-        headers: {
-          'Authorization': 'Token dcee07d8713c07984e33ef33a17c67ac012cbb1b'
-        },
-      ),
+      options:
+          Options(headers: {'Authorization': 'Token ${ApiConstants.getToken}'}),
     );
     return response.data;
   }
@@ -50,9 +47,8 @@ class TimeSlotRemoteDataSource implements RemoteDataSource {
     dio.interceptors.add(PrettyDioLogger());
     Response response = await dio.get(
         '${ApiConstants.baseUrl}$url?user_id=$doctorId',
-        options: Options(headers: {
-          'Authorization': 'Token dcee07d8713c07984e33ef33a17c67ac012cbb1b'
-        }));
+        options: Options(
+            headers: {'Authorization': 'Token ${ApiConstants.getToken}'}));
 
     return response.data['results'];
   }

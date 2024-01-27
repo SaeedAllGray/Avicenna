@@ -44,4 +44,14 @@ class FontStyles {
     fontSize: 24.0,
     fontWeight: FontWeight.bold,
   );
+  static const PRIMARY_BOLD_14 = TextStyle(
+    color: AppColors.primaryPale,
+    fontSize: 14.0,
+    fontWeight: FontWeight.bold,
+  );
+  static const WARNING_BOLD_14 = TextStyle(
+    color: AppColors.warning,
+    fontSize: 14.0,
+    fontWeight: FontWeight.bold,
+  );
 }
