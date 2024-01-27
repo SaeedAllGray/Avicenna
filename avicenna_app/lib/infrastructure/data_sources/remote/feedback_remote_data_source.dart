@@ -14,9 +14,8 @@ class FeedbackRemoteDataSource implements RemoteDataSource {
   Future<List<dynamic>> fetchEntities() async {
     dio.interceptors.add(PrettyDioLogger());
     Response response = await dio.get('${ApiConstants.baseUrl}$url',
-        options: Options(headers: {
-          'Authorization': 'Token dcee07d8713c07984e33ef33a17c67ac012cbb1b'
-        }));
+        options: Options(
+            headers: {'Authorization': 'Token ${ApiConstants.getToken}'}));
 
     return response.data['results'];
   }
@@ -25,9 +24,8 @@ class FeedbackRemoteDataSource implements RemoteDataSource {
     dio.interceptors.add(PrettyDioLogger());
     Response response = await dio.get(
         '${ApiConstants.baseUrl}$url/?user_id=$id',
-        options: Options(headers: {
-          'Authorization': 'Token dcee07d8713c07984e33ef33a17c67ac012cbb1b'
-        }));
+        options: Options(
+            headers: {'Authorization': 'Token ${ApiConstants.getToken}'}));
 
     return response.data['results'];
   }

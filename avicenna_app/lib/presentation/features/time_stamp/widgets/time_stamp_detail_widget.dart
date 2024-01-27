@@ -24,6 +24,7 @@ class TimeStampDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(abstractUser);
     return SizedBox(
       height: 350,
       child: Center(
@@ -44,12 +45,14 @@ class TimeStampDetailWidget extends StatelessWidget {
               // ),
 
               //  When the current user is patient, fetch doctor's info
-              if (AbstractUser is Patient)
+              if (abstractUser is Patient)
                 BlocProvider(
                   create: (context) => DoctorsBloc()
                     ..add(GetDoctorDetails(events.first.event!.doctorId!)),
                   child: BlocBuilder<DoctorsBloc, DoctorsState>(
                     builder: (context, state) {
+                      print('events.first.event!.doctorId!');
+                      print(events.first.event!.doctorId!);
                       if (state is DoctorDetailsFetched) {
                         return Column(
                           children: [
@@ -66,19 +69,36 @@ class TimeStampDetailWidget extends StatelessWidget {
                                 '${DateFormat('HH:mm', Platform.localeName).format(events.first.startTime!)} to ${DateFormat('HH:mm', Platform.localeName).format(events.first.endTime!)}',
                                 textAlign: TextAlign.start,
                               ),
-                              trailing: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: AppColors.primary,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10))),
-                                  child: Text(AppLocalizations.of(context)!
-                                      .add_to_calendar),
-                                  onPressed: () {
-                                    DeviceCalendarHelper
-                                        .addToCalendarForPatient(
-                                            events.first, state.doctor);
-                                  }),
+                              trailing: events.first.event!.isConfirmed!
+                                  ? ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: AppColors.primary,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10))),
+                                      child: Text(AppLocalizations.of(context)!
+                                          .add_to_calendar),
+                                      onPressed: () {
+                                        DeviceCalendarHelper
+                                            .addToCalendarForPatient(
+                                                events.first, state.doctor);
+                                      })
+                                  : Container(
+                                      width: 70,
+                                      height: 35,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        border: Border.all(
+                                          color: AppColors.primaryPale,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          AppLocalizations.of(context)!.pending,
+                                          style: FontStyles.PRIMARY_BOLD_14,
+                                        ),
+                                      ),
+                                    ),
                             ),
                             ListTile(
                               leading: const Icon(Icons.medical_services),
