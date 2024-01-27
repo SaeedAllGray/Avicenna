@@ -20,6 +20,11 @@ class FeedbackRepository
     return response.map((data) => Feedback.fromJson(data)).toList();
   }
 
+  Future<Feedback> createEntity(Feedback feedback) async {
+    dynamic response = await api.createEntity(feedback.toJson());
+    return Feedback.fromJson(response);
+  }
+
   @override
   Future<Feedback> fetchEntity(int id) {
     // TODO: implement fetchEntity

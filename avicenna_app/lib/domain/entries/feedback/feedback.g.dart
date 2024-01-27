@@ -7,10 +7,10 @@ part of 'feedback.dart';
 // **************************************************************************
 
 Feedback _$FeedbackFromJson(Map<String, dynamic> json) => Feedback(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       rating: json['rating'] as int,
-      doctorId: json['doctor_id'] as int,
-      patientId: json['patient_id'] as int,
+      doctorId: json['doctor_id'] as int?,
+      patientId: json['patient_id'] as int?,
       comment: json['comment'] as String?,
     );
 

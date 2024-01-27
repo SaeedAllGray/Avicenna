@@ -30,6 +30,17 @@ class FeedbackRemoteDataSource implements RemoteDataSource {
     return response.data['results'];
   }
 
+  Future<dynamic> createEntity(Map<String, dynamic> data) async {
+    dio.interceptors.add(PrettyDioLogger());
+    Response response = await dio.post(
+      '${ApiConstants.baseUrl}$url/',
+      data: data,
+      options:
+          Options(headers: {'Authorization': 'Token ${ApiConstants.getToken}'}),
+    );
+    return response.data;
+  }
+
   @override
   Future fetchAnEntity(int id) async {
     Response response = await dio.get(
