@@ -109,18 +109,20 @@ class _SchedulesPageState extends State<SchedulesPage> {
                 liveTimeIndicatorSettings:
                     const HourIndicatorSettings(color: AppColors.primary),
                 onEventTap: (events, date) {
-                  showModalBottomSheet<void>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Provider.value(
-                        value: bloc,
-                        child: TimeStampDetailWidget(
-                          events: events,
-                          abstractUser: widget.user,
-                        ),
-                      );
-                    },
-                  );
+                  if (!events.first.event!.isCancelled!) {
+                    showModalBottomSheet<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Provider.value(
+                          value: bloc,
+                          child: TimeStampDetailWidget(
+                            events: events,
+                            abstractUser: widget.user,
+                          ),
+                        );
+                      },
+                    );
+                  }
                 },
               );
             },
