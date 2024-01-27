@@ -46,63 +46,79 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => _bloc,
-      child: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthSucceedState) {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => HomePage(user: state.user)));
-          }
-        },
-        child: BlocBuilder<AuthBloc, AuthState>(
-          bloc: _bloc,
-          builder: (context, state) {
-            return Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.teal,
-                centerTitle: true,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/avicenna.png',
-                      color: Colors.white,
-                      height: 20,
-                    ),
-                    Text(
-                      AppLocalizations.of(context)!.appTitle,
-                      style: FontStyles.WHITE_MEDIUM_24,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                  ],
-                ),
-              ),
-              body: SafeArea(
-                child: SingleChildScrollView(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.teal,
+        centerTitle: true,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/avicenna.png',
+              color: Colors.white,
+              height: 20,
+            ),
+            Text(
+              AppLocalizations.of(context)!.appTitle,
+              style: FontStyles.WHITE_MEDIUM_24,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+          ],
+        ),
+      ),
+      body: SafeArea(
+        child: BlocProvider(
+          create: (context) => _bloc,
+          child: BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is AuthSucceedState) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomePage(user: state.user),
+                  ),
+                );
+              }
+            },
+            child: BlocBuilder<AuthBloc, AuthState>(
+              bloc: _bloc,
+              builder: (context, state) {
+                return SingleChildScrollView(
                   padding: const EdgeInsets.all(10),
                   child: Column(
                     children: [
-                      if (state is UserCreatedState)
-                        getSecondFormWidget(state)
+                      if (state is UserCreatedState ||
+                          state is SignupFailedState)
+                        getSecondFormWidget(state is UserCreatedState
+                            ? state.user
+                            : (state as SignupFailedState).user)
                       else
                         getFirstFormWidget(state),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Visibility(
+                        visible: state is AuthFailedState ||
+                            state is SignupFailedState,
+                        child: Text(
+                          AppLocalizations.of(context)!.error,
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      )
                     ],
                   ),
-                ),
-              ),
-            );
-          },
+                );
+              },
+            ),
+          ),
         ),
       ),
     );
   }
 
-  Widget getSecondFormWidget(UserCreatedState state) => Column(
+  Widget getSecondFormWidget(User user) => Column(
         children: [
           ListTile(
             title: Text(AppLocalizations.of(context)!.iAmADoctor),
@@ -179,7 +195,7 @@ class _AuthPageState extends State<AuthPage> {
                 _bloc.add(
                   SignUpDoctorEvent(
                     doctor: Doctor(
-                        user: state.user,
+                        user: user,
                         address: addressController.text,
                         phoneNumber: phoneController.text,
                         specialization: professionController.text),
@@ -191,7 +207,7 @@ class _AuthPageState extends State<AuthPage> {
                     patient: Patient(
                         dateBorn: birthdateController.text,
                         ssn: ssnController.text,
-                        user: state.user),
+                        user: user),
                   ),
                 );
               }
@@ -263,7 +279,7 @@ class _AuthPageState extends State<AuthPage> {
               onChanged: (v) => _bloc.add(InputEvent()),
             ),
           ),
-          state is AuthInProgress
+          state is AuthInProgress && state is! AuthFailedState
               ? const Center(
                   child: CircularProgressIndicator.adaptive(),
                 )

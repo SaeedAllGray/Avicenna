@@ -32,4 +32,19 @@ class UserCreatedState extends AuthState {
   List<Object> get props => [uuid];
 }
 
-class AuthFailedState extends AuthState {}
+class AuthFailedState extends AuthState {
+  final String uuid = const Uuid().v4();
+
+  @override
+  List<Object> get props => [uuid];
+}
+
+class SignupFailedState extends AuthState {
+  final String uuid = const Uuid().v4();
+  final User user;
+
+  SignupFailedState({required this.user});
+
+  @override
+  List<Object> get props => [uuid];
+}
