@@ -53,5 +53,8 @@
   "pending": "Ausstehend",
   "rating": "Bewertung",
   "message": "Nachricht",
-  "submit": "Senden"
+  "submit": "Senden",
+  "login": "Anmelden",
+  "logout": "Abmelden",
+  "delete": "Konto löschen"
 }
