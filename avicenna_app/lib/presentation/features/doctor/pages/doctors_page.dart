@@ -16,7 +16,7 @@ class DoctorsPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.white,
-          title: const Text("Browse"),
+          title: Text(AppLocalizations.of(context)!.browse),
           bottom: PreferredSize(
             preferredSize: const Size(50, 50),
             child: Container(
