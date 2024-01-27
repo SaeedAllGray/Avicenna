@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:avicenna_app/infrastructure/data_sources/remote/remote_data_source.dart';
@@ -26,7 +25,6 @@ class PatientRemoteDataSource implements RemoteDataSource {
 
   @override
   Future fetchEntities() {
-    // TODO: implement fetchEntities
     throw UnimplementedError();
   }
 }

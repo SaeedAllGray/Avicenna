@@ -1,8 +1,6 @@
 import 'dart:developer';
 
-import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/patient/patient.dart';
-import 'package:avicenna_app/infrastructure/data_sources/remote/doctor_remote_data_source.dart';
 import 'package:avicenna_app/domain/repositories/entity_repository.dart';
 import 'package:avicenna_app/infrastructure/data_sources/remote/patient_remote_data_source.dart';
 

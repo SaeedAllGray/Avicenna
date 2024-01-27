@@ -14,7 +14,7 @@ import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:intl/intl.dart';
 
 class TimeStampDetailWidget extends StatelessWidget {
@@ -25,7 +25,6 @@ class TimeStampDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(abstractUser);
     return SizedBox(
       height: 350,
       child: Center(
@@ -52,8 +51,6 @@ class TimeStampDetailWidget extends StatelessWidget {
                     ..add(GetDoctorDetails(events.first.event!.doctorId!)),
                   child: BlocBuilder<DoctorsBloc, DoctorsState>(
                     builder: (context, state) {
-                      print('events.first.event!.doctorId!');
-                      print(events.first.event!.doctorId!);
                       if (state is DoctorDetailsFetched) {
                         return Column(
                           children: [

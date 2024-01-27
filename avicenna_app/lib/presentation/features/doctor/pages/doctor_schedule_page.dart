@@ -27,11 +27,8 @@ class _DoctorSchedulePageState extends State<DoctorSchedulePage> {
     return CalendarControllerProvider<TimeSlot>(
       controller: EventController(),
       child: BlocProvider(
-        create: (context) =>
-            // TODO: fix this and don't pass the ID from here. Feed it from a helper class in the bloc.
-            bloc
-              ..add(GetDoctorAvailableTimeSlots(
-                  doctorId: widget.doctor.user.id!)),
+        create: (context) => bloc
+          ..add(GetDoctorAvailableTimeSlots(doctorId: widget.doctor.user.id!)),
         child: Scaffold(
           appBar: AppBar(
             title: Text(AppLocalizations.of(context)!.available_time_slots),
@@ -46,7 +43,6 @@ class _DoctorSchedulePageState extends State<DoctorSchedulePage> {
                             DateTime.now().subtract(const Duration(days: 1))))
                         .map(
                           (e) => CalendarEventData(
-                              //TODO: Fix this
                               startTime: e.day.add(Duration(
                                   hours: e.beginning.hour,
                                   minutes: e.beginning.minute)),

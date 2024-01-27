@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/patient/patient.dart';
@@ -15,10 +14,10 @@ class UserRepository {
   final AuthDataSource _authDataSource = AuthDataSource();
   Future<AbstractUser?> fetchUser() async {
     String user = await _localSource.getUser() ?? '';
-    print(user);
+
     if (user.isNotEmpty) {
       Map<String, dynamic> userMap = json.decode(user);
-      print(userMap);
+
       if (userMap[ApiConstants.USER][ApiConstants.DOCTOR_ID] != null) {
         return Doctor.fromJson(userMap);
       } else if (userMap[ApiConstants.USER][ApiConstants.PATIENT_ID] != null) {
@@ -38,7 +37,7 @@ class UserRepository {
 
   Future<int?> fetchUserId() async {
     String user = await _localSource.getUser() ?? '';
-    print(user);
+
     Map<String, dynamic> userMap = jsonDecode(user);
 
     if (userMap[ApiConstants.USER][ApiConstants.DOCTOR_ID] != null) {
@@ -64,9 +63,9 @@ class UserRepository {
       } else {
         return Patient.fromJson(response.data);
       }
-    } catch (e) {
-      print(e);
-    }
+      // ignore: empty_catches
+    } catch (e) {}
+    return null;
   }
 
   Future<User?> createUser(User user, String password) async {
@@ -77,8 +76,6 @@ class UserRepository {
         return User.fromJson(response.data);
       }
     } catch (e) {
-      print('jjjjjj-----jjjjjj');
-      print(e);
       return null;
     }
     return null;
@@ -105,5 +102,6 @@ class UserRepository {
     } catch (e) {
       return null;
     }
+    return null;
   }
 }

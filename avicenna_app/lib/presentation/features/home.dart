@@ -1,6 +1,6 @@
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
-import 'package:avicenna_app/domain/entries/user/user.dart';
+
 import 'package:avicenna_app/presentation/features/doctor/pages/doctors_page.dart';
 import 'package:avicenna_app/presentation/features/appointment/appointment_page.dart';
 import 'package:avicenna_app/presentation/features/profile/profile.dart';

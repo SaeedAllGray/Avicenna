@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:avicenna_app/infrastructure/data_sources/remote/remote_data_source.dart';
 import 'package:avicenna_app/presentation/constants/api_constant.dart';
 import 'package:dio/dio.dart';
@@ -12,7 +10,6 @@ class DoctorRemoteDataSource implements RemoteDataSource {
 
   @override
   Future<List<dynamic>> fetchEntities() async {
-    // TODO: implement dynamic token
     dio.interceptors.add(PrettyDioLogger());
     Response response = await dio.get('${ApiConstants.baseUrl}$url',
         options: Options(
