@@ -31,142 +31,139 @@ class ProfilePage extends StatelessWidget {
             if (state is UserFetchedState) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Expanded(
-                  child: Column(
-                    children: [
-                      if (state.user is Patient)
-                        ListTile(
-                          leading: const Icon(Icons.person),
-                          title: Text(AppLocalizations.of(context)!.name),
-                          trailing: Text(
-                            '${(state.user as Patient).user.firstName} ${(state.user as Patient).user.lastName}',
-                            style: FontStyles.BLACK_REGULAR_16,
-                          ),
+                child: Column(
+                  children: [
+                    if (state.user is Patient)
+                      ListTile(
+                        leading: const Icon(Icons.person),
+                        title: Text(AppLocalizations.of(context)!.name),
+                        trailing: Text(
+                          '${(state.user as Patient).user.firstName} ${(state.user as Patient).user.lastName}',
+                          style: FontStyles.BLACK_REGULAR_16,
                         ),
-                      if (state.user is Doctor)
-                        ListTile(
-                          leading: const Icon(Icons.person),
-                          title: Text(AppLocalizations.of(context)!.name),
-                          trailing: Text(
-                            '${(state.user as Doctor).user.firstName} ${(state.user as Doctor).user.lastName}',
-                            style: FontStyles.BLACK_REGULAR_16,
-                          ),
-                        ),
-                      const SizedBox(
-                        height: 10,
                       ),
-                      if (state.user is Patient)
-                        ListTile(
-                          leading: const Icon(Icons.numbers),
-                          title:
-                              Text(AppLocalizations.of(context)!.socialNumber),
-                          trailing: Text(
-                            (state.user as Patient).ssn,
-                            style: FontStyles.BLACK_REGULAR_16,
-                          ),
+                    if (state.user is Doctor)
+                      ListTile(
+                        leading: const Icon(Icons.person),
+                        title: Text(AppLocalizations.of(context)!.name),
+                        trailing: Text(
+                          '${(state.user as Doctor).user.firstName} ${(state.user as Doctor).user.lastName}',
+                          style: FontStyles.BLACK_REGULAR_16,
                         ),
-                      if (state.user is Doctor)
-                        ListTile(
-                          leading: const Icon(Icons.phone),
-                          title: Text(AppLocalizations.of(context)!.phone),
-                          trailing: Text(
-                            (state.user as Doctor).phoneNumber,
-                            style: FontStyles.BLACK_REGULAR_16,
-                          ),
-                        ),
-                      const SizedBox(
-                        height: 10,
                       ),
-                      if (state.user is Patient)
-                        ListTile(
-                          leading: const Icon(Icons.remember_me),
-                          title: Text(AppLocalizations.of(context)!.username),
-                          trailing: Text(
-                            (state.user as Patient).user.username,
-                            style: FontStyles.BLACK_REGULAR_16,
-                          ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    if (state.user is Patient)
+                      ListTile(
+                        leading: const Icon(Icons.numbers),
+                        title: Text(AppLocalizations.of(context)!.socialNumber),
+                        trailing: Text(
+                          (state.user as Patient).ssn,
+                          style: FontStyles.BLACK_REGULAR_16,
                         ),
-                      if (state.user is Doctor)
-                        ListTile(
-                          leading: const Icon(Icons.email),
-                          title: Text(AppLocalizations.of(context)!.email),
-                          trailing: Text(
-                            (state.user as Doctor).user.email,
-                            style: FontStyles.BLACK_REGULAR_16,
-                          ),
+                      ),
+                    if (state.user is Doctor)
+                      ListTile(
+                        leading: const Icon(Icons.phone),
+                        title: Text(AppLocalizations.of(context)!.phone),
+                        trailing: Text(
+                          (state.user as Doctor).phoneNumber,
+                          style: FontStyles.BLACK_REGULAR_16,
                         ),
-                      const SizedBox(height: 10),
-                      if (state.user is Doctor)
-                        ListTile(
-                          leading: const Icon(Icons.healing),
-                          title: Text(AppLocalizations.of(context)!.profession),
-                          trailing: Text(
-                            (state.user as Doctor).specialization,
-                            style: FontStyles.BLACK_REGULAR_16,
-                          ),
+                      ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    if (state.user is Patient)
+                      ListTile(
+                        leading: const Icon(Icons.remember_me),
+                        title: Text(AppLocalizations.of(context)!.username),
+                        trailing: Text(
+                          (state.user as Patient).user.username,
+                          style: FontStyles.BLACK_REGULAR_16,
                         ),
-                      if (state.user is Patient)
-                        ListTile(
-                          leading: const Icon(Icons.email),
-                          title: Text(AppLocalizations.of(context)!.email),
-                          trailing: Text(
-                            (state.user as Patient).user.email,
-                            style: FontStyles.BLACK_REGULAR_16,
-                          ),
+                      ),
+                    if (state.user is Doctor)
+                      ListTile(
+                        leading: const Icon(Icons.email),
+                        title: Text(AppLocalizations.of(context)!.email),
+                        trailing: Text(
+                          (state.user as Doctor).user.email,
+                          style: FontStyles.BLACK_REGULAR_16,
                         ),
-                      const Spacer(),
-                      SizedBox(
-                        width: double.infinity,
-                        child: OutlinedButton(
-                          style: ButtonStyle(
-                            // Customize the outline color
-                            side: MaterialStateProperty.all<BorderSide>(
-                              const BorderSide(
-                                color: Colors
-                                    .teal, // Set your desired outline color
-                                width: 2.0, // Set the outline thickness
-                              ),
+                      ),
+                    const SizedBox(height: 10),
+                    if (state.user is Doctor)
+                      ListTile(
+                        leading: const Icon(Icons.healing),
+                        title: Text(AppLocalizations.of(context)!.profession),
+                        trailing: Text(
+                          (state.user as Doctor).specialization,
+                          style: FontStyles.BLACK_REGULAR_16,
+                        ),
+                      ),
+                    if (state.user is Patient)
+                      ListTile(
+                        leading: const Icon(Icons.email),
+                        title: Text(AppLocalizations.of(context)!.email),
+                        trailing: Text(
+                          (state.user as Patient).user.email,
+                          style: FontStyles.BLACK_REGULAR_16,
+                        ),
+                      ),
+                    const Spacer(),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        style: ButtonStyle(
+                          // Customize the outline color
+                          side: MaterialStateProperty.all<BorderSide>(
+                            const BorderSide(
+                              color:
+                                  Colors.teal, // Set your desired outline color
+                              width: 2.0, // Set the outline thickness
                             ),
                           ),
-                          child: const Text(
-                            'Logout',
-                          ),
-                          onPressed: () => BlocProvider.of<UserBloc>(context)
-                              .add(LogoutEvent()),
                         ),
+                        child: Text(
+                          AppLocalizations.of(context)!.logout,
+                        ),
+                        onPressed: () => BlocProvider.of<UserBloc>(context)
+                            .add(LogoutEvent()),
                       ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: OutlinedButton(
-                          style: ButtonStyle(
-                            // Customize the outline color
-                            side: MaterialStateProperty.all<BorderSide>(
-                              const BorderSide(
-                                color: Colors
-                                    .red, // Set your desired outline color
-                                width: 2.0, // Set the outline thickness
-                              ),
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        style: ButtonStyle(
+                          // Customize the outline color
+                          side: MaterialStateProperty.all<BorderSide>(
+                            const BorderSide(
+                              color:
+                                  Colors.red, // Set your desired outline color
+                              width: 2.0, // Set the outline thickness
                             ),
+                          ),
 
-                            textStyle: MaterialStateProperty.all<TextStyle>(
-                              const TextStyle(
-                                fontSize: 16.0, // Set the font size
-                                fontWeight:
-                                    FontWeight.bold, // Set the font weight
-                                color: Colors.red,
-                              ),
+                          textStyle: MaterialStateProperty.all<TextStyle>(
+                            const TextStyle(
+                              fontSize: 16.0, // Set the font size
+                              fontWeight:
+                                  FontWeight.bold, // Set the font weight
+                              color: Colors.red,
                             ),
                           ),
-                          onPressed: () => BlocProvider.of<UserBloc>(context)
-                              .add(DeleteUserEvent()),
-                          child: const Text(
-                            'Delete Account',
-                            style: TextStyle(color: Colors.red),
-                          ),
+                        ),
+                        onPressed: () => BlocProvider.of<UserBloc>(context)
+                            .add(DeleteUserEvent()),
+                        child: Text(
+                          AppLocalizations.of(context)!.delete,
+                          style: const TextStyle(color: Colors.red),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               );
             }

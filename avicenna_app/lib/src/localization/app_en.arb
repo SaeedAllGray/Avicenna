@@ -13,6 +13,8 @@
   "phone": "Phone Number",
   "address":"Address",
   "login": "Login",
+  "logout":"Logout",
+  "delete":"Delete Account",
   "error":"Wrong entry. Please try again.",
   "iHaveAnAccount": "I have an account.",
   "iAmADoctor": "I am a doctor.",
