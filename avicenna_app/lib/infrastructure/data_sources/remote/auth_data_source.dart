@@ -30,9 +30,8 @@ class AuthDataSource {
           headers: {'Authorization': 'Token ${ApiConstants.getToken}'},
         ),
       );
-    } catch (e) {
-      print(e);
-    }
+      // ignore: empty_catches
+    } catch (e) {}
     return response;
   }
 

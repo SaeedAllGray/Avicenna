@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:avicenna_app/domain/entries/feedback/feedback.dart';
 import 'package:avicenna_app/infrastructure/data_sources/remote/feedback_remote_data_source.dart';
 import 'package:avicenna_app/domain/repositories/entity_repository.dart';
@@ -27,7 +25,6 @@ class FeedbackRepository
 
   @override
   Future<Feedback> fetchEntity(int id) {
-    // TODO: implement fetchEntity
     throw UnimplementedError();
   }
 }

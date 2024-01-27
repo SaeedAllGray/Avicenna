@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
-import 'package:avicenna_app/domain/entries/patient/patient.dart';
 import 'package:avicenna_app/domain/entries/time_slot/time_slot.dart';
-import 'package:avicenna_app/domain/entries/user.dart';
+
 import 'package:avicenna_app/infrastructure/repositories_implementation/profile_repository.dart';
 import 'package:avicenna_app/infrastructure/repositories_implementation/time_slot_repository.dart';
 import 'package:bloc/bloc.dart';

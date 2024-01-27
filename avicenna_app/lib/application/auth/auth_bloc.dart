@@ -48,8 +48,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         signupActive = false;
         emit(AuthInitialState());
       } else {
-        print('eeeeee');
-
         emit(SignupFailedState(user: event.doctor.user));
       }
     }
@@ -62,8 +60,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (patient != null) {
         emit(AuthSucceedState(user: patient));
       } else {
-        print('ddjddjhdjdjdjdjddjdjdjjdjdjddj');
-
         emit(SignupFailedState(user: event.patient.user));
       }
     }
@@ -96,7 +92,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       CreateUserEvent event, Emitter<AuthState> emit) async {
     final User? user = await repository.createUser(event.user, event.password);
     if (user != null) {
-      print(user);
       emit(UserCreatedState(user: user));
     } else {
       emit(AuthFailedState());

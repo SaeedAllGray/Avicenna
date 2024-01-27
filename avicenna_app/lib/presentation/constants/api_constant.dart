@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:avicenna_app/infrastructure/data_sources/local/local_source.dart';
 
 class ApiConstants {

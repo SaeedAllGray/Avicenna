@@ -3,7 +3,6 @@ import 'package:avicenna_app/application/time_slot/time_slot_bloc.dart';
 import 'package:avicenna_app/domain/entries/time_slot/time_slot.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
 import 'package:avicenna_app/presentation/constants/colors.dart';
-import 'package:calendar_view/calendar_view.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

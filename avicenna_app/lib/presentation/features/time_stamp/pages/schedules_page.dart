@@ -2,7 +2,7 @@ import 'package:avicenna_app/application/time_slot/time_slot_bloc.dart';
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/time_slot/time_slot.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
-import 'package:avicenna_app/domain/entries/user/user.dart';
+
 import 'package:avicenna_app/presentation/constants/colors.dart';
 
 import 'package:avicenna_app/presentation/features/time_stamp/widgets/create_timestamp_bottom_sheet.dart';
@@ -41,7 +41,6 @@ class _SchedulesPageState extends State<SchedulesPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      // TODO: implement this in the bloc, don't pass it from here
       create: (context) => bloc..add(GetUserTimeSlots()),
       child: CalendarControllerProvider<TimeSlot>(
         controller: EventController(),
@@ -50,8 +49,6 @@ class _SchedulesPageState extends State<SchedulesPage> {
             centerTitle: true,
             title: Text(AppLocalizations.of(context)!.schedules),
             actions: [
-              //TODO: the condition to check whether the user is a [doctor] or a [patient]
-
               if (widget.user is Doctor)
                 IconButton(
                     onPressed: () {
@@ -71,7 +68,6 @@ class _SchedulesPageState extends State<SchedulesPage> {
           body: BlocBuilder<TimeSlotBloc, TimeSlotState>(
             builder: (context, state) {
               if (state is TimeSlotsFetched) {
-                // TODO: fix this
                 CalendarControllerProvider.of<TimeSlot>(context)
                     .controller
                     .removeWhere((element) => true);
