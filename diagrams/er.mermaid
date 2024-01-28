@@ -1,7 +1,7 @@
 erDiagram
-    PATIENT ||--o{ RATING : leaves
+    PATIENT ||--o{ REVIEW : leaves
     PATIENT ||..o{ TIME_SLOT : selects
-    DOCTOR ||--o{ RATING : receives
+    DOCTOR ||--o{ REVIEW : receives
     DOCTOR ||--o{ TIME_SLOT : creates
     DOCTOR{
         int id PK
@@ -9,10 +9,13 @@ erDiagram
         string last_name
         string specialization
         string username UK
-        string email UK "optional"
+        string email UK
         string phone_number UK
         string password
         string address
+        float average_rating "not stored in the DB"
+        datetime date_joined
+        datetime last_login
     }
     PATIENT{
         int id PK
@@ -21,15 +24,18 @@ erDiagram
         string last_name
         date date_born
         string username UK
-        string email UK "optional"
+        string email UK
         string password
+        datetime date_joined
+        datetime last_login
     }
-    RATING{
+    REVIEW{
         int id PK
         int rating "from 0 to 5"
         string comment "optional"
         int patient FK
         int doctor FK
+        date date_left "set automatically"
     }
     TIME_SLOT{
         int id PK
@@ -38,7 +44,8 @@ erDiagram
         time end
         int doctor FK
         int patient FK "optional"
-        bool booked "not stored in the DB"
-        bool confirmed
+        bool is_booked "not stored in the DB"
+        bool is_confirmed "defaults to False"
+        bool is_cancelled "defaults to False"
     }
 
