@@ -58,7 +58,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (state is UserCreatedState) {
       Patient? patient = await repository.signupPatient(event.patient);
       if (patient != null) {
-        emit(AuthSucceedState(user: patient));
+        signupActive = false;
+        emit(AuthInitialState());
       } else {
         emit(SignupFailedState(user: event.patient.user));
       }
