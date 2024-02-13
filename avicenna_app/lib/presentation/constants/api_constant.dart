@@ -3,7 +3,7 @@
 import 'package:avicenna_app/infrastructure/data_sources/local/local_source.dart';
 
 class ApiConstants {
-  static const String baseUrl = 'http://10.211.9.32:8000/api/';
+  static const String baseUrl = 'https://p1car00n.eu.pythonanywhere.com/api/';
   static const String TOKEN = 'token';
   static const String USER = 'user';
   static const String TYPE = 'type';
@@ -15,6 +15,7 @@ class ApiConstants {
   static String userToken = '';
 
   static String get getToken {
+    print(userToken);
     return userToken;
   }
 
