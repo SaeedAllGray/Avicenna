@@ -84,8 +84,8 @@ class UserRepository {
   Future<Patient?> signupPatient(Patient patient) async {
     try {
       Response response = await _authDataSource.signupPatient(patient);
-      if (response.statusCode == 200) {
-        return Patient.fromJson(response.data);
+      if (response.statusCode == 201) {
+        return patient;
       }
     } catch (e) {
       return null;
@@ -96,8 +96,8 @@ class UserRepository {
   Future<Doctor?> signupDoctor(Doctor doctor) async {
     try {
       Response response = await _authDataSource.signupDoctor(doctor);
-      if (response.statusCode == 200) {
-        return Doctor.fromJson(response.data);
+      if (response.statusCode == 201) {
+        return doctor;
       }
     } catch (e) {
       return null;
