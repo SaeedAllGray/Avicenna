@@ -56,8 +56,9 @@ class UserRepository {
   Future<AbstractUser?> login(String username, String password) async {
     try {
       final Response response = await _authDataSource.login(username, password);
-      _localSource.saveUser(jsonEncode(response.data));
-      _localSource.setToken(response.data[ApiConstants.TOKEN].toString());
+      await _localSource.saveUser(jsonEncode(response.data));
+      await _localSource.setToken(response.data[ApiConstants.TOKEN].toString());
+      await ApiConstants.setToken();
       if (response.data["user"]["doctor_id"] != null) {
         return Doctor.fromJson(response.data);
       } else {
@@ -71,7 +72,6 @@ class UserRepository {
   Future<User?> createUser(User user, String password) async {
     try {
       Response response = await _authDataSource.createUser(user, password);
-
       if (response.statusCode! < 400) {
         return User.fromJson(response.data);
       }

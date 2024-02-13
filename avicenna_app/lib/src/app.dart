@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
             //       borderRadius: BorderRadius.circular(10)),
             // ),
           ),
-          darkTheme: ThemeData.dark(),
+
           themeMode: settingsController.themeMode,
 
           // Define a function to handle named routes in order to support
