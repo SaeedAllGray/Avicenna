@@ -57,6 +57,8 @@ class _DoctorSchedulePageState extends State<DoctorSchedulePage> {
                         .toList());
               }
               return WeekView<TimeSlot>(
+                initialDay: DateTime.now(),
+                showWeekends: false,
                 headerStyle: HeaderStyle(
                   decoration: BoxDecoration(
                     color: AppColors.primary.withOpacity(0.2),
