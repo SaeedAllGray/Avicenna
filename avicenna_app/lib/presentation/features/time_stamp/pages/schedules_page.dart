@@ -96,6 +96,8 @@ class _SchedulesPageState extends State<SchedulesPage> {
                         .toList());
               }
               return WeekView<TimeSlot>(
+                initialDay: DateTime.now(),
+                showWeekends: false,
                 showLiveTimeLineInAllDays: false,
                 headerStyle: HeaderStyle(
                   decoration: BoxDecoration(
