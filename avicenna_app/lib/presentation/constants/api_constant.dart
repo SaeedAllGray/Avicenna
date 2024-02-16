@@ -15,7 +15,6 @@ class ApiConstants {
   static bool isTheFirstTimeAppLaunch = false;
 
   static Future<void> setIsTheFirstTimeAppLaunch() async {
-    print(await LocalSource.getInstance().getIsAppLaunchedForTheFirstTime());
     isTheFirstTimeAppLaunch =
         await LocalSource.getInstance().getIsAppLaunchedForTheFirstTime() ==
             null;

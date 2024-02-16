@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
         const ProfilePage()
       ];
   List<Widget> getPatientTabs() => <Widget>[
-        DoctorsPage(),
+        const DoctorsPage(),
         SchedulesPage(user: widget.user),
         const ProfilePage()
       ];

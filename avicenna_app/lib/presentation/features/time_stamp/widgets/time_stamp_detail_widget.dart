@@ -118,6 +118,7 @@ class TimeStampDetailWidget extends StatelessWidget {
                                       Text(AppLocalizations.of(context)!.rate),
                                   onPressed: () {
                                     showModalBottomSheet<void>(
+                                      isScrollControlled: true,
                                       context: context,
                                       builder: (BuildContext context) {
                                         return RatingBottomSheet(

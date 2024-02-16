@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DoctorsPage extends StatefulWidget {
-  DoctorsPage({super.key});
+  const DoctorsPage({super.key});
 
   @override
   State<DoctorsPage> createState() => _DoctorsPageState();
@@ -18,7 +18,6 @@ class _DoctorsPageState extends State<DoctorsPage> {
   final TextEditingController searchController = TextEditingController();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     if (ApiConstants.isTheFirstTimeAppLaunch) {
       Future.delayed(
