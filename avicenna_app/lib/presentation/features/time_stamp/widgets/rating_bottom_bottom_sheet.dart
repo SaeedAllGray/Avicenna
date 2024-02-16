@@ -25,104 +25,109 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocProvider(
-        create: (context) => FeedbackBloc(),
-        child: BlocListener<FeedbackBloc, FeedbackState>(
-          listener: (context, state) {
-            if (state is FeedBackCreated) {
-              Navigator.pop(context);
-            }
-          },
-          child: BlocBuilder<FeedbackBloc, FeedbackState>(
-            builder: (context, state) {
-              return SizedBox(
-                height: 800,
-                child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        '${AppLocalizations.of(context)!.rate} ${widget.doctor.user.firstName} ${widget.doctor.user.lastName}',
-                        style: FontStyles.BLACK_BOLD_24,
-                      ),
-                      ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        title: Text(AppLocalizations.of(context)!.rate),
-                        trailing: RatingBar.builder(
-                          itemSize: 35,
-                          initialRating: 0,
-                          direction: Axis.horizontal,
-                          itemCount: 5,
-                          // itemPadding:
-                          //     EdgeInsets.symmetric(horizontal: 4.0),
-                          itemBuilder: (context, _) => const Icon(
-                            Icons.star_rounded,
-                            color: AppColors.primary,
-                          ),
-                          onRatingUpdate: (rating) {
-                            setState(() {
-                              stars = rating.toInt();
-                            });
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        child: TextField(
-                          controller: messageTextEditingController,
-                          minLines: 5,
-                          maxLines: 7,
-                          decoration: InputDecoration(
-                            hintText: AppLocalizations.of(context)!.message,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryPale,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                color: AppColors.primaryPale,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary),
-                        onPressed: () {
-                          BlocProvider.of<FeedbackBloc>(context).add(
-                            LeaveFeedBack(
-                              feedback: feedback.Feedback(
-                                rating: stars,
-                                doctorId: widget.doctor.user.id,
-                                comment: messageTextEditingController.text,
-                              ),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          AppLocalizations.of(context)!.submit,
-                        ),
-                      ),
-                      TextButton(
-                        style: ElevatedButton.styleFrom(
-                            foregroundColor: AppColors.primary),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          AppLocalizations.of(context)!.cancel,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              );
+    return Padding(
+      padding: MediaQuery.of(context).viewInsets,
+      child: SafeArea(
+        child: BlocProvider(
+          create: (context) => FeedbackBloc(),
+          child: BlocListener<FeedbackBloc, FeedbackState>(
+            listener: (context, state) {
+              if (state is FeedBackCreated) {
+                Navigator.pop(context);
+              }
             },
+            child: SingleChildScrollView(
+              child: BlocBuilder<FeedbackBloc, FeedbackState>(
+                builder: (context, state) {
+                  return SizedBox(
+                    height: 400,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            '${AppLocalizations.of(context)!.rate} ${widget.doctor.user.firstName} ${widget.doctor.user.lastName}',
+                            style: FontStyles.BLACK_BOLD_24,
+                          ),
+                          ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: Text(AppLocalizations.of(context)!.rate),
+                            trailing: RatingBar.builder(
+                              itemSize: 35,
+                              initialRating: 0,
+                              direction: Axis.horizontal,
+                              itemCount: 5,
+                              // itemPadding:
+                              //     EdgeInsets.symmetric(horizontal: 4.0),
+                              itemBuilder: (context, _) => const Icon(
+                                Icons.star_rounded,
+                                color: AppColors.primary,
+                              ),
+                              onRatingUpdate: (rating) {
+                                setState(() {
+                                  stars = rating.toInt();
+                                });
+                              },
+                            ),
+                          ),
+                          Expanded(
+                            child: TextField(
+                              controller: messageTextEditingController,
+                              minLines: 5,
+                              maxLines: 7,
+                              decoration: InputDecoration(
+                                hintText: AppLocalizations.of(context)!.message,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(
+                                    color: AppColors.primaryPale,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(
+                                    color: AppColors.primaryPale,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primary),
+                            onPressed: () {
+                              BlocProvider.of<FeedbackBloc>(context).add(
+                                LeaveFeedBack(
+                                  feedback: feedback.Feedback(
+                                    rating: stars,
+                                    doctorId: widget.doctor.user.id,
+                                    comment: messageTextEditingController.text,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!.submit,
+                            ),
+                          ),
+                          TextButton(
+                            style: ElevatedButton.styleFrom(
+                                foregroundColor: AppColors.primary),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!.cancel,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
           ),
         ),
       ),
