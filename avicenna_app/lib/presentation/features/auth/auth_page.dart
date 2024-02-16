@@ -1,4 +1,5 @@
 import 'package:avicenna_app/application/auth/auth_bloc.dart';
+import 'package:avicenna_app/domain/core/validators.dart';
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/patient/patient.dart';
 import 'package:avicenna_app/domain/entries/user/user.dart';
@@ -18,7 +19,10 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> {
   final AuthBloc _bloc = AuthBloc()..add(CheckUserEvent());
+  final Validators validators = Validators();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isChecked = false;
+
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
@@ -118,221 +122,251 @@ class _AuthPageState extends State<AuthPage> {
     );
   }
 
-  Widget getSecondFormWidget(User user) => Column(
-        children: [
-          ListTile(
-            title: Text(AppLocalizations.of(context)!.iAmADoctor),
-            trailing: Checkbox(
-              value: isChecked,
-              onChanged: (bool? value) => setState(() => isChecked = value!),
+  Widget getSecondFormWidget(User user) => Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            ListTile(
+              title: Text(AppLocalizations.of(context)!.iAmADoctor),
+              trailing: Checkbox(
+                value: isChecked,
+                onChanged: (bool? value) => setState(() => isChecked = value!),
+              ),
             ),
-          ),
-          Visibility(
-            visible: !isChecked,
-            child: ListTile(
-              title: TextField(
-                keyboardType: TextInputType.number,
-                onChanged: (v) => _bloc.add(InputEvent()),
-                controller: ssnController,
-                decoration: InputDecoration(
-                  label: Text(AppLocalizations.of(context)!.socialNumber),
+            Visibility(
+              visible: !isChecked,
+              child: ListTile(
+                title: TextFormField(
+                  validator: (value) => validators.validateSSN(context, value),
+                  keyboardType: TextInputType.number,
+                  onChanged: (v) => _bloc.add(InputEvent()),
+                  controller: ssnController,
+                  decoration: InputDecoration(
+                    label: Text(AppLocalizations.of(context)!.socialNumber),
+                  ),
                 ),
               ),
             ),
-          ),
-          Visibility(
-            visible: isChecked,
-            child: ListTile(
-              title: TextField(
-                controller: professionController,
-                onChanged: (v) => _bloc.add(InputEvent()),
-                decoration: InputDecoration(
-                    label: Text(AppLocalizations.of(context)!.profession)),
-              ),
-            ),
-          ),
-          Visibility(
-            visible: isChecked,
-            child: ListTile(
-              title: TextField(
-                keyboardType: TextInputType.phone,
-                controller: phoneController,
-                onChanged: (v) => _bloc.add(InputEvent()),
-                decoration: InputDecoration(
-                    label: Text(AppLocalizations.of(context)!.phone)),
-              ),
-            ),
-          ),
-          Visibility(
-            visible: !isChecked,
-            child: ListTile(
-              title: TextField(
-                keyboardType: TextInputType.datetime,
-                controller: birthdateController,
-                onChanged: (v) => _bloc.add(InputEvent()),
-                decoration: InputDecoration(
-                    label: Text(AppLocalizations.of(context)!.date)),
-              ),
-            ),
-          ),
-          Visibility(
-            visible: isChecked,
-            child: ListTile(
-              title: TextField(
-                keyboardType: TextInputType.streetAddress,
-                controller: addressController,
-                onChanged: (v) => _bloc.add(InputEvent()),
-                decoration: InputDecoration(
-                  label: Text(AppLocalizations.of(context)!.address),
+            Visibility(
+              visible: isChecked,
+              child: ListTile(
+                title: TextField(
+                  controller: professionController,
+                  onChanged: (v) => _bloc.add(InputEvent()),
+                  decoration: InputDecoration(
+                      label: Text(AppLocalizations.of(context)!.profession)),
                 ),
               ),
             ),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
-            onPressed: () {
-              if (isChecked) {
-                _bloc.add(
-                  SignUpDoctorEvent(
-                    doctor: Doctor(
-                        user: user,
-                        address: addressController.text,
-                        phoneNumber: phoneController.text,
-                        specialization: professionController.text),
+            Visibility(
+              visible: isChecked,
+              child: ListTile(
+                title: TextFormField(
+                  validator: (value) =>
+                      validators.validatePhoneNumber(context, value),
+                  keyboardType: TextInputType.phone,
+                  controller: phoneController,
+                  onChanged: (v) => _bloc.add(InputEvent()),
+                  decoration: InputDecoration(
+                      label: Text(AppLocalizations.of(context)!.phone)),
+                ),
+              ),
+            ),
+            Visibility(
+              visible: !isChecked,
+              child: ListTile(
+                title: TextFormField(
+                  validator: (value) => validators.validateDate(context, value),
+                  keyboardType: TextInputType.datetime,
+                  controller: birthdateController,
+                  onChanged: (v) => _bloc.add(InputEvent()),
+                  decoration: InputDecoration(
+                      label: Text(AppLocalizations.of(context)!.date)),
+                ),
+              ),
+            ),
+            Visibility(
+              visible: isChecked,
+              child: ListTile(
+                title: TextFormField(
+                  validator: (value) =>
+                      validators.validateAddress(context, value),
+                  keyboardType: TextInputType.streetAddress,
+                  controller: addressController,
+                  onChanged: (v) => _bloc.add(InputEvent()),
+                  decoration: InputDecoration(
+                    label: Text(AppLocalizations.of(context)!.address),
                   ),
-                );
-              } else {
-                _bloc.add(
-                  SignUpPatientEvent(
-                    patient: Patient(
-                        dateBorn: birthdateController.text,
-                        ssn: ssnController.text,
-                        user: user),
-                  ),
-                );
-              }
-            },
-            child: Text(AppLocalizations.of(context)!.proceed),
-          ),
-        ],
+                ),
+              ),
+            ),
+            ElevatedButton(
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  if (isChecked) {
+                    _bloc
+                      ..add(
+                        SignUpDoctorEvent(
+                          doctor: Doctor(
+                              user: user,
+                              address: addressController.text,
+                              phoneNumber: phoneController.text,
+                              specialization: professionController.text),
+                        ),
+                      )
+                      ..add(LoginEvent(
+                          usernameController.text, passwordController.text));
+                  } else {
+                    _bloc
+                      ..add(
+                        SignUpPatientEvent(
+                          patient: Patient(
+                              dateBorn: birthdateController.text,
+                              ssn: ssnController.text,
+                              user: user),
+                        ),
+                      )
+                      ..add(LoginEvent(
+                          usernameController.text, passwordController.text));
+                  }
+                }
+              },
+              child: Text(AppLocalizations.of(context)!.proceed),
+            ),
+          ],
+        ),
       );
 
-  Widget getFirstFormWidget(AuthState state) => Column(
-        children: [
-          Visibility(
-            maintainAnimation: true,
-            maintainState: true,
-            visible: _bloc.signupActive,
-            child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 500),
-              opacity: _bloc.signupActive ? 1 : 0.0,
-              child: AutofillGroup(
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: TextField(
-                        keyboardType: TextInputType.name,
-                        controller: firstNameController,
-                        onChanged: (v) => _bloc.add(InputEvent()),
-                        decoration: InputDecoration(
-                            label:
-                                Text(AppLocalizations.of(context)!.firstName)),
-                      ),
-                    ),
-                    ListTile(
-                      title: TextField(
-                        keyboardType: TextInputType.name,
-                        controller: lastNameController,
-                        onChanged: (v) => _bloc.add(InputEvent()),
-                        decoration: InputDecoration(
-                            label:
-                                Text(AppLocalizations.of(context)!.lastName)),
-                      ),
-                    ),
-                    ListTile(
-                      title: TextField(
-                        keyboardType: TextInputType.emailAddress,
-                        autofillHints: const [AutofillHints.email],
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          label: Text(AppLocalizations.of(context)!.email),
+  Widget getFirstFormWidget(AuthState state) => Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            Visibility(
+              maintainAnimation: true,
+              maintainState: true,
+              visible: _bloc.signupActive,
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 500),
+                opacity: _bloc.signupActive ? 1 : 0.0,
+                child: AutofillGroup(
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: TextFormField(
+                          validator: (value) =>
+                              validators.validateFirstname(context, value),
+                          keyboardType: TextInputType.name,
+                          controller: firstNameController,
+                          onChanged: (v) => _bloc.add(InputEvent()),
+                          decoration: InputDecoration(
+                              label: Text(
+                                  AppLocalizations.of(context)!.firstName)),
                         ),
-                        onChanged: (v) => _bloc.add(InputEvent()),
                       ),
-                    ),
-                  ],
+                      ListTile(
+                        title: TextFormField(
+                          validator: (value) =>
+                              validators.validateLastname(context, value),
+                          keyboardType: TextInputType.name,
+                          controller: lastNameController,
+                          onChanged: (v) => _bloc.add(InputEvent()),
+                          decoration: InputDecoration(
+                              label:
+                                  Text(AppLocalizations.of(context)!.lastName)),
+                        ),
+                      ),
+                      ListTile(
+                        title: TextFormField(
+                          validator: (value) =>
+                              validators.validateEmail(context, value),
+                          keyboardType: TextInputType.emailAddress,
+                          autofillHints: const [AutofillHints.email],
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            label: Text(AppLocalizations.of(context)!.email),
+                          ),
+                          onChanged: (v) => _bloc.add(InputEvent()),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          ListTile(
-            title: TextFormField(
-              autofillHints: const [AutofillHints.username],
-              controller: usernameController,
-              decoration: InputDecoration(
-                label: Text(AppLocalizations.of(context)!.username),
+            ListTile(
+              title: TextFormField(
+                validator: (value) =>
+                    validators.validateUsername(context, value),
+                autofillHints: const [AutofillHints.username],
+                controller: usernameController,
+                decoration: InputDecoration(
+                  label: Text(AppLocalizations.of(context)!.username),
+                ),
+                onChanged: (v) => _bloc.add(InputEvent()),
               ),
-              onChanged: (v) => _bloc.add(InputEvent()),
             ),
-          ),
-          ListTile(
-            title: TextField(
-              obscureText: true,
-              autofillHints: const [AutofillHints.password],
-              controller: passwordController,
-              decoration: InputDecoration(
-                label: Text(AppLocalizations.of(context)!.password),
+            ListTile(
+              title: TextFormField(
+                validator: (value) =>
+                    validators.validatePassword(context, value),
+                obscureText: true,
+                autofillHints: const [AutofillHints.password],
+                controller: passwordController,
+                decoration: InputDecoration(
+                  label: Text(AppLocalizations.of(context)!.password),
+                ),
+                onChanged: (v) => _bloc.add(InputEvent()),
               ),
-              onChanged: (v) => _bloc.add(InputEvent()),
             ),
-          ),
-          state is AuthInProgress && state is! AuthFailedState
-              ? const Center(
-                  child: CircularProgressIndicator.adaptive(),
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        _bloc.add(ToggleAuthEvent());
-                      },
-                      child: Text(_bloc.signupActive
-                          ? AppLocalizations.of(context)!.iHaveAnAccount
-                          : AppLocalizations.of(context)!.register),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary),
-                      onPressed: usernameController.text.isNotEmpty &&
-                              passwordController.text.isNotEmpty
-                          ? () {
-                              if (_bloc.signupActive) {
-                                _bloc.add(
-                                  CreateUserEvent(
-                                    password: passwordController.text,
-                                    user: User(
-                                        id: null,
-                                        firstName: firstNameController.text,
-                                        lastName: lastNameController.text,
-                                        username: usernameController.text,
-                                        email: emailController.text),
-                                  ),
-                                );
-                              } else {
-                                _bloc.add(
-                                  LoginEvent(usernameController.text,
-                                      passwordController.text),
-                                );
-                              }
+            state is AuthInProgress && state is! AuthFailedState
+                ? const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          _bloc.add(ToggleAuthEvent());
+                        },
+                        child: Text(_bloc.signupActive
+                            ? AppLocalizations.of(context)!.iHaveAnAccount
+                            : AppLocalizations.of(context)!.register),
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            if (_bloc.signupActive) {
+                              _bloc.add(
+                                CreateUserEvent(
+                                  password: passwordController.text,
+                                  user: User(
+                                      id: null,
+                                      firstName: firstNameController.text,
+                                      lastName: lastNameController.text,
+                                      username: usernameController.text,
+                                      email: emailController.text),
+                                ),
+                              );
+                            } else {
+                              _bloc.add(
+                                LoginEvent(usernameController.text,
+                                    passwordController.text),
+                              );
                             }
-                          : null,
-                      child: Text(_bloc.signupActive
-                          ? AppLocalizations.of(context)!.register
-                          : AppLocalizations.of(context)!.login),
-                    ),
-                  ],
-                ),
-        ],
+                          }
+                        },
+                        child: Text(_bloc.signupActive
+                            ? AppLocalizations.of(context)!.register
+                            : AppLocalizations.of(context)!.login),
+                      ),
+                    ],
+                  ),
+          ],
+        ),
       );
 }
