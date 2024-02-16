@@ -4,7 +4,7 @@ import 'package:avicenna_app/presentation/helpers/on_boarding_helper.dart';
 
 import 'package:avicenna_app/presentation/features/doctor/pages/doctors_page.dart';
 import 'package:avicenna_app/presentation/features/appointment/appointment_page.dart';
-import 'package:avicenna_app/presentation/features/profile/profile.dart';
+import 'package:avicenna_app/presentation/features/profile/pages/profile.dart';
 import 'package:avicenna_app/presentation/features/time_stamp/pages/schedules_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -76,11 +76,11 @@ class _HomePageState extends State<HomePage> {
         AppointmentPage(
           user: widget.user,
         ),
-        const ProfilePage()
+        ProfilePage()
       ];
   List<Widget> getPatientTabs() => <Widget>[
         const DoctorsPage(),
         SchedulesPage(user: widget.user),
-        const ProfilePage()
+        ProfilePage(),
       ];
 }
