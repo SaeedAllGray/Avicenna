@@ -15,7 +15,6 @@ class ApiConstants {
   static String userToken = '';
 
   static String get getToken {
-    print(userToken);
     return userToken;
   }
 
