@@ -3,13 +3,16 @@ import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/patient/patient.dart';
 import 'package:avicenna_app/presentation/constants/fonts.dart';
 import 'package:avicenna_app/presentation/features/auth/auth_page.dart';
+import 'package:avicenna_app/presentation/features/profile/widgets/alert_dialog.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  ProfilePage({super.key});
+
+  final UserBloc _bloc = UserBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class ProfilePage extends StatelessWidget {
         title: Text(AppLocalizations.of(context)!.profile),
       ),
       body: BlocProvider(
-        create: (context) => UserBloc()..add(GetUserEvent()),
+        create: (context) => _bloc..add(GetUserEvent()),
         child: BlocConsumer<UserBloc, UserState>(
           listener: (context, state) {
             if (state is UserLoggedOutState) {
@@ -128,8 +131,7 @@ class ProfilePage extends StatelessWidget {
                         child: Text(
                           AppLocalizations.of(context)!.logout,
                         ),
-                        onPressed: () => BlocProvider.of<UserBloc>(context)
-                            .add(LogoutEvent()),
+                        onPressed: () => _showDialog(context, LogoutEvent()),
                       ),
                     ),
                     SizedBox(
@@ -154,8 +156,8 @@ class ProfilePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        onPressed: () => BlocProvider.of<UserBloc>(context)
-                            .add(DeleteUserEvent()),
+                        onPressed: () =>
+                            _showDialog(context, DeleteUserEvent()),
                         child: Text(
                           AppLocalizations.of(context)!.delete,
                           style: const TextStyle(color: Colors.red),
@@ -172,6 +174,16 @@ class ProfilePage extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  Future<void> _showDialog(BuildContext context, UserEvent event) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AppAlertDialog(onConfirmPressed: () => _bloc.add(event));
+      },
     );
   }
 }
