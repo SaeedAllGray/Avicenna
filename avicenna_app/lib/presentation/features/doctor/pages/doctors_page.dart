@@ -1,13 +1,32 @@
 import 'package:avicenna_app/application/doctors/doctors_bloc.dart';
+import 'package:avicenna_app/presentation/constants/api_constant.dart';
 import 'package:avicenna_app/presentation/constants/colors.dart';
 import 'package:avicenna_app/presentation/features/doctor/pages/doctor_detail_page.dart';
+import 'package:avicenna_app/presentation/helpers/on_boarding_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class DoctorsPage extends StatelessWidget {
-  final TextEditingController searchController = TextEditingController();
+class DoctorsPage extends StatefulWidget {
   DoctorsPage({super.key});
+
+  @override
+  State<DoctorsPage> createState() => _DoctorsPageState();
+}
+
+class _DoctorsPageState extends State<DoctorsPage> {
+  final TextEditingController searchController = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (ApiConstants.isTheFirstTimeAppLaunch) {
+      Future.delayed(
+        const Duration(milliseconds: 500),
+        () => OnBoardingHelper.patientTutorial.show(context: context),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

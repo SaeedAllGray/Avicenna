@@ -2,8 +2,10 @@ import 'package:avicenna_app/application/time_slot/time_slot_bloc.dart';
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/time_slot/time_slot.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
+import 'package:avicenna_app/presentation/constants/api_constant.dart';
 
 import 'package:avicenna_app/presentation/constants/colors.dart';
+import 'package:avicenna_app/presentation/helpers/on_boarding_helper.dart';
 
 import 'package:avicenna_app/presentation/features/time_stamp/widgets/create_timestamp_bottom_sheet.dart';
 import 'package:avicenna_app/presentation/features/time_stamp/widgets/time_stamp_detail_widget.dart';
@@ -31,6 +33,12 @@ class _SchedulesPageState extends State<SchedulesPage> {
     super.initState();
     bloc = TimeSlotBloc();
     bloc.add(GetUserTimeSlots());
+    if (ApiConstants.isTheFirstTimeAppLaunch) {
+      Future.delayed(
+        const Duration(milliseconds: 500),
+        () => OnBoardingHelper.doctorTutorial.show(context: context),
+      );
+    }
   }
 
   @override
@@ -62,6 +70,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
             actions: [
               if (widget.user is Doctor)
                 IconButton(
+                    key: OnBoardingHelper.doctorKeys[1],
                     onPressed: () {
                       showModalBottomSheet<void>(
                         context: context,

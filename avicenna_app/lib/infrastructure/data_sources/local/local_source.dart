@@ -47,4 +47,13 @@ class LocalSource {
   Future<void> setType(String value) async {
     await _secureStorage.write(key: ApiConstants.TYPE, value: value);
   }
+
+  Future<String?> getIsAppLaunchedForTheFirstTime() async {
+    return await _secureStorage.read(key: 'isAppLaunchedForTheFirstTime');
+  }
+
+  Future<void> setIsAppLaunchedForTheFirstTime(String value) async {
+    await _secureStorage.write(
+        key: 'isAppLaunchedForTheFirstTime', value: value);
+  }
 }

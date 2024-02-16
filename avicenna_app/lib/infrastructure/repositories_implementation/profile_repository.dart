@@ -49,8 +49,9 @@ class UserRepository {
     return null;
   }
 
-  void logout() {
-    _localSource.clearStorage();
+  void logout() async {
+    await _localSource.clearStorage();
+    ApiConstants.setIsTheFirstTimeAppLaunch();
   }
 
   Future<AbstractUser?> login(String username, String password) async {
