@@ -226,42 +226,48 @@ class _AuthPageState extends State<AuthPage> {
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 500),
               opacity: _bloc.signupActive ? 1 : 0.0,
-              child: Column(
-                children: [
-                  ListTile(
-                    title: TextField(
-                      keyboardType: TextInputType.name,
-                      controller: firstNameController,
-                      onChanged: (v) => _bloc.add(InputEvent()),
-                      decoration: InputDecoration(
-                          label: Text(AppLocalizations.of(context)!.firstName)),
-                    ),
-                  ),
-                  ListTile(
-                    title: TextField(
-                      keyboardType: TextInputType.name,
-                      controller: lastNameController,
-                      onChanged: (v) => _bloc.add(InputEvent()),
-                      decoration: InputDecoration(
-                          label: Text(AppLocalizations.of(context)!.lastName)),
-                    ),
-                  ),
-                  ListTile(
-                    title: TextField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        label: Text(AppLocalizations.of(context)!.email),
+              child: AutofillGroup(
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: TextField(
+                        keyboardType: TextInputType.name,
+                        controller: firstNameController,
+                        onChanged: (v) => _bloc.add(InputEvent()),
+                        decoration: InputDecoration(
+                            label:
+                                Text(AppLocalizations.of(context)!.firstName)),
                       ),
-                      onChanged: (v) => _bloc.add(InputEvent()),
                     ),
-                  ),
-                ],
+                    ListTile(
+                      title: TextField(
+                        keyboardType: TextInputType.name,
+                        controller: lastNameController,
+                        onChanged: (v) => _bloc.add(InputEvent()),
+                        decoration: InputDecoration(
+                            label:
+                                Text(AppLocalizations.of(context)!.lastName)),
+                      ),
+                    ),
+                    ListTile(
+                      title: TextField(
+                        keyboardType: TextInputType.emailAddress,
+                        autofillHints: const [AutofillHints.email],
+                        controller: emailController,
+                        decoration: InputDecoration(
+                          label: Text(AppLocalizations.of(context)!.email),
+                        ),
+                        onChanged: (v) => _bloc.add(InputEvent()),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
           ListTile(
             title: TextFormField(
+              autofillHints: const [AutofillHints.username],
               controller: usernameController,
               decoration: InputDecoration(
                 label: Text(AppLocalizations.of(context)!.username),
@@ -272,6 +278,7 @@ class _AuthPageState extends State<AuthPage> {
           ListTile(
             title: TextField(
               obscureText: true,
+              autofillHints: const [AutofillHints.password],
               controller: passwordController,
               decoration: InputDecoration(
                 label: Text(AppLocalizations.of(context)!.password),

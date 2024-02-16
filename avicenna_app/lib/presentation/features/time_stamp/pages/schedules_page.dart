@@ -23,6 +23,7 @@ class SchedulesPage extends StatefulWidget {
 }
 
 class _SchedulesPageState extends State<SchedulesPage> {
+  bool showWeekView = false;
   late TimeSlotBloc bloc;
 
   @override
@@ -48,6 +49,16 @@ class _SchedulesPageState extends State<SchedulesPage> {
           appBar: AppBar(
             centerTitle: true,
             title: Text(AppLocalizations.of(context)!.schedules),
+            leading: IconButton(
+              icon: Icon(
+                showWeekView
+                    ? Icons.calendar_view_week_rounded
+                    : Icons.calendar_view_day_rounded,
+              ),
+              onPressed: () => setState(() {
+                showWeekView = !showWeekView;
+              }),
+            ),
             actions: [
               if (widget.user is Doctor)
                 IconButton(
@@ -95,34 +106,64 @@ class _SchedulesPageState extends State<SchedulesPage> {
                         )
                         .toList());
               }
-              return WeekView<TimeSlot>(
-                initialDay: DateTime.now(),
-                showWeekends: false,
-                showLiveTimeLineInAllDays: false,
-                headerStyle: HeaderStyle(
-                  decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.2),
+              if (showWeekView) {
+                return WeekView<TimeSlot>(
+                  initialDay: DateTime.now(),
+                  showWeekends: false,
+                  showLiveTimeLineInAllDays: false,
+                  headerStyle: HeaderStyle(
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withOpacity(0.2),
+                    ),
                   ),
-                ),
-                liveTimeIndicatorSettings:
-                    const HourIndicatorSettings(color: AppColors.primary),
-                onEventTap: (events, date) {
-                  if (!events.first.event!.isCancelled!) {
-                    showModalBottomSheet<void>(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Provider.value(
-                          value: bloc,
-                          child: TimeStampDetailWidget(
-                            events: events,
-                            abstractUser: widget.user,
-                          ),
-                        );
-                      },
-                    );
-                  }
-                },
-              );
+                  liveTimeIndicatorSettings:
+                      const HourIndicatorSettings(color: AppColors.primary),
+                  onEventTap: (events, date) {
+                    if (!events.first.event!.isCancelled!) {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Provider.value(
+                            value: bloc,
+                            child: TimeStampDetailWidget(
+                              events: events,
+                              abstractUser: widget.user,
+                            ),
+                          );
+                        },
+                      );
+                    }
+                  },
+                );
+              } else {
+                return DayView<TimeSlot>(
+                  initialDay: DateTime.now(),
+                  // showLiveTimeLineInAllDays: false,
+                  headerStyle: HeaderStyle(
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withOpacity(0.2),
+                    ),
+                  ),
+                  liveTimeIndicatorSettings:
+                      const HourIndicatorSettings(color: AppColors.primary),
+                  onEventTap: (events, date) {
+                    if (!events.first.event!.isCancelled!) {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Provider.value(
+                            value: bloc,
+                            child: TimeStampDetailWidget(
+                              events: events,
+                              abstractUser: widget.user,
+                            ),
+                          );
+                        },
+                      );
+                    }
+                  },
+                );
+              }
             },
           ),
         ),
