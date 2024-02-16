@@ -55,5 +55,9 @@
   "pending": "Pending",
   "rating": "Rating",
   "message": "Message",
-  "submit": "Submit"
+  "submit": "Submit",
+  "doctor_onboarding_1_describtion": "In this tab, you can view your appointments and their status.",
+  "doctor_onboarding_2_describtion": "You can make free time slots for future appointments.",
+  "doctor_onboarding_3_describtion": "In this tab, you can view your appointments requests.",
+  "patient_obboarding_1_description": "In this tab, you can view and search doctors based on their name and specialization."
 }

@@ -56,5 +56,9 @@
   "submit": "Senden",
   "login": "Anmelden",
   "logout": "Abmelden",
-  "delete": "Konto löschen"
+  "delete": "Konto löschen",
+  "doctor_onboarding_1_describtion": "In diesem Tab können Sie Ihre Termine und deren Status anzeigen.",
+  "doctor_onboarding_2_describtion": "Sie können freie Zeitfenster für zukünftige Termine erstellen.",
+  "doctor_onboarding_3_describtion": "In diesem Tab können Sie Ihre Terminanfragen anzeigen.",
+  "patient_obboarding_1_description": "In diesem Tab können Sie Ärzte nach ihrem Namen und ihrer Spezialisierung anzeigen und suchen."
 }

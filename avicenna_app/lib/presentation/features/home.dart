@@ -1,5 +1,6 @@
 import 'package:avicenna_app/domain/entries/doctor/doctor.dart';
 import 'package:avicenna_app/domain/entries/user.dart';
+import 'package:avicenna_app/presentation/helpers/on_boarding_helper.dart';
 
 import 'package:avicenna_app/presentation/features/doctor/pages/doctors_page.dart';
 import 'package:avicenna_app/presentation/features/appointment/appointment_page.dart';
@@ -39,16 +40,24 @@ class _HomePageState extends State<HomePage> {
         items: <BottomNavigationBarItem>[
           if (widget.user is! Doctor)
             BottomNavigationBarItem(
-              icon: const Icon(Icons.search),
+              icon: Icon(key: OnBoardingHelper.patientKeys[0], Icons.search),
               label: AppLocalizations.of(context)!.browse,
             ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.schedule),
+            icon: Icon(
+              Icons.schedule,
+              key: widget.user is Doctor
+                  ? OnBoardingHelper.doctorKeys[0]
+                  : OnBoardingHelper.patientKeys[1],
+            ),
             label: AppLocalizations.of(context)!.schedules,
           ),
           if (widget.user is Doctor)
             BottomNavigationBarItem(
-              icon: const Icon(Icons.bookmark),
+              icon: Icon(
+                Icons.bookmark,
+                key: OnBoardingHelper.doctorKeys[2],
+              ),
               label: AppLocalizations.of(context)!.appointment,
             ),
           BottomNavigationBarItem(

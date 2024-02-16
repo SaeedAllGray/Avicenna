@@ -11,6 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final settingsController = SettingsController(SettingsService());
   ApiConstants.setToken();
+  ApiConstants.setIsTheFirstTimeAppLaunch();
   // Load the user's preferred theme while the splash screen is displayed.
   // This prevents a sudden theme change when the app is first displayed.
   await settingsController.loadSettings();
