@@ -7,7 +7,7 @@ class Validators {
   final RegExp _usernameRegExp = RegExp(r'^[a-zA-Z0-9_]+$');
   final RegExp _passwordRegExp = RegExp(r'^.{8}$');
   final RegExp _ssnRegExp = RegExp(r'^\d{8}$');
-  final RegExp _phoneNumberRegExp = RegExp(r'^\d{3}-\d{3}-\d{4}$');
+  final RegExp _phoneNumberRegExp = RegExp(r'^\d{10}$');
   final RegExp _addressRegExp = RegExp(r'^[a-zA-Z0-9\s,.-]+$');
   final RegExp _emailRegExp = RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
   final RegExp _dateRegExp = RegExp(
