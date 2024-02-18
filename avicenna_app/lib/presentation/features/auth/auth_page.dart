@@ -103,14 +103,12 @@ class _AuthPageState extends State<AuthPage> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Visibility(
-                        visible: state is AuthFailedState ||
-                            state is SignupFailedState,
-                        child: Text(
+                      if (state is AuthFailedState ||
+                          state is SignupFailedState)
+                        Text(
                           AppLocalizations.of(context)!.error,
                           style: const TextStyle(color: Colors.red),
                         ),
-                      )
                     ],
                   ),
                 );
@@ -133,9 +131,8 @@ class _AuthPageState extends State<AuthPage> {
                 onChanged: (bool? value) => setState(() => isChecked = value!),
               ),
             ),
-            Visibility(
-              visible: !isChecked,
-              child: ListTile(
+            if (!isChecked)
+              ListTile(
                 title: TextFormField(
                   validator: (value) => validators.validateSSN(context, value),
                   keyboardType: TextInputType.number,
@@ -146,10 +143,8 @@ class _AuthPageState extends State<AuthPage> {
                   ),
                 ),
               ),
-            ),
-            Visibility(
-              visible: isChecked,
-              child: ListTile(
+            if (isChecked)
+              ListTile(
                 title: TextField(
                   controller: professionController,
                   onChanged: (v) => _bloc.add(InputEvent()),
@@ -157,10 +152,8 @@ class _AuthPageState extends State<AuthPage> {
                       label: Text(AppLocalizations.of(context)!.profession)),
                 ),
               ),
-            ),
-            Visibility(
-              visible: isChecked,
-              child: ListTile(
+            if (isChecked)
+              ListTile(
                 title: TextFormField(
                   validator: (value) =>
                       validators.validatePhoneNumber(context, value),
@@ -171,10 +164,8 @@ class _AuthPageState extends State<AuthPage> {
                       label: Text(AppLocalizations.of(context)!.phone)),
                 ),
               ),
-            ),
-            Visibility(
-              visible: !isChecked,
-              child: ListTile(
+            if (!isChecked)
+              ListTile(
                 title: TextFormField(
                   validator: (value) => validators.validateDate(context, value),
                   keyboardType: TextInputType.datetime,
@@ -184,10 +175,8 @@ class _AuthPageState extends State<AuthPage> {
                       label: Text(AppLocalizations.of(context)!.date)),
                 ),
               ),
-            ),
-            Visibility(
-              visible: isChecked,
-              child: ListTile(
+            if (isChecked)
+              ListTile(
                 title: TextFormField(
                   validator: (value) =>
                       validators.validateAddress(context, value),
@@ -199,7 +188,6 @@ class _AuthPageState extends State<AuthPage> {
                   ),
                 ),
               ),
-            ),
             ElevatedButton(
               style:
                   ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
@@ -243,58 +231,50 @@ class _AuthPageState extends State<AuthPage> {
         key: _formKey,
         child: Column(
           children: [
-            Visibility(
-              maintainAnimation: true,
-              maintainState: true,
-              visible: _bloc.signupActive,
-              child: AnimatedOpacity(
-                duration: const Duration(milliseconds: 500),
-                opacity: _bloc.signupActive ? 1 : 0.0,
-                child: AutofillGroup(
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: TextFormField(
-                          validator: (value) =>
-                              validators.validateFirstname(context, value),
-                          keyboardType: TextInputType.name,
-                          controller: firstNameController,
-                          onChanged: (v) => _bloc.add(InputEvent()),
-                          decoration: InputDecoration(
-                              label: Text(
-                                  AppLocalizations.of(context)!.firstName)),
-                        ),
+            if (_bloc.signupActive)
+              AutofillGroup(
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: TextFormField(
+                        validator: (value) =>
+                            validators.validateFirstname(context, value),
+                        keyboardType: TextInputType.name,
+                        controller: firstNameController,
+                        onChanged: (v) => _bloc.add(InputEvent()),
+                        decoration: InputDecoration(
+                            label:
+                                Text(AppLocalizations.of(context)!.firstName)),
                       ),
-                      ListTile(
-                        title: TextFormField(
-                          validator: (value) =>
-                              validators.validateLastname(context, value),
-                          keyboardType: TextInputType.name,
-                          controller: lastNameController,
-                          onChanged: (v) => _bloc.add(InputEvent()),
-                          decoration: InputDecoration(
-                              label:
-                                  Text(AppLocalizations.of(context)!.lastName)),
-                        ),
+                    ),
+                    ListTile(
+                      title: TextFormField(
+                        validator: (value) =>
+                            validators.validateLastname(context, value),
+                        keyboardType: TextInputType.name,
+                        controller: lastNameController,
+                        onChanged: (v) => _bloc.add(InputEvent()),
+                        decoration: InputDecoration(
+                            label:
+                                Text(AppLocalizations.of(context)!.lastName)),
                       ),
-                      ListTile(
-                        title: TextFormField(
-                          validator: (value) =>
-                              validators.validateEmail(context, value),
-                          keyboardType: TextInputType.emailAddress,
-                          autofillHints: const [AutofillHints.email],
-                          controller: emailController,
-                          decoration: InputDecoration(
-                            label: Text(AppLocalizations.of(context)!.email),
-                          ),
-                          onChanged: (v) => _bloc.add(InputEvent()),
+                    ),
+                    ListTile(
+                      title: TextFormField(
+                        validator: (value) =>
+                            validators.validateEmail(context, value),
+                        keyboardType: TextInputType.emailAddress,
+                        autofillHints: const [AutofillHints.email],
+                        controller: emailController,
+                        decoration: InputDecoration(
+                          label: Text(AppLocalizations.of(context)!.email),
                         ),
+                        onChanged: (v) => _bloc.add(InputEvent()),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ),
             ListTile(
               title: TextFormField(
                 validator: (value) =>
